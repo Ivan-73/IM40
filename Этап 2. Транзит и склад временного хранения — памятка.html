@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Этап 2. Транзит и склад временного хранения — памятка</title>
+<style>
+  :root{
+    --bg:#eef2f7;
+    --ink:#16202e;
+    --muted:#5b6779;
+    --line:#d5dee9;
+    --accent:#1f4e79;
+    --accent-2:#2f6b95;
+    --accent-soft:#eaf2f9;
+    --green:#1f6b3f;
+    --green-soft:#e9f6ee;
+    --red:#a8231b;
+    --red-soft:#fdf0ee;
+    --amber:#8a5a06;
+    --amber-soft:#fff7e3;
+    --radius:16px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font:16px/1.58 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:960px;margin:0 auto;padding:0 18px 70px;}
+
+  .hero{
+    position:relative;
+    overflow:hidden;
+    margin:22px 0 0;
+    padding:38px 36px 34px;
+    border-radius:22px;
+    color:#fff;
+    background:linear-gradient(135deg,#0f2c44 0%,#1f4e79 52%,#3a769f 100%);
+    box-shadow:0 16px 38px rgba(18,45,70,.22);
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    right:-90px;top:-100px;
+    width:300px;height:300px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.14),rgba(255,255,255,0) 70%);
+  }
+  .hero .badge-top{
+    display:inline-block;
+    padding:5px 13px;
+    border-radius:100px;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.28);
+    font-size:12px;
+    font-weight:600;
+  }
+  .hero h1{
+    margin:14px 0 10px;
+    max-width:840px;
+    font-size:30px;
+    line-height:1.22;
+    letter-spacing:-.015em;
+  }
+  .hero .sub{
+    margin:0;
+    max-width:760px;
+    font-size:16.4px;
+    line-height:1.5;
+    color:#dce8f2;
+  }
+  .hero-pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px;}
+  .hero-pills span{
+    padding:7px 14px;
+    border-radius:100px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.25);
+    font-size:13.4px;
+    font-weight:600;
+  }
+
+  .toc{
+    position:sticky;
+    top:0;
+    z-index:30;
+    margin:16px 0 26px;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:0 6px 18px rgba(20,40,70,.07);
+  }
+  .toc-inner{display:flex;gap:4px;padding:9px 10px;overflow-x:auto;scrollbar-width:thin;}
+  .toc a{
+    flex:0 0 auto;
+    padding:6px 10px;
+    border-radius:8px;
+    color:#2b3b4f;
+    font-size:13.2px;
+    font-weight:600;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .toc a:hover{background:var(--accent-soft);color:var(--accent);}
+
+  .card{
+    margin:0 0 20px;
+    padding:24px 26px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 2px 4px rgba(20,40,70,.04),0 10px 24px rgba(20,40,70,.05);
+    scroll-margin-top:78px;
+  }
+  .section-kicker{
+    display:inline-block;
+    margin-bottom:8px;
+    padding:3px 9px;
+    border-radius:6px;
+    background:var(--accent-soft);
+    color:var(--accent);
+    font-size:11.2px;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+  }
+  .card h2{margin:0 0 8px;font-size:22px;line-height:1.28;letter-spacing:-.01em;}
+  .card .lead{margin:0 0 14px;color:#38465a;font-size:15.6px;}
+
+  h3{font-size:16px;margin:18px 0 7px;line-height:1.35;}
+  p{margin:8px 0;}
+  ul,ol{margin:8px 0;padding-left:22px;}
+  li{margin:5px 0;}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid #b9cfe2;word-break:break-word;}
+  a:hover{border-bottom-color:var(--accent);}
+
+  .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:0 0 16px;font-size:13px;color:var(--muted);}
+  .tag{
+    display:inline-block;
+    padding:3px 8px;
+    border-radius:5px;
+    border:1px solid transparent;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .tag-norm{background:#e8f0fb;color:#1f4e79;border-color:#c5d9ef;}
+  .tag-fts{background:#e3f2f1;color:#0e5a5a;border-color:#b6dbd8;}
+  .tag-prac{background:#fdf3e2;color:#7a4f06;border-color:#ecd3a6;}
+  .tag-red{background:var(--red-soft);color:var(--red);border-color:#e7bdb7;}
+  .tag-green{background:var(--green-soft);color:var(--green);border-color:#bfe0cc;}
+
+  .note,.warning,.fine,.deadline,.ausn,.osno,.summary{
+    margin:14px 0;
+    padding:14px 17px;
+    border-radius:12px;
+    font-size:14.6px;
+  }
+  .note{background:#f5f8fb;border:1px solid #dbe5ee;border-left:4px solid #8aa6c0;}
+  .warning{background:var(--amber-soft);border:1px solid #ecd9a8;border-left:5px solid #b8860b;}
+  .fine{background:var(--red-soft);border:1px solid #eccac5;border-left:5px solid var(--red);}
+  .deadline{background:var(--accent-soft);border:1px solid #c9dcef;border-left:5px solid var(--accent);}
+  .ausn{background:var(--green-soft);border:1px solid #c6e3d2;border-left:5px solid var(--green);}
+  .osno{background:#f2f6fc;border:1px solid #c8d9ee;border-left:5px solid #2c5f96;}
+  .summary{
+    padding:20px 22px;
+    border:0;
+    color:#eef5fb;
+    background:linear-gradient(135deg,#173752,#1f4e79);
+  }
+  .summary h3{margin-top:0;color:#fff;}
+  .summary ol{padding-left:20px;}
+  .summary li{margin:7px 0;}
+  .box-title{
+    display:block;
+    margin-bottom:4px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    opacity:.9;
+  }
+
+  .report{
+    margin:14px 0;
+    padding:16px 18px;
+    background:#fcfdfe;
+    border:1px solid var(--line);
+    border-radius:14px;
+    scroll-margin-top:78px;
+  }
+  .report-head{display:flex;gap:14px;align-items:flex-start;}
+  .num{
+    flex:0 0 44px;
+    width:44px;height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:var(--accent);
+    color:#fff;
+    font-size:14px;
+    font-weight:800;
+    text-align:center;
+    line-height:1.1;
+  }
+  .num.green{background:var(--green);}
+  .num.grey{background:#5d6c80;}
+  .num.amber{background:#a8741a;}
+  .report h3{margin:1px 0 2px;font-size:16.5px;}
+  .report .sub{margin:0;font-size:13.8px;color:var(--muted);}
+  .report .tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 8px;}
+  .meta{margin:0;padding:0;border:0;}
+  .meta > div{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:10px;
+    padding:7px 0;
+    border-top:1px dotted var(--line);
+    font-size:14.2px;
+  }
+  .meta dt{margin:0;font-weight:700;color:#2c3a4d;}
+  .meta dd{margin:0;color:#33415a;}
+
+  ol.steps{list-style:none;counter-reset:st;margin:14px 0;padding:0;}
+  ol.steps > li{
+    counter-increment:st;
+    position:relative;
+    margin:0 0 4px 15px;
+    padding:0 0 16px 46px;
+    border-left:2px solid #c9dcef;
+  }
+  ol.steps > li:last-child{border-left-color:transparent;padding-bottom:0;}
+  ol.steps > li::before{
+    content:counter(st);
+    position:absolute;left:-16px;top:0;
+    width:30px;height:30px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    font-size:14px;
+    font-weight:700;
+  }
+  ol.steps h3{margin:2px 0 4px;font-size:15.5px;}
+  .human{margin:2px 0 4px;font-size:14.6px;}
+  .human::before{content:"По-человечески: ";font-weight:700;color:var(--accent-2);}
+  .exact{
+    margin:2px 0 0;
+    padding:7px 10px;
+    background:#fafbfd;
+    border:1px dashed var(--line);
+    border-radius:6px;
+    color:#3c4a5c;
+    font-size:13.6px;
+  }
+  .exact::before{content:"Точно: ";font-weight:700;color:var(--muted);}
+
+  .flow{
+    display:flex;
+    align-items:stretch;
+    justify-content:center;
+    gap:4px;
+    margin:16px 0;
+    padding:18px 14px;
+    background:#fbfcfe;
+    border:1px solid var(--line);
+    border-radius:14px;
+    flex-wrap:wrap;
+  }
+  .flow .node{
+    flex:1 1 0;
+    min-width:0;
+    padding:11px 9px;
+    background:#fff;
+    border:1.5px solid #c9dcef;
+    border-top:4px solid var(--accent);
+    border-radius:9px;
+    text-align:center;
+    font-size:12.6px;
+    line-height:1.4;
+  }
+  .flow .node b{display:block;margin-bottom:3px;font-size:13.2px;}
+  .flow .node span{color:var(--muted);font-size:11.8px;}
+  .flow .node.hi{background:var(--accent-soft);border-top-color:var(--accent-2);}
+  .flow .arrow{
+    flex:0 0 20px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--accent);
+    font-size:18px;font-weight:700;
+  }
+  .flow .arrow::before{content:"→";}
+  .flow-caption{margin:-6px 0 14px;font-size:12.6px;color:var(--muted);text-align:center;line-height:1.45;}
+
+  .table-wrap{margin:14px 0;overflow-x:auto;border:1px solid var(--line);border-radius:12px;}
+  table{width:100%;min-width:660px;border-collapse:collapse;background:#fff;font-size:13.6px;}
+  caption{caption-side:top;padding:8px 10px 6px;background:#f7f9fc;color:var(--muted);font-size:12.8px;text-align:left;}
+  th,td{
+    padding:9px 11px;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    text-align:left;
+    vertical-align:top;
+  }
+  th:last-child,td:last-child{border-right:0;}
+  tbody tr:last-child td{border-bottom:0;}
+  th{background:#eef4fa;font-size:13px;font-weight:700;}
+  tbody tr:nth-child(even) td{background:#fafbfd;}
+  .yes{color:var(--green);font-weight:700;}
+  .no{color:var(--red);font-weight:700;}
+  .mid{color:#8a5a06;font-weight:700;}
+
+  .timeline{list-style:none;margin:16px 0 4px;padding:0 0 0 26px;border-left:2px solid #c4d4e4;}
+  .timeline li{position:relative;margin:0;padding:0 0 20px 18px;}
+  .timeline li:last-child{padding-bottom:0;}
+  .timeline li::before{
+    content:"";
+    position:absolute;left:-35px;top:4px;
+    width:14px;height:14px;
+    border:3px solid var(--accent);
+    border-radius:50%;
+    background:#fff;
+  }
+  .timeline b{display:block;margin-bottom:2px;font-size:15px;}
+  .timeline span{font-size:14.2px;color:#3c4a5e;}
+
+  .checklist{list-style:none;margin:10px 0;padding-left:0;}
+  .checklist li{position:relative;margin:9px 0;padding-left:32px;}
+  .checklist li::before{content:"☐";position:absolute;left:0;top:-1px;color:var(--accent);font-size:19px;}
+
+  dl.glossary{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;margin:12px 0;}
+  dl.glossary > div{padding:8px 0;border-bottom:1px dotted var(--line);}
+  dl.glossary dt{font-weight:700;font-size:14.4px;}
+  dl.glossary dd{margin:2px 0 0;font-size:14px;color:#3a465c;}
+
+  .sources .source{margin:16px 0;padding:4px 0 4px 14px;border-left:3px solid #c3d3e2;}
+  .sources .source h3{margin:0 0 3px;font-size:15px;}
+  .sources .req{margin:0 0 5px;font-size:12.8px;color:var(--muted);}
+  .sources .source p{margin:5px 0;font-size:14.2px;}
+  .sources .link{font-size:12.9px;}
+  .actual{
+    margin-top:18px;
+    padding:11px 14px;
+    background:#f2f6fa;
+    border:1px dashed #c3d3e2;
+    border-radius:10px;
+    font-size:13.4px;
+    color:#3d4b60;
+  }
+
+  .flag{
+    display:inline-block;
+    padding:0 5px;
+    border-radius:3px;
+    background:var(--amber-soft);
+    color:#6d4f00;
+    font-size:11.5px;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .small{font-size:13px;color:var(--muted);}
+
+  footer{
+    margin-top:26px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    font-size:12.7px;
+    line-height:1.5;
+    color:var(--muted);
+  }
+
+  .up{
+    position:fixed;
+    right:20px;bottom:20px;
+    z-index:40;
+    display:flex;align-items:center;justify-content:center;
+    width:46px;height:46px;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    font-size:19px;
+    text-decoration:none;
+    box-shadow:0 8px 20px rgba(20,50,80,.28);
+  }
+  .up:hover{background:#163b5c;}
+
+  @media (max-width:800px){
+    .hero{padding:28px 22px 26px;border-radius:18px;}
+    .hero h1{font-size:24px;}
+    .hero .sub{font-size:15.2px;}
+    .card{padding:20px 18px;}
+    .flow{flex-direction:column;gap:0;}
+    .flow .arrow{flex:0 0 28px;}
+    .flow .arrow::before{content:"↓";}
+    .flow .node{text-align:left;padding:11px 13px;}
+    dl.glossary{grid-template-columns:1fr;}
+    .meta > div{grid-template-columns:1fr;gap:2px;}
+    .toc{border-radius:10px;}
+  }
+
+  @media print{
+    @page{margin:13mm 12mm;}
+    body{background:#fff;color:#000;font-size:10.4pt;line-height:1.4;}
+    .wrap{max-width:none;padding:0;}
+    .hero{
+      padding:0 0 10pt;
+      border:1.5pt solid #000;
+      border-radius:0;
+      background:#fff !important;
+      color:#000;
+      box-shadow:none;
+    }
+    .hero::after{display:none;}
+    .hero .badge-top,.hero-pills span{border:1pt solid #000;background:#fff;color:#000;}
+    .hero .sub{color:#000;}
+    .toc,.up{display:none !important;}
+    .card,.report,.table-wrap,.summary,.flow{
+      box-shadow:none !important;
+      break-inside:avoid;
+      page-break-inside:avoid;
+    }
+    .card{margin-bottom:10pt;border:1pt solid #999;}
+    .summary{background:#fff !important;color:#000;border:1.5pt solid #000;}
+    .summary h3{color:#000;}
+    .note,.warning,.fine,.deadline,.ausn,.osno{
+      background:#fff !important;
+      border:1pt solid #000;
+      border-left:3pt solid #000;
+    }
+    .flow{border:1pt solid #000;background:#fff !important;}
+    .flow .node{background:#fff !important;border:1pt solid #000;}
+    table{min-width:0;font-size:8.8pt;}
+    thead{display:table-header-group;}
+    a{color:#000;border-bottom:0;text-decoration:none;}
+    h1,h2,h3{color:#000;}
+  }
+</style>
+</head>
+<body id="top">
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="badge-top">Актуально на 07.11.2026</span>
+    <h1>Этап 2. Транзит и склад временного хранения</h1>
+    <p class="sub">Как товар едет под таможенным контролем до места назначения, как оформляется транзитная декларация, что происходит на СВХ и какие сроки нельзя пропустить.</p>
+    <div class="hero-pills">
+      <span>Доставка под контролем</span>
+      <span>4 месяца на СВХ</span>
+      <span>4 часа на завершение</span>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Содержание">
+    <div class="toc-inner">
+      <a href="#princip">Главное</a>
+      <a href="#legal">Норма</a>
+      <a href="#choice">Развилка</a>
+      <a href="#transit">Транзит</a>
+      <a href="#security">Обеспечение</a>
+      <a href="#finish">Завершение</a>
+      <a href="#svh">СВХ</a>
+      <a href="#flow">Схема</a>
+      <a href="#errors">Ошибки</a>
+      <a href="#risk">Риски</a>
+      <a href="#check">Чек-лист</a>
+      <a href="#gloss">Глоссарий</a>
+      <a href="#sources">Источники</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ================= 1 ================= -->
+    <section class="card" id="princip">
+      <span class="section-kicker">Сначала — главное</span>
+      <h2>Два разных института, которые часто путают</h2>
+      <p class="lead">Таможенный транзит — это <strong>перевозка</strong> иностранного товара под таможенным контролем от таможни отправления до таможни назначения. Склад временного хранения — это <strong>хранение</strong> товара до его выпуска.</p>
+      <p>Это не альтернативы «или-или». На практике они часто идут друг за другом: товар едет транзитом, доставляется в место назначения, там завершается транзит — и товар помещается на СВХ. И только потом подаётся декларация ИМ 40.</p>
+
+      <div class="legend">
+        <span><span class="tag tag-norm">Норма</span> ТК ЕАЭС</span>
+        <span><span class="tag tag-fts">Позиция ФТС</span> разъяснения и практика</span>
+        <span><span class="tag tag-prac">Практика</span> что происходит на деле</span>
+      </div>
+
+      <div class="osno">
+        <span class="box-title">Формула этапа</span>
+        Таможня отправления → транзитная декларация → обеспечение → перевозка по сроку → доставка → завершение (4 часа) → СВХ или декларирование.
+      </div>
+
+      <div class="note">
+        <strong>Не путайте СВХ и таможенный склад.</strong> СВХ — место временного хранения, это не таможенная процедура. Таможенный склад — отдельная таможенная процедура хранения товаров под таможенным контролем без уплаты платежей. Это разные институты с разными правилами.
+      </div>
+    </section>
+
+    <!-- ================= 2 ================= -->
+    <section class="card" id="legal">
+      <span class="section-kicker">Нормативная база</span>
+      <h2>На чём всё держится</h2>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Основные нормы этапа</caption>
+          <thead><tr><th>Акт</th><th>Что регулирует</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Глава 22 ТК ЕАЭС</strong> (ст. 142–154)</td>
+              <td>Таможенная процедура таможенного транзита: содержание, условия, срок, обеспечение, обязанности перевозчика, завершение.</td>
+            </tr>
+            <tr>
+              <td><strong>Статья 142 ТК ЕАЭС</strong></td>
+              <td>Содержание и применение процедуры таможенного транзита.</td>
+            </tr>
+            <tr>
+              <td><strong>Статья 144 ТК ЕАЭС</strong></td>
+              <td>Срок таможенного транзита.</td>
+            </tr>
+            <tr>
+              <td><strong>Статья 146 ТК ЕАЭС</strong></td>
+              <td>Обеспечение исполнения обязанности по уплате платежей при транзите.</td>
+            </tr>
+            <tr>
+              <td><strong>Статья 150 ТК ЕАЭС</strong></td>
+              <td>Обязанности перевозчика при перевозке товаров под процедурой транзита.</td>
+            </tr>
+            <tr>
+              <td><strong>Статья 151 ТК ЕАЭС</strong></td>
+              <td>Завершение и прекращение действия процедуры; срок завершения — не позднее 4 часов рабочего времени.</td>
+            </tr>
+            <tr>
+              <td><strong>Статья 152 ТК ЕАЭС</strong></td>
+              <td>Таможенные операции, совершаемые после доставки товаров в место доставки.</td>
+            </tr>
+            <tr>
+              <td><strong>Глава 16 ТК ЕАЭС</strong> (ст. 98–103)</td>
+              <td>Временное хранение: места, срок, операции с товарами.</td>
+            </tr>
+            <tr>
+              <td><strong>Статья 101 ТК ЕАЭС</strong></td>
+              <td>Срок временного хранения — не более 4 месяцев.</td>
+            </tr>
+            <tr>
+              <td><strong>Решение КТС от 18.06.2010 № 289</strong></td>
+              <td>Форма и порядок заполнения транзитной декларации.</td>
+            </tr>
+            <tr>
+              <td><strong>Статьи 16.9–16.11 КоАП РФ</strong></td>
+              <td>Ответственность за недоставку, нарушение порядка транзита, повреждение средств идентификации.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= 3 ================= -->
+    <section class="card" id="choice">
+      <span class="section-kicker">Развилка</span>
+      <h2>Что выбрать: транзит, СВХ или сразу декларация</h2>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Выбор зависит от того, где и когда вы готовы декларировать</caption>
+          <thead><tr><th>Ситуация</th><th>Что применяется</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>ДТ подготовлена заранее, товар можно выпустить в месте прибытия</td>
+              <td><span class="yes">Декларирование сразу</span>, без транзита и СВХ</td>
+            </tr>
+            <tr>
+              <td>Товар едет в другой регион, декларирование будет там</td>
+              <td><span class="mid">Таможенный транзит</span> до таможни назначения</td>
+            </tr>
+            <tr>
+              <td>Документы не готовы, ДТ ещё не подана</td>
+              <td><span class="mid">СВХ</span> до подачи и выпуска</td>
+            </tr>
+            <tr>
+              <td>Товар доставлен транзитом, но ДТ ещё не готова</td>
+              <td><span class="mid">Транзит → завершение → СВХ</span></td>
+            </tr>
+            <tr>
+              <td>Нужно изменить маршрут или перевозчика в пути</td>
+              <td>Только с разрешения таможенного органа</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="warning">
+        <strong>Практическое правило.</strong> Чем раньше готова ДТ, тем меньше звеньев. Каждый лишний этап — это время, расходы на хранение и дополнительные точки, где может возникнуть вопрос.
+      </div>
+    </section>
+
+    <!-- ================= 4 ================= -->
+    <section class="card" id="transit">
+      <span class="section-kicker">Транзит</span>
+      <h2>Таможенный транзит: пошагово</h2>
+
+      <ol class="steps">
+        <li>
+          <h3>Определить таможню отправления и назначения</h3>
+          <p class="human">Нужно понимать, откуда товар стартует под контролем и куда должен приехать. Это два разных таможенных органа.</p>
+          <p class="exact">Процедура применяется при перевозке товаров от таможенного органа отправления до таможенного органа назначения (ст. 142 ТК ЕАЭС). <span class="tag tag-norm">Норма</span></p>
+        </li>
+
+        <li>
+          <h3>Подготовить транзитную декларацию</h3>
+          <p class="human">Это отдельный документ, не ДТ. В нём указываются товары, транспорт, перевозчик, маршрут и место доставки.</p>
+          <p class="exact">Форма и порядок заполнения — Решение КТС от 18.06.2010 № 289. <span class="tag tag-norm">Норма</span></p>
+        </li>
+
+        <li>
+          <h3>Обеспечить уплату платежей</h3>
+          <p class="human">Таможня должна быть уверена, что если товар «исчезнет», платежи будут уплачены. Для этого вносится обеспечение.</p>
+          <p class="exact">Обеспечение — ст. 146 ТК ЕАЭС; способы — ст. 63 ТК ЕАЭС. <span class="tag tag-norm">Норма</span></p>
+        </li>
+
+        <li>
+          <h3>Подать и выпустить транзитную декларацию</h3>
+          <p class="human">После регистрации и проверки таможня выпускает транзитную декларацию. Только после этого товар можно везти дальше.</p>
+          <p class="exact">Выпуск транзитной декларации — основание для перевозки под процедурой. <span class="tag tag-norm">Норма</span></p>
+        </li>
+
+        <li>
+          <h3>Перевозка с соблюдением условий</h3>
+          <p class="human">Нельзя отклоняться от маршрута, нарушать срок, вскрывать пломбы и использовать товар. Всё это — предмет контроля.</p>
+          <p class="exact">Обязанности перевозчика — ст. 150 ТК ЕАЭС. <span class="tag tag-norm">Норма</span></p>
+        </li>
+
+        <li>
+          <h3>Доставка в место доставки</h3>
+          <p class="human">Товар приезжает именно туда, куда было предписано, и перевозчик сообщает об этом таможне.</p>
+          <p class="exact">Место доставки определяется таможенным органом отправления. <span class="tag tag-norm">Норма</span></p>
+        </li>
+
+        <li>
+          <h3>Завершение процедуры</h3>
+          <p class="human">Таможня назначения проверяет товар и документы и закрывает транзит. На это есть ограниченное время.</p>
+          <p class="exact">Не позднее 4 часов рабочего времени с момента регистрации подачи документов (ст. 151 ТК ЕАЭС). <span class="tag tag-norm">Норма</span></p>
+        </li>
+
+        <li>
+          <h3>Что дальше</h3>
+          <p class="human">После завершения транзита товар либо помещается на СВХ, либо сразу декларируется.</p>
+          <p class="exact">Таможенные операции после доставки — ст. 152 ТК ЕАЭС. <span class="tag tag-norm">Норма</span></p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ================= 5 ================= -->
+    <section class="card" id="security">
+      <span class="section-kicker">Условия</span>
+      <h2>Срок, обеспечение и обязанности перевозчика</h2>
+
+      <h3>Срок таможенного транзита</h3>
+      <p>Срок устанавливает таможенный орган отправления исходя из вида транспорта и маршрута. Закон задаёт не «универсальные 10 дней», а предельный расчёт.</p>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Как определяется срок (ст. 144 ТК ЕАЭС)</caption>
+          <thead><tr><th>Ситуация</th><th>Правило</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Общее правило</td>
+              <td>Срок устанавливается таможней исходя из вида транспорта и маршрута перевозки</td>
+            </tr>
+            <tr>
+              <td>Предельный срок</td>
+              <td>Не может превышать срок, определяемый из расчёта <strong>2 000 км за 1 месяц</strong>, либо срок, определяемый Комиссией</td>
+            </tr>
+            <tr>
+              <td>Железнодорожный транспорт</td>
+              <td>Из расчёта <strong>2 000 км за 1 месяц</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="deadline">
+        <span class="box-title">Почему «10 дней» — миф</span>
+        В обиходе часто говорят «транзит — 10 дней». Это не универсальная норма: срок привязан к расстоянию и виду транспорта, а предельный расчёт — 2 000 км за месяц. Всегда смотрите, что указано в самой транзитной декларации.
+      </div>
+
+      <h3>Обеспечение уплаты платежей</h3>
+      <p>Обеспечение нужно, чтобы таможня была защищена на случай недоставки или нарушения процедуры. Способы обеспечения установлены статьёй 63 ТК ЕАЭС:</p>
+      <ul>
+        <li>денежные средства (деньги);</li>
+        <li>банковская гарантия;</li>
+        <li>поручительство;</li>
+        <li>залог имущества.</li>
+      </ul>
+      <p class="small">Размер обеспечения рассчитывается исходя из сумм подлежащих уплате платежей. Для отдельных категорий перевозчиков и товаров могут действовать особенности. <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: размер и льготы по вашей ситуации</span></p>
+
+      <h3>Обязанности перевозчика</h3>
+      <ul>
+        <li>доставить товары и документы в установленный срок в место доставки;</li>
+        <li>следовать по определённому маршруту, если он установлен;</li>
+        <li>обеспечить сохранность товаров и средств идентификации;</li>
+        <li>не использовать товары и не передавать их третьим лицам без разрешения;</li>
+        <li>сообщить таможне об аварии или иных обстоятельствах, препятствующих перевозке;</li>
+        <li>предъявить товары и документы по требованию таможенного органа.</li>
+      </ul>
+
+      <div class="note">
+        <strong>Пломбы и идентификация.</strong> Таможня налагает средства идентификации — пломбы, марки, цифровые отметки. Повреждение или утрата пломбы — самостоятельное нарушение, и продолжать движение «как ни в чём не бывало» нельзя: нужно сообщить таможне и действовать по её указаниям.
+      </div>
+    </section>
+
+    <!-- ================= 6 ================= -->
+    <section class="card" id="finish">
+      <span class="section-kicker">Завершение</span>
+      <h2>Доставка и закрытие транзита</h2>
+
+      <p>После доставки товара в место доставки перевозчик представляет документы, а таможенный орган назначения совершает операции по завершению процедуры.</p>
+
+      <div class="deadline">
+        <span class="box-title">4 часа рабочего времени</span>
+        Таможенный орган назначения завершает действие процедуры таможенного транзита в возможно короткие сроки, но не позднее 4 часов рабочего времени с момента регистрации подачи документов (ст. 151 ТК ЕАЭС).
+      </div>
+
+      <h3>Что проверяет таможня назначения</h3>
+      <ul>
+        <li>товар доставлен в место доставки и в срок;</li>
+        <li>средства идентификации не повреждены и не заменены;</li>
+        <li>сведения и документы соответствуют транзитной декларации;</li>
+        <li>нет признаков нарушения процедуры.</li>
+      </ul>
+
+      <h3>Что происходит после завершения</h3>
+      <p>Товар не «освобождается». Он остаётся иностранным и под таможенным контролем. Дальше два пути: помещение на временное хранение (СВХ) либо подача декларации.</p>
+
+      <div class="warning">
+        <strong>Следите за часами.</strong> Четыре часа — это срок для таможни, но не для вас. Если после завершения транзита товар остаётся неоформленным, начинается отсчёт временного хранения и расходов.
+      </div>
+    </section>
+
+    <!-- ================= 7 ================= -->
+    <section class="card" id="svh">
+      <span class="section-kicker">СВХ</span>
+      <h2>Склад временного хранения: пошагово</h2>
+
+      <ol class="steps">
+        <li>
+          <h3>Выбрать место временного хранения</h3>
+          <p class="human">Это может быть СВХ или иное место, предусмотренное законом. Смотрите не только на цену, но и на близость к таможне и на скорость оформления.</p>
+          <p class="exact">Местами временного хранения являются склады временного хранения и иные места (ст. 99 ТК ЕАЭС). <span class="tag tag-norm">Норма</span></p>
+        </li>
+
+        <li>
+          <h3>Оформить помещение товара</h3>
+          <p class="human">Товар принимают на склад по документам. Таможня регистрирует документы, представленные для помещения на временное хранение.</p>
+          <p class="exact">Помещение товаров на временное хранение сопровождается представлением документов и регистрацией их таможенным органом (глава 16 ТК ЕАЭС). <span class="tag tag-norm">Норма</span></p>
+        </li>
+
+        <li>
+          <h3>Соблюдать срок хранения</h3>
+          <p class="human">На СВХ товар может лежать до четырёх месяцев. Дальше — задержание и неприятные последствия.</p>
+          <p class="exact">Срок временного хранения — не более 4 месяцев (ст. 101 ТК ЕАЭС), исчисляется со дня, следующего за днем регистрации документов. <span class="tag tag-norm">Норма</span> <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: особенности для отдельных категорий товаров</span></p>
+        </li>
+
+        <li>
+          <h3>Совершать только разрешённые операции</h3>
+          <p class="human">Можно осматривать, измерять, перемещать в пределах склада, готовить к вывозу. Нельзя пользоваться товаром как своим и вывозить его без разрешения.</p>
+          <p class="exact">Операции с товарами на временном хранении — ст. 102 ТК ЕАЭС. <span class="tag tag-norm">Норма</span></p>
+        </li>
+
+        <li>
+          <h3>Подать декларацию до истечения срока</h3>
+          <p class="human">Лучше — сразу. Каждый день хранения стоит денег, а просрочка создаёт риск задержания.</p>
+          <p class="exact">Декларация подаётся до истечения срока временного хранения. <span class="tag tag-norm">Норма</span></p>
+        </li>
+
+        <li>
+          <h3>Вывезти товар после выпуска</h3>
+          <p class="human">Товар забирают со склада только после выпуска или с разрешения таможни.</p>
+          <p class="exact">Вывоз с временного хранения — после выпуска либо с разрешения таможенного органа. <span class="tag tag-norm">Норма</span></p>
+        </li>
+      </ol>
+
+      <h3>Что важно знать про СВХ</h3>
+      <div class="table-wrap">
+        <table>
+          <caption>Практические моменты</caption>
+          <thead><tr><th>Вопрос</th><th>Ответ</th></tr></thead>
+          <tbody>
+            <tr><td>Кто платит за хранение</td><td>Лицо, поместившее товар; тарифы — у владельца СВХ</td></tr>
+            <tr><td>Можно ли забрать часть товара</td><td>Только в порядке, допускаемом таможней, и после оформления</td></tr>
+            <tr><td>Можно ли вскрыть упаковку</td><td>Только разрешённые операции; вскрытие — с учётом требований таможни</td></tr>
+            <tr><td>Что при истечении срока</td><td>Задержание товаров в соответствии с главой 51 ТК ЕАЭС</td></tr>
+            <tr><td>Можно ли хранить дольше</td><td>Общий срок — 4 месяца; исключения устанавливаются законом</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= 8 ================= -->
+    <section class="card" id="flow">
+      <span class="section-kicker">Инфографика</span>
+      <h2>Схема этапа</h2>
+
+      <div class="flow" role="img" aria-label="Схема: таможня отправления, транзитная декларация, обеспечение, перевозка, доставка, завершение, СВХ или декларация">
+        <div class="node"><b>Отправление</b><span>таможня отправления</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>ТД</b><span>форма № 289</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>Обеспечение</b><span>ст. 146</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node hi"><b>Перевозка</b><span>срок, маршрут, пломбы</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>Доставка</b><span>место доставки</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>Завершение</b><span>до 4 часов</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node hi"><b>Дальше</b><span>СВХ или ДТ</span></div>
+      </div>
+      <p class="flow-caption">Транзит заканчивается не выпуском товара, а завершением процедуры. Товар остаётся под таможенным контролем до декларирования.</p>
+
+      <ol class="timeline">
+        <li><b>Выпуск транзитной декларации</b><span>Начало процедуры и отсчёт срока доставки.</span></li>
+        <li><b>Перевозка</b><span>Соблюдение срока, маршрута и сохранности пломб.</span></li>
+        <li><b>Доставка</b><span>Товар в месте доставки, документы представлены.</span></li>
+        <li><b>4 часа</b><span>Таможня назначения завершает процедуру.</span></li>
+        <li><b>СВХ</b><span>До 4 месяцев — если декларация ещё не готова.</span></li>
+        <li><b>Декларация</b><span>Выпуск и вывоз товара.</span></li>
+      </ol>
+    </section>
+
+    <!-- ================= 9 ================= -->
+    <section class="card" id="errors">
+      <span class="section-kicker">Типичные ошибки</span>
+      <h2>Частые ошибки</h2>
+      <ul>
+        <li>Считать, что транзит и СВХ — одно и то же. Это перевозка и хранение, разные режимы.</li>
+        <li>Думать, что срок транзита всегда 10 дней. Он считается по расстоянию и виду транспорта.</li>
+        <li>Не проверить, требуется ли обеспечение, и получить отказ в выпуске транзитной декларации.</li>
+        <li>Отклониться от маршрута «по объезду» — это нарушение порядка транзита.</li>
+        <li>Повредить пломбу и продолжить движение, не сообщив таможне.</li>
+        <li>Не уведомить таможню о доставке или опоздать с представлением документов.</li>
+        <li>Оставить товар на СВХ дольше четырёх месяцев.</li>
+        <li>Пытаться пользоваться товаром или вывозить его с СВХ без разрешения.</li>
+        <li>Путать СВХ с таможенным складом и планировать хранение по чужим правилам.</li>
+      </ul>
+    </section>
+
+    <!-- ================= 10 ================= -->
+    <section class="card" id="risk">
+      <span class="section-kicker">Риски</span>
+      <h2>Чем это грозит</h2>
+
+      <div class="fine">
+        <span class="box-title">1 · Статья 16.9 КоАП РФ</span>
+        Недоставка товаров, помещённых под процедуру транзита, выдача их без разрешения таможни либо утрата товаров или документов.
+      </div>
+
+      <div class="fine">
+        <span class="box-title">2 · Статья 16.10 КоАП РФ</span>
+        Несоблюдение перевозчиком установленного срока таможенного транзита или определённого маршрута перевозки.
+      </div>
+
+      <div class="fine">
+        <span class="box-title">3 · Статья 16.11 КоАП РФ</span>
+        Уничтожение, повреждение, утрата или изменение средств идентификации.
+      </div>
+
+      <div class="warning">
+        <span class="box-title">4 · Расходы и простой</span>
+        Хранение на СВХ платное. Чем дольше товар лежит, тем дороже. Просрочка срока хранения ведёт к задержанию товара.
+      </div>
+
+      <div class="note">
+        <span class="box-title">5 · Задержание товаров</span>
+        По истечении срока временного хранения товары задерживаются в соответствии с главой 51 ТК ЕАЭС. Дальше — расходы, реализация или уничтожение по установленным правилам.
+      </div>
+    </section>
+
+    <!-- ================= 11 ================= -->
+    <section class="card" id="check">
+      <span class="section-kicker">Практический инструмент</span>
+      <h2>Чек-лист</h2>
+      <ul class="checklist">
+        <li>Я понимаю, нужен ли транзит или можно декларировать в месте прибытия?</li>
+        <li>Определены таможня отправления, таможня назначения и место доставки?</li>
+        <li>Транзитная декларация заполнена по форме № 289?</li>
+        <li>Проверено, требуется ли обеспечение, и выбран его способ?</li>
+        <li>Перевозчик знает срок, маршрут и требования к пломбам?</li>
+        <li>Есть план действий при аварии или повреждении пломбы?</li>
+        <li>Товар доставлен в место доставки и документы представлены?</li>
+        <li>Транзит завершён в пределах 4 часов рабочего времени?</li>
+        <li>Выбран СВХ и оформлено помещение товара?</li>
+        <li>Срок хранения 4 месяца контролируется, декларация готовится заранее?</li>
+        <li>Товар не используется и не вывозится без разрешения таможни?</li>
+      </ul>
+    </section>
+
+    <!-- ================= 12 ================= -->
+    <section class="card" id="gloss">
+      <span class="section-kicker">Словарь</span>
+      <h2>Глоссарий</h2>
+      <dl class="glossary">
+        <div><dt>Таможенный транзит</dt><dd>процедура перевозки иностранных товаров под таможенным контролем.</dd></div>
+        <div><dt>ТД</dt><dd>транзитная декларация.</dd></div>
+        <div><dt>Таможня отправления</dt><dd>орган, выпускающий транзитную декларацию.</dd></div>
+        <div><dt>Таможня назначения</dt><dd>орган, завершающий процедуру транзита.</dd></div>
+        <div><dt>Место доставки</dt><dd>место, куда товар должен быть доставлен.</dd></div>
+        <div><dt>Обеспечение</dt><dd>гарантия уплаты платежей на случай нарушения процедуры.</dd></div>
+        <div><dt>Средства идентификации</dt><dd>пломбы, марки и иные знаки контроля.</dd></div>
+        <div><dt>СВХ</dt><dd>склад временного хранения.</dd></div>
+        <div><dt>Временное хранение</dt><dd>хранение иностранных товаров до выпуска.</dd></div>
+        <div><dt>Таможенный склад</dt><dd>отдельная таможенная процедура хранения, не СВХ.</dd></div>
+        <div><dt>Задержание товаров</dt><dd>мера, применяемая при истечении срока хранения и иных нарушениях.</dd></div>
+        <div><dt>Перевозчик</dt><dd>лицо, фактически осуществляющее перевозку.</dd></div>
+      </dl>
+    </section>
+
+    <!-- ================= 13 ================= -->
+    <section class="card" id="summary">
+      <span class="section-kicker">Итог</span>
+      <h2>Резюме</h2>
+      <div class="summary">
+        <h3>Семь тезисов этапа 2</h3>
+        <ol>
+          <li>Транзит — перевозка под контролем, СВХ — хранение до выпуска; это разные институты.</li>
+          <li>Срок транзита считается по расстоянию и виду транспорта, предельный расчёт — 2 000 км за месяц.</li>
+          <li>Обеспечение уплаты платежей — обязательное условие во многих случаях; способы — ст. 63 ТК ЕАЭС.</li>
+          <li>Перевозчик обязан доставить товар в срок, по маршруту и с сохранностью пломб.</li>
+          <li>Транзит завершается не позднее 4 часов рабочего времени после подачи документов.</li>
+          <li>На СВХ товар хранится не более 4 месяцев; срок исчисляется со следующего дня после регистрации документов.</li>
+          <li>Пользоваться товаром и вывозить его с СВХ без разрешения нельзя.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= 14 ================= -->
+    <section class="card sources" id="sources">
+      <span class="section-kicker">Первоисточники</span>
+      <h2>Источники</h2>
+
+      <article class="source">
+        <h3>Таможенный кодекс ЕАЭС, глава 22 (ст. 142–154)</h3>
+        <p class="req">Таможенная процедура таможенного транзита.</p>
+        <p><strong>Что подтверждает:</strong> содержание процедуры (ст. 142), срок (ст. 144), обеспечение (ст. 146), обязанности перевозчика (ст. 150), завершение (ст. 151), операции после доставки (ст. 152). <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_215315/5a75bfc12fb22083f1c36a55ab285ee71ac3a6f5/">consultant.ru — глава 22</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Таможенный кодекс ЕАЭС, глава 16 (ст. 98–103)</h3>
+        <p class="req">Временное хранение товаров.</p>
+        <p><strong>Что подтверждает:</strong> места временного хранения (ст. 99), срок — не более 4 месяцев (ст. 101), операции с товарами (ст. 102). <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_215315/7adab79b5d312f6c9a3a01a53d372251c4febaa3/">consultant.ru — глава 16</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Статья 63 ТК ЕАЭС</h3>
+        <p class="req">Способы обеспечения исполнения обязанности по уплате таможенных пошлин, налогов.</p>
+        <p><strong>Что подтверждает:</strong> денежные средства, банковская гарантия, поручительство, залог имущества. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_215315/77364177a9a131e0a66826d8de7302371f5c60d8/">consultant.ru — ст. 63</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Решение Комиссии Таможенного союза от 18.06.2010 № 289</h3>
+        <p class="req">«О форме и порядке заполнения транзитной декларации».</p>
+        <p><strong>Что подтверждает:</strong> форму транзитной декларации и правила её заполнения. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.alta.ru/tamdoc/10sr0289/">alta.ru</a> · <a href="https://www.consultant.ru/document/Cons_doc_LAW_101902/">consultant.ru</a></p>
+      </article>
+
+      <article class="source">
+        <h3>КоАП РФ, статьи 16.9–16.11</h3>
+        <p class="req">Недоставка товаров; несоблюдение порядка таможенного транзита; повреждение средств идентификации.</p>
+        <p><strong>Что подтверждает:</strong> виды ответственности за нарушения на этом этапе. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_34661/">consultant.ru — КоАП РФ</a></p>
+      </article>
+
+      <div class="actual">
+        <strong>Информация актуальна на 07.11.2026.</strong> Перед применением сверь действующие редакции главы 22 и главы 16 ТК ЕАЭС, а также особенности обеспечения и сроков по вашему виду транспорта.
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Памятка подготовлена для личного использования участником ВЭД. Не является юридической консультацией. Конкретный порядок зависит от вида транспорта, маршрута и таможенного органа.
+  </footer>
+
+</div>
+
+<a class="up" href="#top" aria-label="Наверх">↑</a>
+
+<style>
+.nav-back { position: fixed; bottom: 24px; right: 24px; background: #0d3b66; color: #fff !important; padding: 10px 16px; border-radius: 8px; text-decoration: none; font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 9999; transition: background 0.2s; font-weight: 600; }
+.nav-back:hover { background: #1e5a99; }
+</style>
+<a href="index.html" class="nav-back">← Назад в меню</a>
+</body>
+</html>

@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Этап 6. Подача декларации — памятка</title>
+<style>
+  :root{
+    --bg:#eef2f7;
+    --ink:#16202e;
+    --muted:#5b6779;
+    --line:#d5dee9;
+    --accent:#1f4e79;
+    --accent-2:#2f6b95;
+    --accent-soft:#eaf2f9;
+    --green:#1f6b3f;
+    --green-soft:#e9f6ee;
+    --red:#a8231b;
+    --red-soft:#fdf0ee;
+    --amber:#8a5a06;
+    --amber-soft:#fff7e3;
+    --radius:16px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font:16px/1.58 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:960px;margin:0 auto;padding:0 18px 70px;}
+
+  .hero{
+    position:relative;
+    overflow:hidden;
+    margin:22px 0 0;
+    padding:38px 36px 34px;
+    border-radius:22px;
+    color:#fff;
+    background:linear-gradient(135deg,#0f2c44 0%,#1f4e79 52%,#3a769f 100%);
+    box-shadow:0 16px 38px rgba(18,45,70,.22);
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    right:-90px;top:-100px;
+    width:300px;height:300px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.14),rgba(255,255,255,0) 70%);
+  }
+  .hero .badge-top{
+    display:inline-block;
+    padding:5px 13px;
+    border-radius:100px;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.28);
+    font-size:12px;
+    font-weight:600;
+  }
+  .hero h1{
+    margin:14px 0 10px;
+    max-width:840px;
+    font-size:30px;
+    line-height:1.22;
+    letter-spacing:-.015em;
+  }
+  .hero .sub{
+    margin:0;
+    max-width:760px;
+    font-size:16.4px;
+    line-height:1.5;
+    color:#dce8f2;
+  }
+  .hero-pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px;}
+  .hero-pills span{
+    padding:7px 14px;
+    border-radius:100px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.25);
+    font-size:13.4px;
+    font-weight:600;
+  }
+
+  .toc{
+    position:sticky;
+    top:0;
+    z-index:30;
+    margin:16px 0 26px;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:0 6px 18px rgba(20,40,70,.07);
+  }
+  .toc-inner{display:flex;gap:4px;padding:9px 10px;overflow-x:auto;scrollbar-width:thin;}
+  .toc a{
+    flex:0 0 auto;
+    padding:6px 10px;
+    border-radius:8px;
+    color:#2b3b4f;
+    font-size:13.2px;
+    font-weight:600;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .toc a:hover{background:var(--accent-soft);color:var(--accent);}
+
+  .card{
+    margin:0 0 20px;
+    padding:24px 26px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 2px 4px rgba(20,40,70,.04),0 10px 24px rgba(20,40,70,.05);
+    scroll-margin-top:78px;
+  }
+  .section-kicker{
+    display:inline-block;
+    margin-bottom:8px;
+    padding:3px 9px;
+    border-radius:6px;
+    background:var(--accent-soft);
+    color:var(--accent);
+    font-size:11.2px;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+  }
+  .card h2{margin:0 0 8px;font-size:22px;line-height:1.28;letter-spacing:-.01em;}
+  .card .lead{margin:0 0 14px;color:#38465a;font-size:15.6px;}
+
+  h3{font-size:16px;margin:18px 0 7px;line-height:1.35;}
+  p{margin:8px 0;}
+  ul,ol{margin:8px 0;padding-left:22px;}
+  li{margin:5px 0;}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid #b9cfe2;word-break:break-word;}
+  a:hover{border-bottom-color:var(--accent);}
+
+  .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:0 0 16px;font-size:13px;color:var(--muted);}
+  .tag{
+    display:inline-block;
+    padding:3px 8px;
+    border-radius:5px;
+    border:1px solid transparent;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .tag-norm{background:#e8f0fb;color:#1f4e79;border-color:#c5d9ef;}
+  .tag-fts{background:#e3f2f1;color:#0e5a5a;border-color:#b6dbd8;}
+  .tag-prac{background:#fdf3e2;color:#7a4f06;border-color:#ecd3a6;}
+  .tag-red{background:var(--red-soft);color:var(--red);border-color:#e7bdb7;}
+  .tag-green{background:var(--green-soft);color:var(--green);border-color:#bfe0cc;}
+
+  .note,.warning,.fine,.deadline,.ausn,.osno,.summary{
+    margin:14px 0;
+    padding:14px 17px;
+    border-radius:12px;
+    font-size:14.6px;
+  }
+  .note{background:#f5f8fb;border:1px solid #dbe5ee;border-left:4px solid #8aa6c0;}
+  .warning{background:var(--amber-soft);border:1px solid #ecd9a8;border-left:5px solid #b8860b;}
+  .fine{background:var(--red-soft);border:1px solid #eccac5;border-left:5px solid var(--red);}
+  .deadline{background:var(--accent-soft);border:1px solid #c9dcef;border-left:5px solid var(--accent);}
+  .ausn{background:var(--green-soft);border:1px solid #c6e3d2;border-left:5px solid var(--green);}
+  .osno{background:#f2f6fc;border:1px solid #c8d9ee;border-left:5px solid #2c5f96;}
+  .summary{
+    padding:20px 22px;
+    border:0;
+    color:#eef5fb;
+    background:linear-gradient(135deg,#173752,#1f4e79);
+  }
+  .summary h3{margin-top:0;color:#fff;}
+  .summary ol{padding-left:20px;}
+  .summary li{margin:7px 0;}
+  .box-title{
+    display:block;
+    margin-bottom:4px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    opacity:.9;
+  }
+
+  .report{
+    margin:14px 0;
+    padding:16px 18px;
+    background:#fcfdfe;
+    border:1px solid var(--line);
+    border-radius:14px;
+    scroll-margin-top:78px;
+  }
+  .report-head{display:flex;gap:14px;align-items:flex-start;}
+  .num{
+    flex:0 0 44px;
+    width:44px;height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:var(--accent);
+    color:#fff;
+    font-size:14px;
+    font-weight:800;
+    text-align:center;
+    line-height:1.1;
+  }
+  .num.green{background:var(--green);}
+  .num.grey{background:#5d6c80;}
+  .num.amber{background:#a8741a;}
+  .report h3{margin:1px 0 2px;font-size:16.5px;}
+  .report .sub{margin:0;font-size:13.8px;color:var(--muted);}
+  .report .tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 8px;}
+  .meta{margin:0;padding:0;border:0;}
+  .meta > div{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:10px;
+    padding:7px 0;
+    border-top:1px dotted var(--line);
+    font-size:14.2px;
+  }
+  .meta dt{margin:0;font-weight:700;color:#2c3a4d;}
+  .meta dd{margin:0;color:#33415a;}
+
+  ol.steps{list-style:none;counter-reset:st;margin:14px 0;padding:0;}
+  ol.steps > li{
+    counter-increment:st;
+    position:relative;
+    margin:0 0 4px 15px;
+    padding:0 0 16px 46px;
+    border-left:2px solid #c9dcef;
+  }
+  ol.steps > li:last-child{border-left-color:transparent;padding-bottom:0;}
+  ol.steps > li::before{
+    content:counter(st);
+    position:absolute;left:-16px;top:0;
+    width:30px;height:30px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    font-size:14px;
+    font-weight:700;
+  }
+  ol.steps h3{margin:2px 0 4px;font-size:15.5px;}
+  .human{margin:2px 0 4px;font-size:14.6px;}
+  .human::before{content:"По-человечески: ";font-weight:700;color:var(--accent-2);}
+  .exact{
+    margin:2px 0 0;
+    padding:7px 10px;
+    background:#fafbfd;
+    border:1px dashed var(--line);
+    border-radius:6px;
+    color:#3c4a5c;
+    font-size:13.6px;
+  }
+  .exact::before{content:"Точно: ";font-weight:700;color:var(--muted);}
+
+  .flow{
+    display:flex;
+    align-items:stretch;
+    justify-content:center;
+    gap:4px;
+    margin:16px 0;
+    padding:18px 14px;
+    background:#fbfcfe;
+    border:1px solid var(--line);
+    border-radius:14px;
+    flex-wrap:wrap;
+  }
+  .flow .node{
+    flex:1 1 0;
+    min-width:0;
+    padding:11px 9px;
+    background:#fff;
+    border:1.5px solid #c9dcef;
+    border-top:4px solid var(--accent);
+    border-radius:9px;
+    text-align:center;
+    font-size:12.6px;
+    line-height:1.4;
+  }
+  .flow .node b{display:block;margin-bottom:3px;font-size:13.2px;}
+  .flow .node span{color:var(--muted);font-size:11.8px;}
+  .flow .node.hi{background:var(--accent-soft);border-top-color:var(--accent-2);}
+  .flow .arrow{
+    flex:0 0 20px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--accent);
+    font-size:18px;font-weight:700;
+  }
+  .flow .arrow::before{content:"→";}
+  .flow-caption{margin:-6px 0 14px;font-size:12.6px;color:var(--muted);text-align:center;line-height:1.45;}
+
+  .table-wrap{margin:14px 0;overflow-x:auto;border:1px solid var(--line);border-radius:12px;}
+  table{width:100%;min-width:660px;border-collapse:collapse;background:#fff;font-size:13.5px;}
+  caption{caption-side:top;padding:8px 10px 6px;background:#f7f9fc;color:var(--muted);font-size:12.8px;text-align:left;}
+  th,td{
+    padding:9px 11px;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    text-align:left;
+    vertical-align:top;
+  }
+  th:last-child,td:last-child{border-right:0;}
+  tbody tr:last-child td{border-bottom:0;}
+  th{background:#eef4fa;font-size:12.9px;font-weight:700;}
+  tbody tr:nth-child(even) td{background:#fafbfd;}
+  .yes{color:var(--green);font-weight:700;}
+  .no{color:var(--red);font-weight:700;}
+  .mid{color:#8a5a06;font-weight:700;}
+
+  .timeline{list-style:none;margin:16px 0 4px;padding:0 0 0 26px;border-left:2px solid #c4d4e4;}
+  .timeline li{position:relative;margin:0;padding:0 0 20px 18px;}
+  .timeline li:last-child{padding-bottom:0;}
+  .timeline li::before{
+    content:"";
+    position:absolute;left:-35px;top:4px;
+    width:14px;height:14px;
+    border:3px solid var(--accent);
+    border-radius:50%;
+    background:#fff;
+  }
+  .timeline b{display:block;margin-bottom:2px;font-size:15px;}
+  .timeline span{font-size:14.2px;color:#3c4a5e;}
+
+  .checklist{list-style:none;margin:10px 0;padding-left:0;}
+  .checklist li{position:relative;margin:9px 0;padding-left:32px;}
+  .checklist li::before{content:"☐";position:absolute;left:0;top:-1px;color:var(--accent);font-size:19px;}
+
+  dl.glossary{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;margin:12px 0;}
+  dl.glossary > div{padding:8px 0;border-bottom:1px dotted var(--line);}
+  dl.glossary dt{font-weight:700;font-size:14.4px;}
+  dl.glossary dd{margin:2px 0 0;font-size:14px;color:#3a465c;}
+
+  .sources .source{margin:16px 0;padding:4px 0 4px 14px;border-left:3px solid #c3d3e2;}
+  .sources .source h3{margin:0 0 3px;font-size:15px;}
+  .sources .req{margin:0 0 5px;font-size:12.8px;color:var(--muted);}
+  .sources .source p{margin:5px 0;font-size:14.2px;}
+  .sources .link{font-size:12.9px;}
+  .actual{
+    margin-top:18px;
+    padding:11px 14px;
+    background:#f2f6fa;
+    border:1px dashed #c3d3e2;
+    border-radius:10px;
+    font-size:13.4px;
+    color:#3d4b60;
+  }
+
+  .flag{
+    display:inline-block;
+    padding:0 5px;
+    border-radius:3px;
+    background:var(--amber-soft);
+    color:#6d4f00;
+    font-size:11.5px;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .small{font-size:13px;color:var(--muted);}
+
+  footer{
+    margin-top:26px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    font-size:12.7px;
+    line-height:1.5;
+    color:var(--muted);
+  }
+
+  .up{
+    position:fixed;
+    right:20px;bottom:20px;
+    z-index:40;
+    display:flex;align-items:center;justify-content:center;
+    width:46px;height:46px;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    font-size:19px;
+    text-decoration:none;
+    box-shadow:0 8px 20px rgba(20,50,80,.28);
+  }
+  .up:hover{background:#163b5c;}
+
+  @media (max-width:800px){
+    .hero{padding:28px 22px 26px;border-radius:18px;}
+    .hero h1{font-size:24px;}
+    .hero .sub{font-size:15.2px;}
+    .card{padding:20px 18px;}
+    .flow{flex-direction:column;gap:0;}
+    .flow .arrow{flex:0 0 28px;}
+    .flow .arrow::before{content:"↓";}
+    .flow .node{text-align:left;padding:11px 13px;}
+    dl.glossary{grid-template-columns:1fr;}
+    .meta > div{grid-template-columns:1fr;gap:2px;}
+    .toc{border-radius:10px;}
+  }
+
+  @media print{
+    @page{margin:13mm 12mm;}
+    body{background:#fff;color:#000;font-size:10.3pt;line-height:1.4;}
+    .wrap{max-width:none;padding:0;}
+    .hero{
+      padding:0 0 10pt;
+      border:1.5pt solid #000;
+      border-radius:0;
+      background:#fff !important;
+      color:#000;
+      box-shadow:none;
+    }
+    .hero::after{display:none;}
+    .hero .badge-top,.hero-pills span{border:1pt solid #000;background:#fff;color:#000;}
+    .hero .sub{color:#000;}
+    .toc,.up{display:none !important;}
+    .card,.report,.table-wrap,.summary,.flow{
+      box-shadow:none !important;
+      break-inside:avoid;
+      page-break-inside:avoid;
+    }
+    .card{margin-bottom:10pt;border:1pt solid #999;}
+    .summary{background:#fff !important;color:#000;border:1.5pt solid #000;}
+    .summary h3{color:#000;}
+    .note,.warning,.fine,.deadline,.ausn,.osno{
+      background:#fff !important;
+      border:1pt solid #000;
+      border-left:3pt solid #000;
+    }
+    .flow{border:1pt solid #000;background:#fff !important;}
+    .flow .node{background:#fff !important;border:1pt solid #000;}
+    table{min-width:0;font-size:8.6pt;}
+    thead{display:table-header-group;}
+    a{color:#000;border-bottom:0;text-decoration:none;}
+    h1,h2,h3{color:#000;}
+  }
+</style>
+</head>
+<body id="top">
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="badge-top">Актуально на 07.11.2026</span>
+    <h1>Этап 6. Подача декларации</h1>
+    <p class="sub">От формирования ДТ в программе до присвоения регистрационного номера: что должно быть готово, как проходит ФЛК, почему приходит отказ и что делать дальше.</p>
+    <div class="hero-pills">
+      <span>АПС, а не ЛК</span>
+      <span>ФЛК и УКЭП</span>
+      <span>Регистрация — это номер</span>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Содержание">
+    <div class="toc-inner">
+      <a href="#princip">Главное</a>
+      <a href="#legal">Норма</a>
+      <a href="#prepare">Что готово</a>
+      <a href="#form">Формирование</a>
+      <a href="#submit">Подача</a>
+      <a href="#register">Регистрация</a>
+      <a href="#after">После</a>
+      <a href="#flow">Схема</a>
+      <a href="#errors">Ошибки</a>
+      <a href="#risk">Риски</a>
+      <a href="#check">Чек-лист</a>
+      <a href="#gloss">Глоссарий</a>
+      <a href="#sources">Источники</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- 1 -->
+    <section class="card" id="princip">
+      <span class="section-kicker">Сначала — главное</span>
+      <h2>Подача — это не «заполнить форму на сайте»</h2>
+      <p class="lead">Декларация формируется в специализированном программном обеспечении (АПС), подписывается УКЭП и направляется в информационную систему таможенных органов. Личный кабинет — это витрина статусов и сервисов, а не редактор ДТ.</p>
+      <p>К моменту подачи должны быть готовы не только графы, но и таможенная стоимость, ДТС-1, разрешительные документы, платежи и остаток на ЕЛС. Если хотя бы одно звено не готово, декларация либо не пройдёт форматно-логический контроль, либо будет зарегистрирована и упрётся в проверку.</p>
+
+      <div class="legend">
+        <span><span class="tag tag-norm">Норма</span> ТК ЕАЭС и решения ЕЭК</span>
+        <span><span class="tag tag-fts">Позиция ФТС</span> сервисы и разъяснения</span>
+        <span><span class="tag tag-prac">Практика</span> что происходит на деле</span>
+      </div>
+
+      <div class="flow" role="img" aria-label="Схема: АПС, ФЛК, УКЭП, отправка, регистрация, номер ДТ">
+        <div class="node"><b>АПС</b><span>формирование ДТ</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>ФЛК</b><span>проверка структуры</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node hi"><b>УКЭП</b><span>подпись</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>ЕАИС</b><span>отправка</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>Регистрация</b><span>номер ДТ</span></div>
+      </div>
+      <p class="flow-caption">Подача и регистрация — разные события. ДТ может быть отправлена, но не зарегистрирована.</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="card" id="legal">
+      <span class="section-kicker">Нормативная база</span>
+      <h2>На чём всё держится</h2>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Основные акты этапа</caption>
+          <thead><tr><th>Акт</th><th>Что регулирует</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Статья 104 ТК ЕАЭС</strong></td><td>Место таможенного декларирования.</td></tr>
+            <tr><td><strong>Статья 105 ТК ЕАЭС</strong></td><td>Срок подачи таможенной декларации.</td></tr>
+            <tr><td><strong>Статья 106 ТК ЕАЭС</strong></td><td>Сведения, подлежащие указанию в декларации.</td></tr>
+            <tr><td><strong>Статья 108 ТК ЕАЭС</strong></td><td>Документы, подтверждающие сведения в декларации.</td></tr>
+            <tr><td><strong>Статья 111 ТК ЕАЭС</strong></td><td>Регистрация таможенной декларации.</td></tr>
+            <tr><td><strong>Статья 112 ТК ЕАЭС</strong></td><td>Отказ в регистрации таможенной декларации.</td></tr>
+            <tr><td><strong>Статья 119 ТК ЕАЭС</strong></td><td>Сроки выпуска товаров.</td></tr>
+            <tr><td><strong>Решение КТС от 20.05.2010 № 257</strong></td><td>Порядок заполнения декларации на товары (ред. от 28.04.2026).</td></tr>
+            <tr><td><strong>Решение Коллегии ЕЭК от 16.01.2018 № 4</strong></td><td>Структура и формат декларации на товары. <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: номер и действующая редакция</span></td></tr>
+            <tr><td><strong>Решение Коллегии ЕЭК от 16.10.2018 № 160</strong></td><td>ДТС-1 и ДТС-2, подаваемые вместе с ДТ.</td></tr>
+            <tr><td><strong>Статья 16.2 КоАП РФ</strong></td><td>Ответственность за недостоверное декларирование.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="warning">
+        <strong>Про формат 2026 года.</strong> С 1 апреля 2026 года применяется обновлённая структура электронной декларации. Программа должна быть обновлена; иначе ФЛК не пропустит документ. <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: версия формата в вашей АПС</span>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="card" id="prepare">
+      <span class="section-kicker">Шаг 1</span>
+      <h2>Что должно быть готово до подачи</h2>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Комплект готовности</caption>
+          <thead><tr><th>Блок</th><th>Что проверить</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Документы</strong></td><td>Контракт, инвойс, транспортные, упаковочный лист, разрешительные документы</td></tr>
+            <tr><td><strong>Таможенная стоимость</strong></td><td>Расчёт, начисления и вычеты, ДТС-1</td></tr>
+            <tr><td><strong>Платежи</strong></td><td>Остаток на ЕЛС, ставки, льготы</td></tr>
+            <tr><td><strong>Разрешительные документы</strong></td><td>Проверены в ЛК «Разрешительные документы»</td></tr>
+            <tr><td><strong>УНК</strong></td><td>Указан в графе 44, если применимо</td></tr>
+            <tr><td><strong>УКЭП</strong></td><td>Действует на дату подачи</td></tr>
+            <tr><td><strong>Таможенный орган</strong></td><td>Правомочен принимать ДТ по вашему товару</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <strong>Практика.</strong> Декларации, как правило, подаются в центр электронного декларирования (ЦЭД), а товар находится на СВХ в регионе деятельности. Проверьте компетенцию органа до отправки.
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="card" id="form">
+      <span class="section-kicker">Шаг 2</span>
+      <h2>Формирование декларации</h2>
+
+      <ol class="steps">
+        <li>
+          <h3>Открыть ДТ в программе</h3>
+          <p class="human">Создаёте декларацию в АПС и заполняете графы. Данные о компании подтягиваются из профиля, но проверить их нужно вручную.</p>
+          <p class="exact">Форма и порядок заполнения — Решение КТС № 257; структура и формат электронного документа — отдельный акт ЕЭК. <span class="tag tag-norm">Норма</span></p>
+        </li>
+        <li>
+          <h3>Заполнить ключевые графы</h3>
+          <p class="human">Проверяете то, из-за чего чаще всего ломается выпуск: код, стоимость, платежи, документы и процедуру.</p>
+          <p class="exact">Графа 33 — код ТН ВЭД; графа 37 — <strong>ИМ 40</strong>; графа 44 — документы; графа 45 — таможенная стоимость; графа 47 — исчисление платежей. <span class="tag tag-norm">Норма</span></p>
+        </li>
+        <li>
+          <h3>Приложить документы</h3>
+          <p class="human">Формализованные документы идут отдельными файлами, неформализованные — сканами или PDF. Каждый должен быть подписан.</p>
+          <p class="exact">Документы, подтверждающие сведения, — ст. 108 ТК ЕАЭС; электронные документы прикрепляются к ДТ. <span class="tag tag-norm">Норма</span></p>
+        </li>
+        <li>
+          <h3>Приложить ДТС-1</h3>
+          <p class="human">Без декларации стоимости при методе 1 пакет неполный.</p>
+          <p class="exact">ДТС-1 подаётся вместе с ДТ; форма и порядок — Решение № 160. <span class="tag tag-norm">Норма</span></p>
+        </li>
+        <li>
+          <h3>Проверить логику</h3>
+          <p class="human">Суммы, веса и количества должны сходиться между графами, ДТС-1 и документами. Программа проверяет структуру, но не смысл.</p>
+          <p class="exact">Форматно-логический контроль проверяет формат и логические связи; смысловые ошибки остаются на декларанте. <span class="tag tag-prac">Практика</span></p>
+        </li>
+      </ol>
+
+      <div class="fine">
+        <span class="box-title">Критично</span>
+        ФЛК не проверяет, тот ли у вас сертификат и правильную ли ставку вы взяли. Он проверяет только структуру и арифметику. Ответственность за смысл — на декларанте.
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="card" id="submit">
+      <span class="section-kicker">Шаг 3</span>
+      <h2>Подача и ФЛК</h2>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Что происходит после нажатия «Отправить»</caption>
+          <thead><tr><th>Этап</th><th>Что проверяется</th><th>Результат</th></tr></thead>
+          <tbody>
+            <tr><td>Форматно-логический контроль</td><td>Структура, форматы, обязательные реквизиты, арифметика</td><td>Прошла или ошибка с кодом</td></tr>
+            <tr><td>Проверка подписи</td><td>Действительность УКЭП и целостность документа</td><td>Принято или отказ</td></tr>
+            <tr><td>Поступление в ЕАИС</td><td>Доставка документа в систему таможенных органов</td><td>Зафиксировано время подачи</td></tr>
+            <tr><td>Регистрация</td><td>Проверка оснований для регистрации</td><td>Номер ДТ или отказ</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="deadline">
+        <span class="box-title">Срок регистрации</span>
+        Таможенный орган регистрирует декларацию или отказывает в регистрации в установленный срок — по общему правилу не более 2 часов с момента подачи. <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: точный срок по ст. 111 ТК ЕАЭС</span>
+      </div>
+
+      <div class="note">
+        <strong>Что не является отказом в регистрации.</strong> Запрос дополнительных документов, сомнение в стоимости, решение о досмотре — это уже проверка после регистрации. Не путайте отказ в регистрации с отказом в выпуске.
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="card" id="register">
+      <span class="section-kicker">Шаг 4</span>
+      <h2>Регистрация или отказ</h2>
+
+      <h3>Что означает регистрация</h3>
+      <ul>
+        <li>ДТ принята и ей присвоен регистрационный номер.</li>
+        <li>С этого момента начинается исчисление срока выпуска.</li>
+        <li>Сведения нельзя изменить «просто так» — только через корректировку.</li>
+      </ul>
+
+      <h3>Типичные основания отказа в регистрации</h3>
+      <div class="table-wrap">
+        <table>
+          <caption>Практика</caption>
+          <thead><tr><th>Причина</th><th>Что делать</th></tr></thead>
+          <tbody>
+            <tr><td>Ошибка формата или структуры</td><td>Обновить программу, исправить реквизиты, отправить заново</td></tr>
+            <tr><td>Недействительная или отсутствующая УКЭП</td><td>Проверить сертификат и срок действия</td></tr>
+            <tr><td>Не представлены обязательные документы</td><td>Дополнить комплект и подать заново</td></tr>
+            <tr><td>ДТ подана в неправомочный орган</td><td>Проверить компетенцию таможенного органа</td></tr>
+            <tr><td>Противоречивые сведения</td><td>Сверить графы, ДТС-1 и документы</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="warning">
+        <strong>Отказ — не приговор.</strong> Обычно это техническая ошибка, которую исправляют и подают заново. Хуже, когда декларация зарегистрирована с неверными сведениями: тогда начинается проверка и возможна корректировка.
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="card" id="after">
+      <span class="section-kicker">Шаг 5</span>
+      <h2>Что происходит после регистрации</h2>
+
+      <ol class="timeline">
+        <li><b>Проверка документов и сведений</b><span>Таможня сверяет данные, может запросить пояснения.</span></li>
+        <li><b>Досмотр или осмотр</b><span>При необходимости — с составлением акта.</span></li>
+        <li><b>КТС</b><span>Корректировка таможенной стоимости, если есть сомнения.</span></li>
+        <li><b>КДТ</b><span>Изменение сведений в декларации по установленному порядку.</span></li>
+        <li><b>Выпуск</b><span>Не более 4 часов с момента регистрации; продление — до 10 рабочих дней (ст. 119 ТК ЕАЭС).</span></li>
+      </ol>
+
+      <div class="ausn">
+        <span class="box-title">Если всё в порядке</span>
+        Статус меняется на «Выпуск разрешён», платежи списываются с ЕЛС, товар можно забирать со СВХ.
+      </div>
+
+      <div class="fine">
+        <span class="box-title">Если есть ошибка</span>
+        После регистрации изменения вносятся через КДТ, а не «переподачей» декларации. Порядок — Решение Коллегии ЕЭК от 10.12.2013 № 289.
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="card" id="flow">
+      <span class="section-kicker">Инфографика</span>
+      <h2>Схема этапа</h2>
+
+      <div class="flow" role="img" aria-label="Схема: подготовка, формирование, ФЛК, подпись, отправка, регистрация, проверка, выпуск">
+        <div class="node"><b>Подготовка</b><span>документы и платежи</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>АПС</b><span>заполнение ДТ</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>ФЛК</b><span>структура</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node hi"><b>УКЭП</b><span>подпись</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>Регистрация</b><span>номер</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>Проверка</b><span>запросы, досмотр</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node hi"><b>Выпуск</b><span>4 часа</span></div>
+      </div>
+      <p class="flow-caption">Ключевая развилка — регистрация. До неё ошибку можно исправить переподачей, после — только через КДТ.</p>
+    </section>
+
+    <!-- 9 -->
+    <section class="card" id="errors">
+      <span class="section-kicker">Типичные ошибки</span>
+      <h2>Частые ошибки</h2>
+      <ul>
+        <li>Пытаться заполнить и подать ДТ в личном кабинете — это делается в АПС.</li>
+        <li>Отправлять декларацию с недействительной или чужой УКЭП.</li>
+        <li>Подавать без ДТС-1 при методе 1.</li>
+        <li>Не проверить остаток на ЕЛС — декларация зарегистрируется, а выпуска не будет.</li>
+        <li>Считать, что ФЛК проверит правильность кода и ставки. Он проверяет только формат.</li>
+        <li>Указывать графу 37 как «40» вместо «ИМ 40».</li>
+        <li>Путать отказ в регистрации с отказом в выпуске.</li>
+        <li>После регистрации пытаться «переподать» ДТ вместо КДТ.</li>
+      </ul>
+    </section>
+
+    <!-- 10 -->
+    <section class="card" id="risk">
+      <span class="section-kicker">Риски</span>
+      <h2>Чем это грозит</h2>
+
+      <div class="fine">
+        <span class="box-title">1 · Отказ в регистрации</span>
+        Потеря времени, простой на СВХ, дополнительные расходы.
+      </div>
+
+      <div class="fine">
+        <span class="box-title">2 · Регистрация с ошибкой</span>
+        Хуже отказа: начинается проверка, возможны КТС, КДТ и доначисление.
+      </div>
+
+      <div class="fine">
+        <span class="box-title">3 · Часть 1 и часть 2 статьи 16.2 КоАП РФ</span>
+        Недекларирование или недостоверные сведения, повлиявшие на платежи.
+      </div>
+
+      <div class="warning">
+        <span class="box-title">4 · Срок выпуска</span>
+        Чем больше ошибок, тем дольше проверка. Срок в 4 часа — это про «идеальную» декларацию, а не гарантия.
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="card" id="check">
+      <span class="section-kicker">Практический инструмент</span>
+      <h2>Чек-лист перед отправкой</h2>
+      <ul class="checklist">
+        <li>Программа обновлена и поддерживает действующий формат?</li>
+        <li>УКЭП действует и принадлежит нужному лицу?</li>
+        <li>Все графы заполнены, графа 37 — «ИМ 40»?</li>
+        <li>Код, стоимость и платежи сходятся с ДТС-1 и документами?</li>
+        <li>ДТС-1 приложена?</li>
+        <li>Разрешительные документы проверены в ЛК?</li>
+        <li>УНК указан в графе 44?</li>
+        <li>На ЕЛС достаточно средств?</li>
+        <li>Таможенный орган правомочен принимать декларацию?</li>
+        <li>Документы подписаны и приложены?</li>
+      </ul>
+    </section>
+
+    <!-- 12 -->
+    <section class="card" id="gloss">
+      <span class="section-kicker">Словарь</span>
+      <h2>Глоссарий</h2>
+      <dl class="glossary">
+        <div><dt>ДТ</dt><dd>декларация на товары.</dd></div>
+        <div><dt>АПС</dt><dd>автоматизированное рабочее место / программное средство для декларирования.</dd></div>
+        <div><dt>ЕАИС</dt><dd>Единая автоматизированная информационная система таможенных органов.</dd></div>
+        <div><dt>ФЛК</dt><dd>форматно-логический контроль.</dd></div>
+        <div><dt>УКЭП</dt><dd>усиленная квалифицированная электронная подпись.</dd></div>
+        <div><dt>Регистрация ДТ</dt><dd>принятие декларации с присвоением номера.</dd></div>
+        <div><dt>Отказ в регистрации</dt><dd>решение таможни не принимать декларацию.</dd></div>
+        <div><dt>КДТ</dt><dd>корректировка декларации на товары.</dd></div>
+        <div><dt>ЦЭД</dt><dd>центр электронного декларирования.</dd></div>
+        <div><dt>ДТС-1</dt><dd>декларация таможенной стоимости по методу 1.</dd></div>
+        <div><dt>Формализованный документ</dt><dd>электронный документ установленной структуры.</dd></div>
+        <div><dt>Неформализованный документ</dt><dd>скан или графический файл документа.</dd></div>
+      </dl>
+    </section>
+
+    <!-- 13 -->
+    <section class="card" id="summary">
+      <span class="section-kicker">Итог</span>
+      <h2>Резюме</h2>
+      <div class="summary">
+        <h3>Семь тезисов этапа 6</h3>
+        <ol>
+          <li>ДТ формируется в АПС, а не в личном кабинете.</li>
+          <li>Перед отправкой должны быть готовы документы, стоимость, платежи и разрешения.</li>
+          <li>ФЛК проверяет формат и арифметику, но не смысл.</li>
+          <li>Подача и регистрация — разные события.</li>
+          <li>Регистрация означает присвоение номера и начало срока выпуска.</li>
+          <li>После регистрации изменения вносятся через КДТ.</li>
+          <li>Срок выпуска — 4 часа, с продлением до 10 рабочих дней.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 14 -->
+    <section class="card sources" id="sources">
+      <span class="section-kicker">Первоисточники</span>
+      <h2>Источники</h2>
+
+      <article class="source">
+        <h3>Таможенный кодекс ЕАЭС, статьи 104–108, 111, 112, 119</h3>
+        <p class="req">Место и срок декларирования, сведения в ДТ, документы, регистрация и отказ в регистрации, сроки выпуска.</p>
+        <p><strong>Что подтверждает:</strong> порядок подачи, регистрации и выпуска. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_215315/">consultant.ru — ТК ЕАЭС</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Решение КТС от 20.05.2010 № 257</h3>
+        <p class="req">Порядок заполнения декларации на товары (ред. от 28.04.2026).</p>
+        <p><strong>Что подтверждает:</strong> правила заполнения граф, включая 37, 44, 45 и 47. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_101257/">consultant.ru</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Решение Коллегии ЕЭК от 16.01.2018 № 4</h3>
+        <p class="req">Структура и формат декларации на товары.</p>
+        <p><strong>Что подтверждает:</strong> требования к электронному формату ДТ. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.alta.ru/tamdoc/18kr0004/">alta.ru</a> <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: номер и редакция</span></p>
+      </article>
+
+      <article class="source">
+        <h3>Решение Коллегии ЕЭК от 16.10.2018 № 160</h3>
+        <p class="req">Формы ДТС-1 и ДТС-2, порядок заполнения.</p>
+        <p><strong>Что подтверждает:</strong> обязанность приложить ДТС-1 при методе 1. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_309367/">consultant.ru</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Решение Коллегии ЕЭК от 10.12.2013 № 289</h3>
+        <p class="req">Порядок внесения изменений в сведения, заявленные в ДТ.</p>
+        <p><strong>Что подтверждает:</strong> порядок КДТ после регистрации. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_156860/">consultant.ru</a></p>
+      </article>
+
+      <article class="source">
+        <h3>КоАП РФ, статья 16.2</h3>
+        <p class="req">Недекларирование и недостоверное декларирование.</p>
+        <p><strong>Что подтверждает:</strong> ответственность за ошибки в декларации. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_34661/">consultant.ru</a></p>
+      </article>
+
+      <div class="actual">
+        <strong>Информация актуальна на 07.11.2026.</strong> Перед применением сверь действующую редакцию Решения № 257, актуальный формат электронной ДТ и сроки регистрации по ст. 111 ТК ЕАЭС.
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Памятка подготовлена для личного использования участником ВЭД. Не является юридической консультацией. Порядок подачи зависит от программного обеспечения, таможенного органа и категории товара.
+  </footer>
+
+</div>
+
+<a class="up" href="#top" aria-label="Наверх">↑</a>
+
+<style>
+.nav-back { position: fixed; bottom: 24px; right: 24px; background: #0d3b66; color: #fff !important; padding: 10px 16px; border-radius: 8px; text-decoration: none; font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 9999; transition: background 0.2s; font-weight: 600; }
+.nav-back:hover { background: #1e5a99; }
+</style>
+<a href="index.html" class="nav-back">← Назад в меню</a>
+</body>
+</html>

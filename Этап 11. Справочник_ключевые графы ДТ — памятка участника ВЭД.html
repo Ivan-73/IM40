@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Справочник: ключевые графы ДТ — памятка участника ВЭД</title>
+<style>
+:root{
+  --bg:#eef2f7; --ink:#16202e; --muted:#5b6779; --line:#d5dee9;
+  --accent:#1f4e79; --accent-2:#2f6b95; --accent-soft:#eaf2f9;
+  --green:#1f6b3f; --green-soft:#e9f6ee;
+  --red:#a8231b; --red-soft:#fdf0ee;
+  --amber:#8a5a06; --amber-soft:#fff7e3;
+  --radius:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+a{color:var(--accent-2);text-decoration:none;border-bottom:1px solid rgba(47,107,149,.32)}
+a:hover{border-bottom-color:var(--accent-2)}
+code{
+  background:#f3f6fa;border:1px solid var(--line);border-radius:6px;
+  padding:1px 5px;font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+strong{color:#0f2c44}
+
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#0f2c44 0%,#1f4e79 52%,#3a769f 100%);
+  color:#fff;padding:52px 0 44px;margin-bottom:26px;
+}
+.hero::after{
+  content:"";position:absolute;right:-120px;top:-140px;width:420px;height:420px;
+  border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.20),rgba(255,255,255,0) 70%);
+}
+.hero .wrap{position:relative;z-index:2}
+.badge-top{
+  display:inline-block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.42);border-radius:999px;padding:6px 14px;margin-bottom:18px;
+  color:#dbeaf6;
+}
+.hero h1{margin:0 0 12px;font-size:34px;line-height:1.2;letter-spacing:-.01em}
+.hero .sub{margin:0;max-width:760px;font-size:17px;color:#d5e6f3}
+.hero-pills{margin-top:22px;display:flex;flex-wrap:wrap;gap:9px}
+.hero-pills span{
+  font-size:12.5px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);
+  border-radius:999px;padding:6px 12px;color:#eaf4fb;
+}
+
+.toc{position:sticky;top:0;z-index:50;background:rgba(238,242,247,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.toc-inner{
+  max-width:1080px;margin:0 auto;padding:10px 18px;display:flex;gap:8px;
+  overflow-x:auto;white-space:nowrap;scrollbar-width:thin;
+}
+.toc-inner a{
+  font-size:13px;color:#2b3a4d;background:#fff;border:1px solid var(--line);
+  border-radius:999px;padding:6px 12px;flex:0 0 auto;
+}
+.toc-inner a:hover{background:var(--accent-soft);border-color:#b9d2e6}
+
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px 28px;margin-bottom:18px;scroll-margin-top:78px;
+  box-shadow:0 1px 2px rgba(22,32,46,.04);
+}
+.section-kicker{
+  font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent-2);font-weight:700;margin-bottom:6px;
+}
+.card h2{margin:0 0 10px;font-size:23px;line-height:1.28;letter-spacing:-.01em}
+.lead{margin:0 0 16px;color:var(--muted);font-size:15.5px}
+
+.report{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0;background:#fcfdfe}
+.report-head{display:flex;gap:12px;align-items:flex-start}
+.num{
+  flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:var(--accent-soft);
+  color:var(--accent);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.num.green{background:var(--green-soft);color:var(--green)}
+.num.grey{background:#f1f4f8;color:var(--muted)}
+.num.amber{background:var(--amber-soft);color:var(--amber)}
+.report-head h3{margin:2px 0 0;font-size:17.5px;line-height:1.35}
+.report .sub{margin:4px 0 0;font-size:13.5px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tags span{font-size:11px;border-radius:999px;padding:3px 9px;border:1px solid transparent}
+.tag-norm{background:var(--accent-soft);color:var(--accent);border-color:#cfe0ee}
+.tag-fts{background:var(--green-soft);color:var(--green);border-color:#cfe9d9}
+.tag-prac{background:#f1f4f8;color:var(--muted);border-color:#dde5ee}
+.tag-warn{background:var(--amber-soft);color:var(--amber);border-color:#f0dfae}
+
+dl.meta{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0 6px}
+dl.meta dt{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}
+dl.meta dd{margin:3px 0 0;font-size:14px;line-height:1.5}
+
+.report ul{margin:10px 0 4px;padding-left:20px}
+.report li{margin:6px 0}
+.report p{margin:10px 0}
+
+.note,.warning,.fine,.deadline,.ausn,.osno{
+  border-radius:12px;padding:14px 16px;margin:16px 0;font-size:14.5px;line-height:1.58;
+}
+.note{background:#f4f6fa;border:1px solid var(--line)}
+.warning{background:var(--amber-soft);border:1px solid #efdca7;border-left:4px solid var(--amber)}
+.fine{background:var(--red-soft);border:1px solid #f3cfc9;border-left:4px solid var(--red)}
+.deadline{background:var(--accent-soft);border:1px solid #cfe1ef;border-left:4px solid var(--accent)}
+.ausn{background:var(--green-soft);border:1px solid #cfe9d9;border-left:4px solid var(--green)}
+.osno{background:#fff;border:2px solid #c9dcec}
+.box-t{display:block;font-weight:700;margin-bottom:5px;font-size:13px;letter-spacing:.03em;text-transform:uppercase}
+
+.summary{
+  background:linear-gradient(135deg,#16202e 0%,#1f4e79 100%);color:#eef6fc;
+  border-radius:var(--radius);padding:24px 26px;margin:18px 0;
+}
+.summary h3{margin:0 0 10px;font-size:18px;color:#fff}
+.summary p{margin:8px 0;font-size:14.8px;color:#dbe9f4}
+.summary strong{color:#fff}
+
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:16px 0}
+.node{
+  background:var(--accent-soft);border:1px solid #cfe0ee;border-radius:10px;
+  padding:9px 13px;font-size:13.5px;color:#1b3b58;
+}
+.arrow{color:var(--accent-2);font-weight:700}
+.arrow::before{content:"→"}
+
+ol.steps{list-style:none;counter-reset:st;padding:0;margin:14px 0}
+ol.steps>li{counter-increment:st;position:relative;padding:0 0 16px 44px;margin:0}
+ol.steps>li::before{
+  content:counter(st);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;
+  background:var(--accent);color:#fff;font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+ol.steps>li:not(:last-child)::after{
+  content:"";position:absolute;left:13.5px;top:30px;bottom:2px;width:1px;background:var(--line);
+}
+.human{display:block;font-size:14.5px;margin-top:2px}
+.exact{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+.exact::before{content:"Точно: ";font-weight:700;color:#3d4c60}
+
+.tblwrap{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:12px}
+table.tbl{border-collapse:collapse;width:100%;min-width:820px;font-size:13.7px;background:#fff}
+table.tbl th{
+  text-align:left;background:#f2f6fa;color:#22384f;font-size:11.5px;
+  text-transform:uppercase;letter-spacing:.07em;padding:11px 13px;border-bottom:1px solid var(--line);
+}
+table.tbl td{padding:10px 13px;border-bottom:1px solid #e8eef5;vertical-align:top;line-height:1.5}
+table.tbl tr:last-child td{border-bottom:none}
+table.tbl td.g{font-weight:700;color:var(--accent);white-space:nowrap;width:64px}
+table.tbl td.ex{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.6px;color:#1b3b58;background:#fbfcfe}
+table.tbl td.rk{color:#6a4a12;font-size:13px}
+table.tbl caption{
+  caption-side:top;text-align:left;padding:12px 13px 8px;font-size:12px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--accent-2);font-weight:700;background:#fff;
+}
+
+.flag{
+  display:inline-block;background:var(--amber-soft);color:var(--amber);
+  border:1px dashed #d8b65f;border-radius:6px;padding:1px 7px;font-size:11.5px;
+  font-weight:700;letter-spacing:.02em;
+}
+
+.checklist{list-style:none;padding:0;margin:14px 0}
+.checklist li{position:relative;padding:7px 0 7px 30px;font-size:14.5px;border-bottom:1px dashed #e6ecf3}
+.checklist li:last-child{border-bottom:none}
+.checklist li::before{content:"☐";position:absolute;left:2px;top:5px;color:var(--accent-2);font-size:17px}
+
+dl.glossary{display:grid;grid-template-columns:1fr 1fr;gap:14px 26px;margin:16px 0}
+dl.glossary div{border-top:1px solid var(--line);padding-top:9px}
+dl.glossary dt{font-weight:700;font-size:14.5px;color:#1b3b58}
+dl.glossary dd{margin:3px 0 0;font-size:14px;color:#3d4c60}
+
+/* ---------- ФАКСИМИЛЕ ФОРМЫ ---------- */
+.facsim{border:2px solid #1b3b58;border-radius:12px;padding:16px;background:#fff;margin:18px 0;overflow-x:auto}
+.facsim h4{margin:0 0 4px;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.facsim .fnote{font-size:11.5px;color:#9aa8b7;margin:0 0 12px}
+.fgrid{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:8px;margin:10px 0}
+.fcell{border:1px solid #b9c9d8;border-radius:7px;padding:7px 9px;background:#fbfcfe;min-height:62px}
+.fn{display:block;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+.fv{display:block;font-size:12.4px;line-height:1.35;margin-top:3px;word-break:break-word}
+.fv.empty{color:#9aa8b7}
+table.fgoods{border-collapse:collapse;width:100%;min-width:700px;font-size:12.5px;margin-top:10px}
+table.fgoods th{background:#eef3f8;border:1px solid #b9c9d8;padding:5px 7px;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:#22384f;text-align:left}
+table.fgoods td{border:1px solid #cfdbe6;padding:6px 7px;vertical-align:top;line-height:1.4}
+
+.sources{display:grid;gap:10px;margin:16px 0}
+.source{border-left:3px solid var(--accent-2);background:#f8fafc;padding:10px 14px;border-radius:0 10px 10px 0;font-size:14px}
+.source .req{font-weight:700;color:#1b3b58}
+.source .link{font-size:12.5px;color:var(--muted);margin-top:3px;word-break:break-all}
+
+.actual{
+  border:1px dashed #b9c9d8;border-radius:12px;padding:13px 16px;margin:20px 0 0;
+  font-size:13.5px;color:var(--muted);background:#f8fafc;
+}
+
+.up{
+  position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:50%;
+  background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:19px;border:none;box-shadow:0 6px 18px rgba(31,78,121,.32);z-index:60;
+}
+.up:hover{background:var(--accent-2)}
+
+@media (max-width:800px){
+  .hero h1{font-size:26px}
+  .card{padding:20px 18px}
+  .flow{flex-direction:column;align-items:stretch}
+  .arrow::before{content:"↓"}
+  .arrow{text-align:center}
+  dl.glossary{grid-template-columns:1fr}
+  dl.meta{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr 1fr}
+}
+@media print{
+  body{background:#fff}
+  .hero{background:#fff;color:#000;border-bottom:2px solid #000;padding:20px 0}
+  .hero::after{display:none}
+  .badge-top{color:#000;border-color:#000}
+  .hero .sub{color:#000}
+  .hero-pills span{background:#fff;border-color:#999;color:#000}
+  .toc,.up{display:none}
+  .card,.report,.note,.warning,.fine,.deadline,.ausn,.osno,.summary,.facsim{break-inside:avoid;box-shadow:none}
+  a{color:#000;border-bottom:none}
+  .summary{background:#fff;color:#000;border:1px solid #000}
+  .summary p,.summary strong{color:#000}
+}
+</style>
+</head>
+<body id="top">
+
+<div class="hero">
+  <div class="wrap">
+    <span class="badge-top">Памятка · серия ИМ 40 · справочник</span>
+    <h1>Ключевые графы ДТ:<br>что вносится и как выглядит</h1>
+    <p class="sub">Справочник по графам декларации на товары с примерами значений, разбором граф 31, 44 и 47 и полным условным образцом заполненной ДТ.</p>
+    <div class="hero-pills">
+      <span>12 разделов</span>
+      <span>30+ граф</span>
+      <span>условный образец внутри</span>
+      <span>актуально на 07.11.2026</span>
+    </div>
+  </div>
+</div>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#s1">1. Как пользоваться</a>
+    <a href="#s2">2. Анатомия формы</a>
+    <a href="#s3">3. Шапка ДТ</a>
+    <a href="#s4">4. Товарный блок</a>
+    <a href="#s5">5. Графа 31</a>
+    <a href="#s6">6. Графа 44</a>
+    <a href="#s7">7. Графа 47</a>
+    <a href="#s8">8. Красная зона</a>
+    <a href="#s9">9. Образец ДТ</a>
+    <a href="#s10">10. Про примеры из интернета</a>
+    <a href="#s11">11. Чек-лист</a>
+    <a href="#s12">12. Источники</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ================= 1 ================= -->
+<section class="card" id="s1">
+  <div class="section-kicker">Раздел 1</div>
+  <h2>Как пользоваться справочником</h2>
+  <p class="lead">Это не инструкция по заполнению целиком — это карта ключевых граф: что в них попадает, откуда берётся значение и где чаще всего ошибаются.</p>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num grey">i</div>
+      <div>
+        <h3>Три вещи, которые надо знать до чтения таблиц</h3>
+        <p class="sub">Они объясняют половину ошибок в ДТ</p>
+      </div>
+    </div>
+    <ul>
+      <li><strong>Графа 7 не заполняется декларантом.</strong> Регистрационный номер ДТ присваивается таможенным органом при регистрации. В черновике АПС этого поля просто нет.</li>
+      <li><strong>Одна ДТ — много листов.</strong> Графы 1–12 — на первом листе, графы 14–47 — в товарном блоке, который повторяется на каждом листе. Графа 54 — на каждом листе своя.</li>
+      <li><strong>Цифры в графах 12, 45, 46 — это три разные величины.</strong> 12 — общая стоимость по всем товарам в рублях; 45 — стоимость конкретного товара в рублях; 46 — она же в долларах США для статистики.</li>
+    </ul>
+    <div class="tags">
+      <span class="tag-norm">Норма</span>
+      <span class="tag-fts">Позиция ФТС</span>
+      <span class="tag-prac">Практика</span>
+      <span class="tag-warn">Флаг = проверить</span>
+    </div>
+  </div>
+
+  <div class="warning">
+    <span class="box-t">Форма и правила заполнения</span>
+    Форма ДТ и Инструкция о порядке её заполнения утверждены Решением Комиссии Таможенного союза от 20.05.2010 № 257 (действующая редакция — от 28.04.2026). Классификаторы, которыми кодируются графы, — Решение КТС от 20.09.2010 № 378 (ред. 21.09.2026). Любая таблица «граф» — лишь пересказ; спор решается по Инструкции.
+  </div>
+
+  <div class="note">
+    <span class="box-t">О примерах и файлах</span>
+    Готовых официальных PDF с заполненными ДТ в открытом доступе я не нашёл — поиск не дал результатов. Реальные декларации к тому же содержат коммерческие данные и не публикуются. Поэтому в разделе 9 собран <strong>полный условный образец</strong>: все реквизиты вымышлены, структура — настоящая. Это не официальная форма и не для расчётов.
+  </div>
+</section>
+
+<!-- ================= 2 ================= -->
+<section class="card" id="s2">
+  <div class="section-kicker">Раздел 2</div>
+  <h2>Анатомия формы: три части</h2>
+  <p class="lead">ДТ читается сверху вниз и слева направо, но логически делится на три блока. Понимание блоков убирает половину путаницы с номерами.</p>
+
+  <div class="flow">
+    <div class="node">Шапка: графы 1–12<br><span style="font-size:12px;color:#5b6779">кто, откуда, сколько всего</span></div>
+    <div class="arrow"></div>
+    <div class="node">Товарный блок: 14–47<br><span style="font-size:12px;color:#5b6779">что именно, по какой цене, какие документы</span></div>
+    <div class="arrow"></div>
+    <div class="node">Итог: 48–54<br><span style="font-size:12px;color:#5b6779">отсрочка, склад, подпись</span></div>
+  </div>
+
+  <dl class="glossary">
+    <div><dt>Шапка</dt><dd>Заполняется один раз на декларацию. Отправитель, получатель, торгующая страна, общая стоимость, количество товаров и мест.</dd></div>
+    <div><dt>Товарный блок</dt><dd>Повторяется для каждого товара. Код, описание, вес, цена, стоимость, документы, платежи.</dd></div>
+    <div><dt>Итоговый блок</dt><dd>Отсрочка и рассрочка, реквизиты склада, место и дата, подпись. Плюс служебные поля таможни.</dd></div>
+    <div><dt>Служебные поля</dt><dd>Отметки таможенного органа, номер регистрации, решения по контролю — заполняются инспектором или автоматически.</dd></div>
+  </dl>
+
+  <div class="ausn">
+    <span class="box-t">Практическое следствие</span>
+    Если инспектор просит «поправить графу 31», это не значит, что ошибка в декларации целиком — правится товарный блок конкретного товара, а вслед за ним пересчитываются 42, 45, 46 и 47. Одна правка тянет четыре графы.
+  </div>
+</section>
+
+<!-- ================= 3 ================= -->
+<section class="card" id="s3">
+  <div class="section-kicker">Раздел 3</div>
+  <h2>Шапка ДТ: графы 1–12</h2>
+  <p class="lead">Здесь ошибки дешевле всего: они видны сразу и правятся до подачи. Но именно здесь путают страну отправления, страну происхождения и торгующую страну.</p>
+
+  <div class="tblwrap">
+    <table class="tbl">
+      <caption>Справочник — заголовочная часть</caption>
+      <thead>
+        <tr><th>Графа</th><th>Что вносится</th><th>Пример значения</th><th>Риск / типичная ошибка</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="g">1</td>
+          <td>Декларация на товары: код направления декларации</td>
+          <td class="ex">ИМ</td>
+          <td class="rk">Полный код процедуры — не здесь, а в графе 37. Не дублируйте «ИМ 40» в графу 1.</td>
+        </tr>
+        <tr>
+          <td class="g">2</td>
+          <td>Отправитель / экспортёр: иностранный продавец, наименование и адрес</td>
+          <td class="ex">NINGBO EXAMPLE ELECTRIC CO., LTD, КНР</td>
+          <td class="rk">Указывают российского получателя «по привычке». Здесь всегда иностранное лицо.</td>
+        </tr>
+        <tr>
+          <td class="g">3</td>
+          <td>Формы ДТ: номер листа / всего листов</td>
+          <td class="ex">1/2</td>
+          <td class="rk">«1/1» при двух товарах на разных листах — формально неверно.</td>
+        </tr>
+        <tr>
+          <td class="g">4</td>
+          <td>Отгрузочные спецификации: число листов</td>
+          <td class="ex">1</td>
+          <td class="rk">Ставят «0», когда спецификации нет. Правильнее — прочерк.</td>
+        </tr>
+        <tr>
+          <td class="g">5</td>
+          <td>Всего товаров: количество товарных позиций</td>
+          <td class="ex">1</td>
+          <td class="rk">Считают места или артикулы вместо товарных позиций.</td>
+        </tr>
+        <tr>
+          <td class="g">6</td>
+          <td>Всего мест: количество грузовых мест</td>
+          <td class="ex">12</td>
+          <td class="rk">Ставят вес вместо мест. Место — это коробка, паллета, контейнер.</td>
+        </tr>
+        <tr>
+          <td class="g">7</td>
+          <td>Справочный номер: регистрационный номер ДТ</td>
+          <td class="ex">10013160/131026/0123456</td>
+          <td class="rk"><strong>Присваивается таможней при регистрации.</strong> Структура: код таможни / дата / порядковый номер.</td>
+        </tr>
+        <tr>
+          <td class="g">8</td>
+          <td>Получатель: российское лицо, ИНН, адрес</td>
+          <td class="ex">ООО «Пример-Импорт», ИНН 7700000000</td>
+          <td class="rk">Сверяйте с ЕГРЮЛ: адрес в ДТ должен совпадать с фактическим.</td>
+        </tr>
+        <tr>
+          <td class="g">9</td>
+          <td>Лицо, ответственное за финансовое урегулирование</td>
+          <td class="ex">ООО «Пример-Импорт»</td>
+          <td class="rk">Заполняется, только если это не получатель (например, платит головная компания).</td>
+        </tr>
+        <tr>
+          <td class="g">11</td>
+          <td>Торгующая страна: страна регистрации продавца по контракту</td>
+          <td class="ex">CN</td>
+          <td class="rk">Главная путаница: торгующая ≠ страна отправления ≠ страна происхождения. При закупке через трейдера в третьей стране все три могут различаться.</td>
+        </tr>
+        <tr>
+          <td class="g">12</td>
+          <td>Общая таможенная стоимость: сумма по всем товарам, в рублях</td>
+          <td class="ex">4 139 000,00</td>
+          <td class="rk">Ставят сумму инвойса в валюте. Здесь — только рубли и только таможенная стоимость, а не цена контракта.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="fine">
+    <span class="box-t">Разбор на пальцах: три «страны»</span>
+    Товар произвели во Вьетнаме, продавец — компания в Гонконге, отгрузка — из Шанхая. Тогда: графа 16 (происхождение) — VN, графа 11 (торгующая) — HK, графа 15 (отправления) — CN. Если поставить везде CN, вы заявите неверные сведения о происхождении и попадёте под проверку документов и корректировку.
+  </div>
+</section>
+
+<!-- ================= 4 ================= -->
+<section class="card" id="s4">
+  <div class="section-kicker">Раздел 4</div>
+  <h2>Товарный блок: графы 14–47</h2>
+  <p class="lead">Сердце декларации. Именно здесь возникает 90 % корректировок до выпуска.</p>
+
+  <div class="tblwrap">
+    <table class="tbl">
+      <caption>Справочник — сведения о товаре</caption>
+      <thead>
+        <tr><th>Графа</th><th>Что вносится</th><th>Пример значения</th><th>Риск / типичная ошибка</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="g">14</td>
+          <td>Декларант: лицо, подающее декларацию</td>
+          <td class="ex">ООО «Пример-Импорт»</td>
+          <td class="rk">При подаче через таможенного представителя — указывается представитель, а не получатель.</td>
+        </tr>
+        <tr>
+          <td class="g">15</td>
+          <td>Страна отправления + код (15а)</td>
+          <td class="ex">CN</td>
+          <td class="rk">Это страна, откуда товар фактически убыл, а не страна продавца.</td>
+        </tr>
+        <tr>
+          <td class="g">16</td>
+          <td>Страна происхождения + код (16а)</td>
+          <td class="ex">CN</td>
+          <td class="rk">Влияет на преференции и меры защиты рынка. Должна подтверждаться сертификатом происхождения.</td>
+        </tr>
+        <tr>
+          <td class="g">17</td>
+          <td>Страна назначения</td>
+          <td class="ex">RU</td>
+          <td class="rk">Технически просто, но при транзите через третьи страны проверяйте маршрут.</td>
+        </tr>
+        <tr>
+          <td class="g">18</td>
+          <td>Транспортное средство при прибытии</td>
+          <td class="ex">контейнер MSKU1234567</td>
+          <td class="rk">Номер должен совпадать с транспортными документами и сведениями в транзите.</td>
+        </tr>
+        <tr>
+          <td class="g">19</td>
+          <td>Контейнер: 1 — да, 0 — нет</td>
+          <td class="ex">1</td>
+          <td class="rk">Ставят «да/нет» словами — поле кодовое.</td>
+        </tr>
+        <tr>
+          <td class="g">20</td>
+          <td>Условия поставки: код Инкотермс + географический пункт</td>
+          <td class="ex">FOB ШАНХАЙ</td>
+          <td class="rk">Пункт должен соответствовать контракту и инвойсу. От условий поставки зависит, что начисляется к цене (графа 45).</td>
+        </tr>
+        <tr>
+          <td class="g">21</td>
+          <td>Транспортное средство на границе</td>
+          <td class="ex">т/х «EXAMPLE STAR», рейс 12/26</td>
+          <td class="rk">Пустое поле при фактическом пересечении границы — повод для запроса.</td>
+        </tr>
+        <tr>
+          <td class="g">22</td>
+          <td>Валюта и общая сумма по счёту</td>
+          <td class="ex">USD 42 800,00</td>
+          <td class="rk">Код валюты + сумма по инвойсу. Не рубли. Не путать с графой 12.</td>
+        </tr>
+        <tr>
+          <td class="g">23</td>
+          <td>Курс валюты</td>
+          <td class="ex">92,5000</td>
+          <td class="rk">Курс на дату регистрации ДТ (п. 8 ст. 38 ТК ЕАЭС). Курс на дату подачи или инвойса — ошибка.</td>
+        </tr>
+        <tr>
+          <td class="g">24</td>
+          <td>Характер сделки: код вида сделки</td>
+          <td class="ex">010</td>
+          <td class="rk">Код по классификатору характера сделки <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: сверьте код по действующей редакции классификатора № 378</span></td>
+        </tr>
+        <tr>
+          <td class="g">25</td>
+          <td>Вид транспорта на границе: код</td>
+          <td class="ex">10</td>
+          <td class="rk">Кодовое поле. Морской / ж-д / авто / авиа — разные коды <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: значение кода</span></td>
+        </tr>
+        <tr>
+          <td class="g">26</td>
+          <td>Вид транспорта внутри страны</td>
+          <td class="ex">30</td>
+          <td class="rk">Часто не совпадает с графой 25: море до порта, далее авто.</td>
+        </tr>
+        <tr>
+          <td class="g">31</td>
+          <td>Грузовые места и описание товара</td>
+          <td class="ex">ЧАЙНИКИ ЭЛЕКТРИЧЕСКИЕ… 1200 ШТ, 12 МЕСТ</td>
+          <td class="rk">Самая правленая графа. Разбор — в разделе 5.</td>
+        </tr>
+        <tr>
+          <td class="g">32</td>
+          <td>Товар: порядковый номер позиции</td>
+          <td class="ex">1</td>
+          <td class="rk">Нумерация сквозная по всем листам, без пропусков.</td>
+        </tr>
+        <tr>
+          <td class="g">33</td>
+          <td>Код товара по ТН ВЭД: 10 знаков</td>
+          <td class="ex">8516 71 000 0</td>
+          <td class="rk">Код должен вытекать из описания в графе 31. Обратный порядок («подогнать описание под код») — прямой путь к корректировке.</td>
+        </tr>
+        <tr>
+          <td class="g">34</td>
+          <td>Страна происхождения (в товарном блоке)</td>
+          <td class="ex">CN</td>
+          <td class="rk">Должна совпадать с графой 16 и сертификатом происхождения.</td>
+        </tr>
+        <tr>
+          <td class="g">35</td>
+          <td>Брутто-масса, кг</td>
+          <td class="ex">2 760,00</td>
+          <td class="rk">Включает упаковку. Недостоверный вес сам по себе не образует ч. 2 ст. 16.2 КоАП, если не повлиял на платежи (Постановление КС РФ от 05.03.2024 № 9-П), но влияет на контроль.</td>
+        </tr>
+        <tr>
+          <td class="g">36</td>
+          <td>Преференции: код льготы</td>
+          <td class="ex">—</td>
+          <td class="rk">Заполняется только при наличии основания. «На всякий случай» не ставится.</td>
+        </tr>
+        <tr>
+          <td class="g">37</td>
+          <td>Процедура: направление + таможенная процедура</td>
+          <td class="ex">ИМ 40</td>
+          <td class="rk">Пишут «40» — неверно. Полное значение — <strong>ИМ 40</strong> (выпуск для внутреннего потребления).</td>
+        </tr>
+        <tr>
+          <td class="g">38</td>
+          <td>Вес нетто, кг</td>
+          <td class="ex">2 400,00</td>
+          <td class="rk">Без упаковки. Не путать с брутто и с количеством в штуках.</td>
+        </tr>
+        <tr>
+          <td class="g">39</td>
+          <td>Квота</td>
+          <td class="ex">—</td>
+          <td class="rk">Заполняется только для квотируемых товаров.</td>
+        </tr>
+        <tr>
+          <td class="g">40</td>
+          <td>Общая декларация / предшествующий документ</td>
+          <td class="ex">—</td>
+          <td class="rk">Нужна, если товар уже заявлялся ранее (например, при КДТ).</td>
+        </tr>
+        <tr>
+          <td class="g">41</td>
+          <td>Дополнительные единицы измерения</td>
+          <td class="ex">1 200 шт</td>
+          <td class="rk">Только если единица предусмотрена ТН ВЭД для этого кода.</td>
+        </tr>
+        <tr>
+          <td class="g">42</td>
+          <td>Цена товара: фактически уплаченная или подлежащая уплате</td>
+          <td class="ex">42 800,00</td>
+          <td class="rk">В валюте счёта. Не рублёвая стоимость и не статистическая.</td>
+        </tr>
+        <tr>
+          <td class="g">44</td>
+          <td>Дополнительная информация / предоставляемые документы</td>
+          <td class="ex">03011 · CONTRACT-2026/15 · 01.09.2026</td>
+          <td class="rk">Разбор — в разделе 6. Самая частая причина приостановки выпуска.</td>
+        </tr>
+        <tr>
+          <td class="g">45</td>
+          <td>Таможенная стоимость товара, рубли</td>
+          <td class="ex">4 139 000,00</td>
+          <td class="rk">Должна быть равна графе 12, если товар один. Расхождение — ошибка в ДТС-1.</td>
+        </tr>
+        <tr>
+          <td class="g">46</td>
+          <td>Статистическая стоимость, доллары США</td>
+          <td class="ex">44 745,95</td>
+          <td class="rk">Пересчёт таможенной стоимости в USD. Не влияет на платежи, но проверяется статистикой.</td>
+        </tr>
+        <tr>
+          <td class="g">47</td>
+          <td>Исчисление таможенных пошлин, налогов и сборов</td>
+          <td class="ex">1010 — 206 950,00; 2010 — 869 190,00</td>
+          <td class="rk">Разбор — в разделе 7. Сумма должна совпадать с фактически списанным с ЕЛС.</td>
+        </tr>
+        <tr>
+          <td class="g">48</td>
+          <td>Отсрочка / рассрочка уплаты платежей</td>
+          <td class="ex">—</td>
+          <td class="rk">Заполняется при предоставлении отсрочки (ст. 59–60 ТК ЕАЭС).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="box-t">Про графы 27–30, 43, 49–53</span>
+    Это уточняющие и служебные поля (место погрузки/разгрузки, сведения об органах, реквизиты склада и т. п.). В повседневной работе декларанта они заполняются автоматически из АПС или инспектором. Точный перечень и порядок — по Инструкции к Решению № 257. <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: детализация по этим графам в памятке не приводится</span>
+  </div>
+</section>
+
+<!-- ================= 5 ================= -->
+<section class="card" id="s5">
+  <div class="section-kicker">Раздел 5</div>
+  <h2>Графа 31: грузовые места и описание товара</h2>
+  <p class="lead">Одна графа, из-за которой происходит больше всего корректировок. Правило простое: описание должно позволять классифицировать товар без догадок.</p>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num amber">31</div>
+      <div>
+        <h3>Структура описания</h3>
+        <p class="sub">Что должно быть в тексте, чтобы инспектор не задал вопрос</p>
+      </div>
+    </div>
+    <div class="tags"><span class="tag-norm">Норма</span><span class="tag-prac">Практика</span></div>
+
+    <ol class="steps">
+      <li>
+        <span class="human">Наименование товара — общепринятое, а не маркетинговое.</span>
+        <span class="exact">«ЧАЙНИКИ ЭЛЕКТРИЧЕСКИЕ ДЛЯ КИПЯЧЕНИЯ ВОДЫ», а не «чайник уютный с подсветкой».</span>
+      </li>
+      <li>
+        <span class="human">Характеристики, влияющие на код: материал, мощность, объём, комплектация.</span>
+        <span class="exact">«МОЩНОСТЬ 1800 ВТ, ОБЪЁМ 1,7 Л, КОРПУС НЕРЖ. СТАЛЬ».</span>
+      </li>
+      <li>
+        <span class="human">Торговая марка и артикул — как в инвойсе.</span>
+        <span class="exact">«ТОРГОВАЯ МАРКА "EXAMPLE", АРТИКУЛ EK-1800».</span>
+      </li>
+      <li>
+        <span class="human">Производитель и страна.</span>
+        <span class="exact">«ПРОИЗВОДИТЕЛЬ NINGBO EXAMPLE ELECTRIC CO., LTD, КИТАЙ».</span>
+      </li>
+      <li>
+        <span class="human">Количество в единицах и количество грузовых мест.</span>
+        <span class="exact">«1200 ШТ, 12 МЕСТ».</span>
+      </li>
+    </ol>
+
+    <div class="fine">
+      <span class="box-t">Три признака плохого описания</span>
+      <ul>
+        <li>Только коммерческое название без характеристик.</li>
+        <li>Описание шире, чем код: «электротовары бытовые» под конкретный код 8516.</li>
+        <li>Описание не совпадает с инвойсом и упаковочным листом по артикулу или количеству.</li>
+      </ul>
+    </div>
+
+    <div class="ausn">
+      <span class="box-t">Проверка на прочность</span>
+      Дайте описание человеку, который не знает ваш товар, и попросите назвать код по ТН ВЭД. Если он ошибся — описание недостаточно. Это самый быстрый бытовой тест перед подачей.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6 ================= -->
+<section class="card" id="s6">
+  <div class="section-kicker">Раздел 6</div>
+  <h2>Графа 44: документы и дополнительные сведения</h2>
+  <p class="lead">Технически это список, но фактически — доказательная база декларации. Пустая или неверная графа 44 = приостановка выпуска и запрос документов.</p>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num">44</div>
+      <div>
+        <h3>Как формируется запись</h3>
+        <p class="sub">Формат: код документа · номер · дата</p>
+      </div>
+    </div>
+    <div class="tags"><span class="tag-norm">Норма</span><span class="tag-fts">Позиция ФТС</span></div>
+
+    <p><strong>Подтверждённые коды документов:</strong></p>
+    <ul>
+      <li><code>01011</code> — лицензия Минпромторга;</li>
+      <li><code>03011</code> — контракт (внешнеторговый договор);</li>
+      <li><code>03031</code> — учётный номер контракта (УНК);</li>
+      <li><code>04021</code> — инвойс (счёт-фактура).</li>
+    </ul>
+
+    <p><strong>Каждый документ — с новой строки, в формате:</strong></p>
+    <div class="ex" style="background:#f3f6fa;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;line-height:1.9">
+      03011 · CONTRACT-2026/15 · 01.09.2026<br>
+      04021 · INV-2026/0412 · 12.10.2026<br>
+      03031 · 26010001/0000000/0000/0000 · 05.09.2026
+    </div>
+
+    <div class="warning">
+      <span class="box-t">Что чаще всего забывают</span>
+      <ul>
+        <li>УНК (03031) — он есть у банка, но в декларацию его нужно перенести вручную.</li>
+        <li>Сертификат соответствия или декларация — если товар под техрегламентом.</li>
+        <li>Свидетельство о госрегистрации (СГР) — для товаров из перечня Решения КТС № 299, раздел II.</li>
+        <li>Лицензия — если товар в перечне Решения № 30 (меры нетарифного регулирования).</li>
+      </ul>
+    </div>
+
+    <div class="note">
+      <span class="box-t">Логика проверки</span>
+      Контуры не исключают друг друга, а суммируются: перечень № 30 → техрегламент → перечень СГР → специальные контуры (ветеринарный, фитосанитарный, экспортный контроль). Пройти по одному и остановиться — классическая ошибка.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7 ================= -->
+<section class="card" id="s7">
+  <div class="section-kicker">Раздел 7</div>
+  <h2>Графа 47: исчисление платежей</h2>
+  <p class="lead">Здесь видно, из чего сложилась сумма к уплате. Если графа 47 расходится с выпиской ЕЛС — выпуска не будет.</p>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num green">47</div>
+      <div>
+        <h3>Как читать строки</h3>
+        <p class="sub">Код вида платежа → база → ставка → сумма</p>
+      </div>
+    </div>
+    <div class="tags"><span class="tag-norm">Норма</span><span class="tag-prac">Практика</span></div>
+
+    <div class="tblwrap">
+      <table class="tbl" style="min-width:600px">
+        <thead>
+          <tr><th>Код</th><th>Платёж</th><th>База</th><th>Пример суммы</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="g">1010</td><td>Ввозная таможенная пошлина</td><td>Таможенная стоимость (графа 45)</td><td class="ex">206 950,00</td></tr>
+          <tr><td class="g">2010</td><td>НДС</td><td>(ТС + пошлина + акциз)</td><td class="ex">869 190,00</td></tr>
+          <tr><td class="g">—</td><td>Акциз</td><td>Только для подакцизных товаров</td><td class="ex">—</td></tr>
+          <tr><td class="g">—</td><td>Таможенные сборы за операции</td><td>Ставка по ПП РФ № 1637</td><td class="ex">30 000,00</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="fine">
+      <span class="box-t">Главная арифметическая ошибка</span>
+      НДС считают от таможенной стоимости. Правильно — <strong>НДС = (ТС + пошлина + акциз) × ставка</strong>. На примере: (4 139 000 + 206 950) × 20 % = 869 190 ₽, а не 827 800 ₽. Разница — 41 390 ₽, и она всплывёт при сверке.
+    </div>
+
+    <div class="note">
+      <span class="box-t">Проверка перед подачей</span>
+      Сложите строки графы 47 и сравните с остатком на ЕЛС. Если авансов меньше — доплатите до подачи. Платежи списываются <strong>до</strong> выпуска, а не после решения о выпуске.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8 ================= -->
+<section class="card" id="s8">
+  <div class="section-kicker">Раздел 8</div>
+  <h2>Красная зона: девять граф, из-за которых правят ДТ</h2>
+  <p class="lead">Если время ограничено, проверяйте именно эти. Остальное обычно вытягивает АПС.</p>
+
+  <div class="tblwrap">
+    <table class="tbl" style="min-width:700px">
+      <thead>
+        <tr><th>Графа</th><th>Что проверять</th><th>Последствие ошибки</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="g">11</td><td>Торгующая страна ≠ страна происхождения</td><td>Неверные сведения, запрос документов</td></tr>
+        <tr><td class="g">12 / 45</td><td>Рубли, сумма по всем товарам; 45 = 12 при одном товаре</td><td>Расхождение с ДТС-1, корректировка стоимости</td></tr>
+        <tr><td class="g">20</td><td>Код Инкотермс и пункт совпадают с контрактом</td><td>Неверные начисления к цене, КТС</td></tr>
+        <tr><td class="g">22 / 23</td><td>Валюта счёта; курс на дату регистрации ДТ</td><td>Пересчёт стоимости и платежей</td></tr>
+        <tr><td class="g">31</td><td>Описание позволяет классифицировать товар</td><td>Корректировка кода, запрос, досмотр</td></tr>
+        <tr><td class="g">33</td><td>10 знаков, код вытекает из описания</td><td>Изменение ставки пошлины, доплата</td></tr>
+        <tr><td class="g">37</td><td><strong>ИМ 40</strong>, а не «40»</td><td>Формальное несоответствие процедуры</td></tr>
+        <tr><td class="g">44</td><td>Все документы, включая УНК и разрешительные</td><td>Приостановка выпуска, запрос</td></tr>
+        <tr><td class="g">47</td><td>НДС от (ТС + пошлина + акциз)</td><td>Недоплата, отказ в выпуске</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="summary">
+    <h3>Правило одной правки</h3>
+    <p>Любое изменение в графах 31, 33 или 42 автоматически требует пересчёта 45, 46 и 47. Не «правьте одну графу» — пересчитывайте блок целиком.</p>
+  </div>
+</section>
+
+<!-- ================= 9 ================= -->
+<section class="card" id="s9">
+  <div class="section-kicker">Раздел 9</div>
+  <h2>Условный образец заполненной ДТ</h2>
+  <p class="lead">Полный сквозной пример на одну товарную позицию. Все реквизиты вымышлены; структура и логика — настоящие.</p>
+
+  <div class="warning">
+    <span class="box-t">Дисклеймер</span>
+    Это <strong>не официальная форма</strong> и не бланк. Суммы приведены для иллюстрации арифметики и не подлежат использованию в расчётах. Код 8516 71 000 0 указан условно — проверяйте по действующей редакции ТН ВЭД.
+  </div>
+
+  <div class="facsim">
+    <h4>Лист 1 — заголовочная часть</h4>
+    <p class="fnote">Условный пример · ООО «Пример-Импорт» · ввоз электрических чайников из Китая</p>
+
+    <div class="fgrid">
+      <div class="fcell"><span class="fn">1 · ДЕКЛАРАЦИЯ НА ТОВАРЫ</span><span class="fv">ИМ</span></div>
+      <div class="fcell"><span class="fn">2 · ОТПРАВИТЕЛЬ/ЭКСПОРТЁР</span><span class="fv">NINGBO EXAMPLE ELECTRIC CO., LTD, КНР, г. Нинбо</span></div>
+      <div class="fcell"><span class="fn">3 · ФОРМЫ ДТ</span><span class="fv">1/2</span></div>
+      <div class="fcell"><span class="fn">4 · ОТГРУЗОЧНЫЕ СПЕЦИФИКАЦИИ</span><span class="fv">1</span></div>
+
+      <div class="fcell"><span class="fn">5 · ВСЕГО ТОВАРОВ</span><span class="fv">1</span></div>
+      <div class="fcell"><span class="fn">6 · ВСЕГО МЕСТ</span><span class="fv">12</span></div>
+      <div class="fcell"><span class="fn">7 · СПРАВОЧНЫЙ НОМЕР</span><span class="fv">10013160/131026/0123456</span></div>
+      <div class="fcell"><span class="fn">8 · ПОЛУЧАТЕЛЬ</span><span class="fv">ООО «Пример-Импорт», ИНН 7700000000, г. Москва</span></div>
+
+      <div class="fcell"><span class="fn">9 · ЛИЦО, ОТВЕТСТВЕННОЕ ЗА ФИН. УРЕГУЛИРОВАНИЕ</span><span class="fv">ООО «Пример-Импорт»</span></div>
+      <div class="fcell"><span class="fn">11 · ТОРГУЮЩАЯ СТРАНА</span><span class="fv">CN</span></div>
+      <div class="fcell"><span class="fn">12 · ОБЩАЯ ТАМОЖЕННАЯ СТОИМОСТЬ</span><span class="fv">4 139 000,00</span></div>
+      <div class="fcell"><span class="fn">СЛУЖЕБНОЕ ПОЛЕ</span><span class="fv empty">отметки таможенного органа</span></div>
+    </div>
+
+    <h4 style="margin-top:18px">Товарный блок — товар № 1</h4>
+    <div class="fgrid">
+      <div class="fcell"><span class="fn">14 · ДЕКЛAРАНТ</span><span class="fv">ООО «Пример-Импорт»</span></div>
+      <div class="fcell"><span class="fn">15 · СТРАНА ОТПРАВЛЕНИЯ / 15а</span><span class="fv">КИТАЙ / CN</span></div>
+      <div class="fcell"><span class="fn">16 · СТРАНА ПРОИСХОЖДЕНИЯ / 16а</span><span class="fv">КИТАЙ / CN</span></div>
+      <div class="fcell"><span class="fn">17 · СТРАНА НАЗНАЧЕНИЯ</span><span class="fv">RU</span></div>
+
+      <div class="fcell"><span class="fn">18 · ТС ПРИ ПРИБЫТИИ</span><span class="fv">контейнер MSKU1234567</span></div>
+      <div class="fcell"><span class="fn">19 · КОНТЕЙНЕР</span><span class="fv">1</span></div>
+      <div class="fcell"><span class="fn">20 · УСЛОВИЯ ПОСТАВКИ</span><span class="fv">FOB ШАНХАЙ</span></div>
+      <div class="fcell"><span class="fn">21 · ТС НА ГРАНИЦЕ</span><span class="fv">т/х «EXAMPLE STAR», рейс 12/26</span></div>
+
+      <div class="fcell"><span class="fn">22 · ВАЛЮТА И СУММА ПО СЧЁТУ</span><span class="fv">USD 42 800,00</span></div>
+      <div class="fcell"><span class="fn">23 · КУРС ВАЛЮТЫ</span><span class="fv">92,5000</span></div>
+      <div class="fcell"><span class="fn">24 · ХАРАКТЕР СДЕЛКИ</span><span class="fv">010</span></div>
+      <div class="fcell"><span class="fn">25 · ВИД ТРАНСПОРТА НА ГРАНИЦЕ</span><span class="fv">10</span></div>
+
+      <div class="fcell" style="grid-column:span 2"><span class="fn">31 · ГРУЗОВЫЕ МЕСТА И ОПИСАНИЕ ТОВАРА</span><span class="fv">ЧАЙНИКИ ЭЛЕКТРИЧЕСКИЕ ДЛЯ КИПЯЧЕНИЯ ВОДЫ, МОЩНОСТЬ 1800 ВТ, ОБЪЁМ 1,7 Л, КОРПУС НЕРЖ. СТАЛЬ, ТОРГОВАЯ МАРКА «EXAMPLE», АРТИКУЛ EK-1800, ПРОИЗВОДИТЕЛЬ NINGBO EXAMPLE ELECTRIC CO., LTD, КИТАЙ, 1200 ШТ, 12 МЕСТ</span></div>
+      <div class="fcell"><span class="fn">32 · ТОВАР</span><span class="fv">1</span></div>
+      <div class="fcell"><span class="fn">33 · КОД ТОВАРА</span><span class="fv">8516 71 000 0</span></div>
+
+      <div class="fcell"><span class="fn">34 · СТРАНА ПРОИСХОЖДЕНИЯ</span><span class="fv">CN</span></div>
+      <div class="fcell"><span class="fn">35 · БРУТТО, КГ</span><span class="fv">2 760,00</span></div>
+      <div class="fcell"><span class="fn">36 · ПРЕФЕРЕНЦИИ</span><span class="fv empty">—</span></div>
+      <div class="fcell"><span class="fn">37 · ПРОЦЕДУРА</span><span class="fv">ИМ 40</span></div>
+
+      <div class="fcell"><span class="fn">38 · ВЕС НЕТТО, КГ</span><span class="fv">2 400,00</span></div>
+      <div class="fcell"><span class="fn">39 · КВОТА</span><span class="fv empty">—</span></div>
+      <div class="fcell"><span class="fn">40 · ПРЕДШЕСТВУЮЩИЙ ДОКУМЕНТ</span><span class="fv empty">—</span></div>
+      <div class="fcell"><span class="fn">41 · ДОП. ЕДИНИЦЫ</span><span class="fv">1 200 шт</span></div>
+
+      <div class="fcell"><span class="fn">42 · ЦЕНА ТОВАРА</span><span class="fv">42 800,00</span></div>
+      <div class="fcell"><span class="fn">45 · ТАМОЖЕННАЯ СТОИМОСТЬ</span><span class="fv">4 139 000,00</span></div>
+      <div class="fcell"><span class="fn">46 · СТАТИСТИЧЕСКАЯ СТОИМОСТЬ</span><span class="fv">44 745,95</span></div>
+      <div class="fcell"><span class="fn">48 · ОТСРОЧКА</span><span class="fv empty">—</span></div>
+    </div>
+
+    <table class="fgoods">
+      <thead>
+        <tr><th colspan="2">44 · Дополнительная информация / предоставляемые документы</th><th>47 · Исчисление платежей</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="2" style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.9">
+            03011 · CONTRACT-2026/15 · 01.09.2026<br>
+            04021 · INV-2026/0412 · 12.10.2026<br>
+            03031 · 26010001/0000000/0000/0000 · 05.09.2026
+          </td>
+          <td style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.9">
+            1010 — 206 950,00<br>
+            2010 — 869 190,00<br>
+            Итого: 1 076 140,00
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num">∞</div>
+      <div>
+        <h3>Как получены цифры</h3>
+        <p class="sub">Проверьте арифметику — она должна сходиться у вас</p>
+      </div>
+    </div>
+    <ol class="steps">
+      <li><span class="human">Цена по инвойсу в рублях.</span><span class="exact">42 800,00 × 92,5000 = 3 959 000,00 ₽</span></li>
+      <li><span class="human">Плюс транспорт до границы ЕАЭС (начисление по п. 1 ст. 40 ТК ЕАЭС).</span><span class="exact">3 959 000,00 + 180 000,00 = 4 139 000,00 ₽ — это графы 12 и 45</span></li>
+      <li><span class="human">Пошлина 5 %.</span><span class="exact">4 139 000,00 × 5 % = 206 950,00 ₽</span></li>
+      <li><span class="human">НДС 20 % от суммы стоимости и пошлины.</span><span class="exact">(4 139 000,00 + 206 950,00) × 20 % = 869 190,00 ₽</span></li>
+      <li><span class="human">Статистическая стоимость в долларах.</span><span class="exact">4 139 000,00 ÷ 92,5000 = 44 745,95 USD</span></li>
+    </ol>
+    <div class="note">
+      <span class="box-t">Обратите внимание</span>
+      Графа 42 (42 800,00) и графа 45 (4 139 000,00) — <strong>разные числа и разные валюты</strong>. Именно на этом месте новички ставят в 45 сумму инвойса, и декларация уходит в корректировку стоимости.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10 ================= -->
+<section class="card" id="s10">
+  <div class="section-kicker">Раздел 10</div>
+  <h2>Про примеры из интернета и заполненные файлы</h2>
+  <p class="lead">Честно о том, что удалось и что не удалось найти.</p>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num grey">?</div>
+      <div>
+        <h3>Что есть и чего нет</h3>
+      </div>
+    </div>
+    <ul>
+      <li><strong>Официального банка заполненных ДТ в открытом доступе нет.</strong> ФТС не публикует примеры деклараций с реквизитами. <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: наличие разъяснений с примерами на текущей версии сайта ФТС</span></li>
+      <li><strong>Реальные ДТ не публикуются</strong> — они содержат коммерческую тайну, банковские реквизиты и данные контрагентов.</li>
+      <li><strong>Примеры в учебных материалах и у разработчиков ПО</strong> существуют, но они не нормативны и часто содержат устаревшие графы. Опираться на них как на образец нельзя.</li>
+      <li><strong>Поиск в этой сессии не дал результатов</strong> — ни по одному запросу. Поэтому вместо ссылок на файлы в разделе 9 собран собственный условный образец.</li>
+    </ul>
+
+    <div class="ausn">
+      <span class="box-t">Что действительно помогает</span>
+      Встроенные подсказки и проверки формата в АПС: они не дадут подать ДТ с незаполненной обязательной графой или с кодом неверной длины. Это ближе к «примеру», чем любая картинка из интернета.
+    </div>
+
+    <div class="note">
+      <span class="box-t">Если нужен разбор реального примера</span>
+      Пришлите обезличенный файл (PDF печатной формы или выгрузку из АПС с удалёнными наименованиями и ИНН) — разберу по графам: что заполнено верно, где риск корректировки, что пересчитать.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 11 ================= -->
+<section class="card" id="s11">
+  <div class="section-kicker">Раздел 11</div>
+  <h2>Чек-лист перед подачей ДТ</h2>
+  <p class="lead">Пять минут проверки экономят сутки ожидания.</p>
+
+  <ul class="checklist">
+    <li>Графа 1 — направление; графа 37 — <strong>ИМ 40</strong> полностью</li>
+    <li>Графа 2 — иностранный продавец; графа 8 — российский получатель по ЕГРЮЛ</li>
+    <li>Графа 11, 15, 16 — три «страны» различаются осознанно, а не «все CN»</li>
+    <li>Графа 12 = сумма граф 45 по всем товарам, в рублях</li>
+    <li>Графа 20 — условия поставки совпадают с контрактом и инвойсом</li>
+    <li>Графа 22 — валюта счёта; графа 23 — курс на дату регистрации ДТ</li>
+    <li>Графа 31 — описание позволяет однозначно классифицировать товар</li>
+    <li>Графа 33 — 10 знаков, код соответствует описанию</li>
+    <li>Графы 35 и 38 — килограммы, брутто включает упаковку</li>
+    <li>Графа 44 — контракт (03011), инвойс (04021), УНК (03031) и все разрешительные</li>
+    <li>Графа 47 — НДС посчитан от (ТС + пошлина + акциз)</li>
+    <li>Сумма по графе 47 покрыта остатком на ЕЛС</li>
+    <li>Графа 54 — место, дата, подпись; на каждом листе своя</li>
+  </ul>
+
+  <div class="deadline">
+    <span class="box-t">Три срока, связанных с ДТ</span>
+    Регистрация поданной декларации — <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: срок по ст. 111 ТК ЕАЭС</span>. Выпуск — 4 часа рабочего времени, с продлением до 10 рабочих дней. Изменения после регистрации — только через КДТ, не переподачей.
+  </div>
+</section>
+
+<!-- ================= 12 ================= -->
+<section class="card" id="s12">
+  <div class="section-kicker">Раздел 12</div>
+  <h2>Источники</h2>
+  <p class="lead">Нормативная база справочника.</p>
+
+  <div class="sources">
+    <div class="source">
+      <div class="req">Решение Комиссии ТС от 20.05.2010 № 257</div>
+      <div>Форма декларации на товары и Инструкция о порядке её заполнения. Действующая редакция — от 28.04.2026. Основной документ по всем графам.</div>
+      <div class="link">eec.eaeunion.org · pravo.gov.ru</div>
+    </div>
+    <div class="source">
+      <div class="req">Решение КТС от 20.09.2010 № 378</div>
+      <div>Классификаторы, используемые при заполнении ДТ (характер сделки, виды транспорта, документы и др.). Ред. 21.09.2026.</div>
+      <div class="link">eec.eaeunion.org</div>
+    </div>
+    <div class="source">
+      <div class="req">Таможенный кодекс ЕАЭС</div>
+      <div>Ст. 104–108, 111 (подача и регистрация), 118–126 (выпуск), 38 (курс валюты), 40 (начисления к цене), 57 (срок уплаты).</div>
+      <div class="link">eec.eaeunion.org</div>
+    </div>
+    <div class="source">
+      <div class="req">Решение Совета ЕЭК от 14.09.2021 № 80</div>
+      <div>ТН ВЭД ЕАЭС (ред. 21.09.2026) и пояснения к ней (ред. 24.12.2025) — для графы 33.</div>
+      <div class="link">eec.eaeunion.org</div>
+    </div>
+    <div class="source">
+      <div class="req">Решение КТС № 299, раздел II</div>
+      <div>Перечень товаров, подлежащих государственной регистрации (СГР). Ред. 28.07.2026.</div>
+      <div class="link">eec.eaeunion.org</div>
+    </div>
+    <div class="source">
+      <div class="req">Решение № 30 (меры нетарифного регулирования)</div>
+      <div>Перечень товаров, ввоз которых требует лицензии/разрешения. Ред. 07.04.2026.</div>
+      <div class="link">eec.eaeunion.org</div>
+    </div>
+    <div class="source">
+      <div class="req">Постановление КС РФ от 05.03.2024 № 9-П</div>
+      <div>Ч. 2 ст. 16.2 КоАП не применяется к недостоверному весу брутто, если это не повлияло на размер платежей.</div>
+      <div class="link">pravo.gov.ru</div>
+    </div>
+    <div class="source">
+      <div class="req">ПП РФ от 28.11.2024 № 1637 (ред. 27.11.2025) и ПП РФ от 23.10.2025 № 1638</div>
+      <div>Ставки таможенных сборов за операции и индексация с 01.01.2026 (верхняя ставка — 73 860 ₽).</div>
+      <div class="link">pravo.gov.ru</div>
+    </div>
+  </div>
+
+  <div class="actual">
+    <strong>Информация актуальна на 07.11.2026.</strong><br>
+    Все числовые примеры в разделе 9 — условные и приведены только для проверки логики расчёта. Код 8516 71 000 0 указан как условный. Графы, по которым не удалось подтвердить кодовые значения (24, 25, служебные 27–30, 43, 49–53), помечены флагом «ТРЕБУЕТ ПРОВЕРКИ». Официальный источник по любой графе — Инструкция к Решению КТС № 257 в действующей редакции.
+  </div>
+</section>
+
+</div>
+
+<a class="up" href="#top" aria-label="Наверх">↑</a>
+
+<style>
+.nav-back { position: fixed; bottom: 24px; right: 24px; background: #0d3b66; color: #fff !important; padding: 10px 16px; border-radius: 8px; text-decoration: none; font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 9999; transition: background 0.2s; font-weight: 600; }
+.nav-back:hover { background: #1e5a99; }
+</style>
+<a href="index.html" class="nav-back">← Назад в меню</a>
+</body>
+</html>

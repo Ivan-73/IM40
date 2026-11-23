@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Этап 8. Выпуск — памятка</title>
+<style>
+  :root{
+    --bg:#eef2f7;
+    --ink:#16202e;
+    --muted:#5b6779;
+    --line:#d5dee9;
+    --accent:#1f4e79;
+    --accent-2:#2f6b95;
+    --accent-soft:#eaf2f9;
+    --green:#1f6b3f;
+    --green-soft:#e9f6ee;
+    --red:#a8231b;
+    --red-soft:#fdf0ee;
+    --amber:#8a5a06;
+    --amber-soft:#fff7e3;
+    --radius:16px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font:16px/1.58 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:960px;margin:0 auto;padding:0 18px 70px;}
+
+  .hero{
+    position:relative;
+    overflow:hidden;
+    margin:22px 0 0;
+    padding:38px 36px 34px;
+    border-radius:22px;
+    color:#fff;
+    background:linear-gradient(135deg,#0f2c44 0%,#1f4e79 52%,#3a769f 100%);
+    box-shadow:0 16px 38px rgba(18,45,70,.22);
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    right:-90px;top:-100px;
+    width:300px;height:300px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.14),rgba(255,255,255,0) 70%);
+  }
+  .hero .badge-top{
+    display:inline-block;
+    padding:5px 13px;
+    border-radius:100px;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.28);
+    font-size:12px;
+    font-weight:600;
+  }
+  .hero h1{
+    margin:14px 0 10px;
+    max-width:840px;
+    font-size:30px;
+    line-height:1.22;
+    letter-spacing:-.015em;
+  }
+  .hero .sub{
+    margin:0;
+    max-width:760px;
+    font-size:16.4px;
+    line-height:1.5;
+    color:#dce8f2;
+  }
+  .hero-pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px;}
+  .hero-pills span{
+    padding:7px 14px;
+    border-radius:100px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.25);
+    font-size:13.4px;
+    font-weight:600;
+  }
+
+  .toc{
+    position:sticky;
+    top:0;
+    z-index:30;
+    margin:16px 0 26px;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:0 6px 18px rgba(20,40,70,.07);
+  }
+  .toc-inner{display:flex;gap:4px;padding:9px 10px;overflow-x:auto;scrollbar-width:thin;}
+  .toc a{
+    flex:0 0 auto;
+    padding:6px 10px;
+    border-radius:8px;
+    color:#2b3b4f;
+    font-size:13.2px;
+    font-weight:600;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .toc a:hover{background:var(--accent-soft);color:var(--accent);}
+
+  .card{
+    margin:0 0 20px;
+    padding:24px 26px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 2px 4px rgba(20,40,70,.04),0 10px 24px rgba(20,40,70,.05);
+    scroll-margin-top:78px;
+  }
+  .section-kicker{
+    display:inline-block;
+    margin-bottom:8px;
+    padding:3px 9px;
+    border-radius:6px;
+    background:var(--accent-soft);
+    color:var(--accent);
+    font-size:11.2px;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+  }
+  .card h2{margin:0 0 8px;font-size:22px;line-height:1.28;letter-spacing:-.01em;}
+  .card .lead{margin:0 0 14px;color:#38465a;font-size:15.6px;}
+
+  h3{font-size:16px;margin:18px 0 7px;line-height:1.35;}
+  p{margin:8px 0;}
+  ul,ol{margin:8px 0;padding-left:22px;}
+  li{margin:5px 0;}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid #b9cfe2;word-break:break-word;}
+  a:hover{border-bottom-color:var(--accent);}
+
+  .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:0 0 16px;font-size:13px;color:var(--muted);}
+  .tag{
+    display:inline-block;
+    padding:3px 8px;
+    border-radius:5px;
+    border:1px solid transparent;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .tag-norm{background:#e8f0fb;color:#1f4e79;border-color:#c5d9ef;}
+  .tag-fts{background:#e3f2f1;color:#0e5a5a;border-color:#b6dbd8;}
+  .tag-prac{background:#fdf3e2;color:#7a4f06;border-color:#ecd3a6;}
+  .tag-red{background:var(--red-soft);color:var(--red);border-color:#e7bdb7;}
+  .tag-green{background:var(--green-soft);color:var(--green);border-color:#bfe0cc;}
+
+  .note,.warning,.fine,.deadline,.ausn,.osno,.summary{
+    margin:14px 0;
+    padding:14px 17px;
+    border-radius:12px;
+    font-size:14.6px;
+  }
+  .note{background:#f5f8fb;border:1px solid #dbe5ee;border-left:4px solid #8aa6c0;}
+  .warning{background:var(--amber-soft);border:1px solid #ecd9a8;border-left:5px solid #b8860b;}
+  .fine{background:var(--red-soft);border:1px solid #eccac5;border-left:5px solid var(--red);}
+  .deadline{background:var(--accent-soft);border:1px solid #c9dcef;border-left:5px solid var(--accent);}
+  .ausn{background:var(--green-soft);border:1px solid #c6e3d2;border-left:5px solid var(--green);}
+  .osno{background:#f2f6fc;border:1px solid #c8d9ee;border-left:5px solid #2c5f96;}
+  .summary{
+    padding:20px 22px;
+    border:0;
+    color:#eef5fb;
+    background:linear-gradient(135deg,#173752,#1f4e79);
+  }
+  .summary h3{margin-top:0;color:#fff;}
+  .summary ol{padding-left:20px;}
+  .summary li{margin:7px 0;}
+  .box-title{
+    display:block;
+    margin-bottom:4px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    opacity:.9;
+  }
+
+  .report{
+    margin:14px 0;
+    padding:16px 18px;
+    background:#fcfdfe;
+    border:1px solid var(--line);
+    border-radius:14px;
+    scroll-margin-top:78px;
+  }
+  .report-head{display:flex;gap:14px;align-items:flex-start;}
+  .num{
+    flex:0 0 44px;
+    width:44px;height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:var(--accent);
+    color:#fff;
+    font-size:14px;
+    font-weight:800;
+    text-align:center;
+    line-height:1.1;
+  }
+  .num.green{background:var(--green);}
+  .num.grey{background:#5d6c80;}
+  .num.amber{background:#a8741a;}
+  .report h3{margin:1px 0 2px;font-size:16.5px;}
+  .report .sub{margin:0;font-size:13.8px;color:var(--muted);}
+  .report .tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 8px;}
+  .meta{margin:0;padding:0;border:0;}
+  .meta > div{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:10px;
+    padding:7px 0;
+    border-top:1px dotted var(--line);
+    font-size:14.2px;
+  }
+  .meta dt{margin:0;font-weight:700;color:#2c3a4d;}
+  .meta dd{margin:0;color:#33415a;}
+
+  ol.steps{list-style:none;counter-reset:st;margin:14px 0;padding:0;}
+  ol.steps > li{
+    counter-increment:st;
+    position:relative;
+    margin:0 0 4px 15px;
+    padding:0 0 16px 46px;
+    border-left:2px solid #c9dcef;
+  }
+  ol.steps > li:last-child{border-left-color:transparent;padding-bottom:0;}
+  ol.steps > li::before{
+    content:counter(st);
+    position:absolute;left:-16px;top:0;
+    width:30px;height:30px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    font-size:14px;
+    font-weight:700;
+  }
+  ol.steps h3{margin:2px 0 4px;font-size:15.5px;}
+  .human{margin:2px 0 4px;font-size:14.6px;}
+  .human::before{content:"По-человечески: ";font-weight:700;color:var(--accent-2);}
+  .exact{
+    margin:2px 0 0;
+    padding:7px 10px;
+    background:#fafbfd;
+    border:1px dashed var(--line);
+    border-radius:6px;
+    color:#3c4a5c;
+    font-size:13.6px;
+  }
+  .exact::before{content:"Точно: ";font-weight:700;color:var(--muted);}
+
+  .flow{
+    display:flex;
+    align-items:stretch;
+    justify-content:center;
+    gap:4px;
+    margin:16px 0;
+    padding:18px 14px;
+    background:#fbfcfe;
+    border:1px solid var(--line);
+    border-radius:14px;
+    flex-wrap:wrap;
+  }
+  .flow .node{
+    flex:1 1 0;
+    min-width:0;
+    padding:11px 9px;
+    background:#fff;
+    border:1.5px solid #c9dcef;
+    border-top:4px solid var(--accent);
+    border-radius:9px;
+    text-align:center;
+    font-size:12.6px;
+    line-height:1.4;
+  }
+  .flow .node b{display:block;margin-bottom:3px;font-size:13.2px;}
+  .flow .node span{color:var(--muted);font-size:11.8px;}
+  .flow .node.hi{background:var(--accent-soft);border-top-color:var(--accent-2);}
+  .flow .arrow{
+    flex:0 0 20px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--accent);
+    font-size:18px;font-weight:700;
+  }
+  .flow .arrow::before{content:"→";}
+  .flow-caption{margin:-6px 0 14px;font-size:12.6px;color:var(--muted);text-align:center;line-height:1.45;}
+
+  .table-wrap{margin:14px 0;overflow-x:auto;border:1px solid var(--line);border-radius:12px;}
+  table{width:100%;min-width:660px;border-collapse:collapse;background:#fff;font-size:13.5px;}
+  caption{caption-side:top;padding:8px 10px 6px;background:#f7f9fc;color:var(--muted);font-size:12.8px;text-align:left;}
+  th,td{
+    padding:9px 11px;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    text-align:left;
+    vertical-align:top;
+  }
+  th:last-child,td:last-child{border-right:0;}
+  tbody tr:last-child td{border-bottom:0;}
+  th{background:#eef4fa;font-size:12.9px;font-weight:700;}
+  tbody tr:nth-child(even) td{background:#fafbfd;}
+  .yes{color:var(--green);font-weight:700;}
+  .no{color:var(--red);font-weight:700;}
+  .mid{color:#8a5a06;font-weight:700;}
+
+  .timeline{list-style:none;margin:16px 0 4px;padding:0 0 0 26px;border-left:2px solid #c4d4e4;}
+  .timeline li{position:relative;margin:0;padding:0 0 20px 18px;}
+  .timeline li:last-child{padding-bottom:0;}
+  .timeline li::before{
+    content:"";
+    position:absolute;left:-35px;top:4px;
+    width:14px;height:14px;
+    border:3px solid var(--accent);
+    border-radius:50%;
+    background:#fff;
+  }
+  .timeline b{display:block;margin-bottom:2px;font-size:15px;}
+  .timeline span{font-size:14.2px;color:#3c4a5e;}
+
+  .checklist{list-style:none;margin:10px 0;padding-left:0;}
+  .checklist li{position:relative;margin:9px 0;padding-left:32px;}
+  .checklist li::before{content:"☐";position:absolute;left:0;top:-1px;color:var(--accent);font-size:19px;}
+
+  dl.glossary{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;margin:12px 0;}
+  dl.glossary > div{padding:8px 0;border-bottom:1px dotted var(--line);}
+  dl.glossary dt{font-weight:700;font-size:14.4px;}
+  dl.glossary dd{margin:2px 0 0;font-size:14px;color:#3a465c;}
+
+  .sources .source{margin:16px 0;padding:4px 0 4px 14px;border-left:3px solid #c3d3e2;}
+  .sources .source h3{margin:0 0 3px;font-size:15px;}
+  .sources .req{margin:0 0 5px;font-size:12.8px;color:var(--muted);}
+  .sources .source p{margin:5px 0;font-size:14.2px;}
+  .sources .link{font-size:12.9px;}
+  .actual{
+    margin-top:18px;
+    padding:11px 14px;
+    background:#f2f6fa;
+    border:1px dashed #c3d3e2;
+    border-radius:10px;
+    font-size:13.4px;
+    color:#3d4b60;
+  }
+
+  .flag{
+    display:inline-block;
+    padding:0 5px;
+    border-radius:3px;
+    background:var(--amber-soft);
+    color:#6d4f00;
+    font-size:11.5px;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .small{font-size:13px;color:var(--muted);}
+
+  footer{
+    margin-top:26px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    font-size:12.7px;
+    line-height:1.5;
+    color:var(--muted);
+  }
+
+  .up{
+    position:fixed;
+    right:20px;bottom:20px;
+    z-index:40;
+    display:flex;align-items:center;justify-content:center;
+    width:46px;height:46px;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    font-size:19px;
+    text-decoration:none;
+    box-shadow:0 8px 20px rgba(20,50,80,.28);
+  }
+  .up:hover{background:#163b5c;}
+
+  @media (max-width:800px){
+    .hero{padding:28px 22px 26px;border-radius:18px;}
+    .hero h1{font-size:24px;}
+    .hero .sub{font-size:15.2px;}
+    .card{padding:20px 18px;}
+    .flow{flex-direction:column;gap:0;}
+    .flow .arrow{flex:0 0 28px;}
+    .flow .arrow::before{content:"↓";}
+    .flow .node{text-align:left;padding:11px 13px;}
+    dl.glossary{grid-template-columns:1fr;}
+    .meta > div{grid-template-columns:1fr;gap:2px;}
+    .toc{border-radius:10px;}
+  }
+
+  @media print{
+    @page{margin:13mm 12mm;}
+    body{background:#fff;color:#000;font-size:10.3pt;line-height:1.4;}
+    .wrap{max-width:none;padding:0;}
+    .hero{
+      padding:0 0 10pt;
+      border:1.5pt solid #000;
+      border-radius:0;
+      background:#fff !important;
+      color:#000;
+      box-shadow:none;
+    }
+    .hero::after{display:none;}
+    .hero .badge-top,.hero-pills span{border:1pt solid #000;background:#fff;color:#000;}
+    .hero .sub{color:#000;}
+    .toc,.up{display:none !important;}
+    .card,.report,.table-wrap,.summary,.flow{
+      box-shadow:none !important;
+      break-inside:avoid;
+      page-break-inside:avoid;
+    }
+    .card{margin-bottom:10pt;border:1pt solid #999;}
+    .summary{background:#fff !important;color:#000;border:1.5pt solid #000;}
+    .summary h3{color:#000;}
+    .note,.warning,.fine,.deadline,.ausn,.osno{
+      background:#fff !important;
+      border:1pt solid #000;
+      border-left:3pt solid #000;
+    }
+    .flow{border:1pt solid #000;background:#fff !important;}
+    .flow .node{background:#fff !important;border:1pt solid #000;}
+    table{min-width:0;font-size:8.6pt;}
+    thead{display:table-header-group;}
+    a{color:#000;border-bottom:0;text-decoration:none;}
+    h1,h2,h3{color:#000;}
+  }
+</style>
+</head>
+<body id="top">
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="badge-top">Актуально на 07.11.2026</span>
+    <h1>Этап 8. Выпуск</h1>
+    <p class="sub">Что означает выпуск, какие условия должны сойтись, чем отличается условный выпуск от отказа и что делать сразу после статуса «Выпуск разрешён».</p>
+    <div class="hero-pills">
+      <span>4 часа — базовый срок</span>
+      <span>Статус товаров Союза</span>
+      <span>Дальше — СВХ и валютный контроль</span>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Содержание">
+    <div class="toc-inner">
+      <a href="#princip">Главное</a>
+      <a href="#legal">Норма</a>
+      <a href="#conditions">Условия</a>
+      <a href="#terms">Сроки</a>
+      <a href="#decision">Решение</a>
+      <a href="#refusal">Отказ</a>
+      <a href="#conditional">Условный выпуск</a>
+      <a href="#after">После выпуска</a>
+      <a href="#flow">Схема</a>
+      <a href="#errors">Ошибки</a>
+      <a href="#risk">Риски</a>
+      <a href="#check">Чек-лист</a>
+      <a href="#gloss">Глоссарий</a>
+      <a href="#sources">Источники</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- 1 -->
+    <section class="card" id="princip">
+      <span class="section-kicker">Сначала — главное</span>
+      <h2>Выпуск — это действие таможни, а не ваша заявка</h2>
+      <p class="lead">Выпуск товаров — действие таможенного органа, после которого товары можно использовать в соответствии с заявленной процедурой. Для ИМ 40 это означает: товар стал товаром Союза и поступил в свободное обращение.</p>
+      <p>Выпуск происходит только при одновременном соблюдении условий: декларация зарегистрирована, соблюдены запреты и ограничения, уплачены платежи (или предоставлено обеспечение), проведён необходимый контроль. Если хотя бы одно условие не выполнено — выпуска нет.</p>
+
+      <div class="legend">
+        <span><span class="tag tag-norm">Норма</span> ТК ЕАЭС</span>
+        <span><span class="tag tag-fts">Позиция ФТС</span> разъяснения и практика</span>
+        <span><span class="tag tag-prac">Практика</span> что происходит на деле</span>
+      </div>
+
+      <div class="flow" role="img" aria-label="Схема: регистрация, условия, контроль, решение, выпуск, статус товаров Союза">
+        <div class="node"><b>Регистрация</b><span>ДТ принята</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>Условия</b><span>документы и платежи</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>Контроль</b><span>проверки и запросы</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node hi"><b>Решение</b><span>выпуск / отказ</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>Статус</b><span>товар Союза</span></div>
+      </div>
+      <p class="flow-caption">Выпуск — не «разрешение забрать груз», а изменение правового статуса товара.</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="card" id="legal">
+      <span class="section-kicker">Нормативная база</span>
+      <h2>На чём всё держится</h2>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Основные нормы этапа</caption>
+          <thead><tr><th>Акт</th><th>Что регулирует</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Подпункт 6 пункта 1 статьи 2 ТК ЕАЭС</strong></td><td>Определение понятия «выпуск товаров».</td></tr>
+            <tr><td><strong>Статья 118 ТК ЕАЭС</strong></td><td>Общие положения о выпуске товаров, условия и порядок оформления решения.</td></tr>
+            <tr><td><strong>Статья 119 ТК ЕАЭС</strong></td><td>Сроки выпуска: 4 часа с момента регистрации, продление до 10 рабочих дней.</td></tr>
+            <tr><td><strong>Статья 120 ТК ЕАЭС</strong></td><td>Выпуск товаров до подачи декларации.</td></tr>
+            <tr><td><strong>Статья 124 ТК ЕАЭС</strong></td><td>Приостановление срока выпуска товаров, содержащих объекты интеллектуальной собственности.</td></tr>
+            <tr><td><strong>Статья 125 ТК ЕАЭС</strong></td><td>Отказ в выпуске товаров и порядок действий при отказе.</td></tr>
+            <tr><td><strong>Статья 126 ТК ЕАЭС</strong></td><td>Условный выпуск товаров.</td></tr>
+            <tr><td><strong>Статья 16.2 КоАП РФ</strong></td><td>Ответственность за недостоверное декларирование.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <strong>Важно.</strong> Выпуск оформляется электронным документом в информационной системе таможенного органа либо проставлением отметок. Для электронной ДТ это статус в системе, а не бумажный штамп.
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="card" id="conditions">
+      <span class="section-kicker">Условия</span>
+      <h2>Когда таможня обязана выпустить товар</h2>
+      <p class="lead">Выпуск — не одолжение, а решение при выполнении установленных условий. Если все они соблюдены, таможня не вправе отказать.</p>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Условия выпуска</caption>
+          <thead><tr><th>Условие</th><th>Что проверяется</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Декларация зарегистрирована</strong></td><td>Есть номер ДТ и отметка о регистрации</td></tr>
+            <tr><td><strong>Соблюдены запреты и ограничения</strong></td><td>Лицензии, разрешения, сертификаты, СГР — действительны и заявлены</td></tr>
+            <tr><td><strong>Уплачены платежи или предоставлено обеспечение</strong></td><td>Пошлина, НДС, акциз, сбор; остаток на ЕЛС</td></tr>
+            <tr><td><strong>Соблюдены требования к документам</strong></td><td>Документы представлены и оформлены правильно</td></tr>
+            <tr><td><strong>Проведён необходимый контроль</strong></td><td>Проверка документов, досмотр, экспертиза — если требовались</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ausn">
+        <span class="box-title">Практика</span>
+        Чаще всего выпуск тормозят три вещи: недоплата на ЕЛС, незаявленный разрешительный документ и неподтверждённая таможенная стоимость.
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="card" id="terms">
+      <span class="section-kicker">Сроки</span>
+      <h2>Сколько ждать</h2>
+
+      <div class="deadline">
+        <span class="box-title">Базовый срок</span>
+        Выпуск должен быть завершён не позднее <strong>4 часов</strong> с момента регистрации декларации (ст. 119 ТК ЕАЭС).
+      </div>
+
+      <div class="warning">
+        <span class="box-title">Продление</span>
+        Срок может быть продлён <strong>до 10 рабочих дней</strong> — при проверке документов и сведений, досмотре, отборе проб, экспертизе, проверке стоимости и в иных установленных случаях.
+      </div>
+
+      <div class="note">
+        <strong>Не путайте сроки.</strong> Для отдельных ситуаций закон устанавливает иные сроки — например, выпуск не позднее 1 рабочего дня, следующего за днем регистрации, в случаях, прямо предусмотренных ст. 119. Всегда смотрите, какой пункт применяется.
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Что съедает время</caption>
+          <thead><tr><th>Причина</th><th>Что происходит</th></tr></thead>
+          <tbody>
+            <tr><td>Запрос документов</td><td>Ожидание ответа декларанта</td></tr>
+            <tr><td>Досмотр</td><td>Вскрытие, пересчёт, акт</td></tr>
+            <tr><td>Экспертиза</td><td>Лабораторное исследование</td></tr>
+            <tr><td>КТС</td><td>Пересчёт стоимости и платежей</td></tr>
+            <tr><td>Обеспечение</td><td>Оформление гарантии</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="card" id="decision">
+      <span class="section-kicker">Решение</span>
+      <h2>Как выглядит выпуск</h2>
+
+      <ol class="steps">
+        <li>
+          <h3>Таможня завершает проверку</h3>
+          <p class="human">Если условий достаточно, принимается решение о выпуске. Никаких дополнительных заявлений от вас не требуется.</p>
+          <p class="exact">Выпуск оформляется электронным документом в информационной системе таможенного органа (ст. 118 ТК ЕАЭС). <span class="tag tag-norm">Норма</span></p>
+        </li>
+        <li>
+          <h3>Появляется статус</h3>
+          <p class="human">В программе и в личном кабинете видно, что декларация выпущена. Это и есть подтверждение для вас и для перевозчика.</p>
+          <p class="exact">Статус «Выпуск разрешён»; в электронной ДТ — соответствующая отметка. <span class="tag tag-prac">Практика</span></p>
+        </li>
+        <li>
+          <h3>Списываются платежи</h3>
+          <p class="human">Суммы уходят с ЕЛС. Проверьте остаток: он понадобится для следующей поставки.</p>
+          <p class="exact">Платежи уплачиваются до выпуска; списание отражается на ЕЛС. <span class="tag tag-norm">Норма</span></p>
+        </li>
+        <li>
+          <h3>Товар получает статус Союза</h3>
+          <p class="human">Для ИМ 40 товар становится «своим»: его можно продавать, перерабатывать, использовать без таможенных ограничений.</p>
+          <p class="exact">Товары приобретают статус товаров Союза в соответствии с условиями выпуска для внутреннего потребления. <span class="tag tag-norm">Норма</span></p>
+        </li>
+        <li>
+          <h3>Можно забирать со СВХ</h3>
+          <p class="human">Склад отпускает товар по документам с отметками о выпуске. Проверьте, что все экземпляры у вас.</p>
+          <p class="exact">Вывоз товаров с временного хранения — после выпуска либо с разрешения таможни. <span class="tag tag-norm">Норма</span></p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 6 -->
+    <section class="card" id="refusal">
+      <span class="section-kicker">Обратная сторона</span>
+      <h2>Отказ в выпуске и приостановление</h2>
+
+      <h3>Отказ в выпуске (ст. 125 ТК ЕАЭС)</h3>
+      <p>Таможня отказывает, если не выполнены условия выпуска: не уплачены платежи, не соблюдены запреты и ограничения, не представлены документы, не устранены основания проверки.</p>
+      <ul>
+        <li>Отказ оформляется решением с указанием причин.</li>
+        <li>Причины можно устранить и подать декларацию заново.</li>
+        <li>Решение можно обжаловать в вышестоящий орган или в суд.</li>
+      </ul>
+
+      <div class="fine">
+        <span class="box-title">Важно</span>
+        Отказ в выпуске — не то же самое, что отказ в регистрации. Регистрация — это приём декларации; выпуск — это решение по товару.
+      </div>
+
+      <h3>Приостановление срока выпуска (ст. 124 ТК ЕАЭС)</h3>
+      <p>Отдельный случай — товары, содержащие объекты интеллектуальной собственности. Срок выпуска приостанавливается, чтобы правообладатель и декларант могли разобраться. Затем выпуск либо возобновляется, либо принимается иное решение.</p>
+      <p class="small">Это не общий механизм для всех товаров, а специальная мера. <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: сроки и порядок по ст. 124</span></p>
+    </section>
+
+    <!-- 7 -->
+    <section class="card" id="conditional">
+      <span class="section-kicker">Особый режим</span>
+      <h2>Условный выпуск</h2>
+      <p class="lead">Условный выпуск — это выпуск с ограничениями. Товар отдаётся, но пользоваться и распоряжаться им можно не полностью.</p>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Условный выпуск vs обычный</caption>
+          <thead><tr><th>Критерий</th><th>Обычный выпуск</th><th>Условный выпуск</th></tr></thead>
+          <tbody>
+            <tr><td>Статус товара</td><td>Товар Союза</td><td>Ограничения сохраняются до выполнения условий</td></tr>
+            <tr><td>Пользование</td><td>Без ограничений</td><td>С ограничениями</td></tr>
+            <tr><td>Основание</td><td>Все условия выполнены</td><td>Часть условий не выполнена, но выпуск допускается</td></tr>
+            <tr><td>Что делать</td><td>Забрать товар</td><td>Выполнить условия и снять ограничения</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="warning">
+        <strong>Практика.</strong> Условный выпуск — это не «полувыпуск». Товар у вас, но распоряжаться им свободно нельзя, пока ограничения не сняты.
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="card" id="after">
+      <span class="section-kicker">После выпуска</span>
+      <h2>Что сделать сразу</h2>
+
+      <ol class="timeline">
+        <li><b>Проверить статус и документы</b><span>Убедиться, что выпуск отражён, а документы получены.</span></li>
+        <li><b>Проверить списание с ЕЛС</b><span>Остаток должен совпадать с расчётом.</span></li>
+        <li><b>Забрать товар со СВХ</b><span>По документам с отметками о выпуске.</span></li>
+        <li><b>Проверить валютный контроль</b><span>При наличии УНК сведения о ДТ уходят в банк в течение двух рабочих дней.</span></li>
+        <li><b>Сохранить документы</b><span>ДТ, ДТС-1, документы по сделке и платежам — на весь срок хранения.</span></li>
+      </ol>
+
+      <div class="note">
+        <span class="tag tag-prac">Практика</span> Выпуск не закрывает историю: таможня вправе провести проверку после выпуска и запросить документы. Поэтому архив должен быть собран сразу.
+      </div>
+
+      <div class="ausn">
+        <span class="box-title">Валютный контроль</span>
+        Если в графе 44 указан УНК, сведения о ДТ направляются в уполномоченный банк автоматически в течение двух рабочих дней после выпуска. В ЛК видно банк, дату и квитанцию.
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="card" id="flow">
+      <span class="section-kicker">Инфографика</span>
+      <h2>Схема этапа</h2>
+
+      <div class="flow" role="img" aria-label="Схема: условия, контроль, решение, выпуск, статус, СВХ">
+        <div class="node"><b>Условия</b><span>документы, платежи</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>Контроль</b><span>проверки</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node hi"><b>Решение</b><span>выпуск</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>Статус</b><span>товар Союза</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>СВХ</b><span>вывоз товара</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node hi"><b>Банк</b><span>ДТ и квитанция</span></div>
+      </div>
+      <p class="flow-caption">Выпуск — точка, после которой начинаются обязанности «мирного времени»: хранение документов, валютный контроль, возможная проверка после выпуска.</p>
+    </section>
+
+    <!-- 10 -->
+    <section class="card" id="errors">
+      <span class="section-kicker">Типичные ошибки</span>
+      <h2>Частые ошибки</h2>
+      <ul>
+        <li>Считать выпуск автоматическим: без соблюдения условий его не будет.</li>
+        <li>Путать отказ в регистрации и отказ в выпуске.</li>
+        <li>Забирать товар со СВХ без документов с отметками.</li>
+        <li>Не проверить списание с ЕЛС и остаток.</li>
+        <li>Считать условный выпуск полным: ограничения сохраняются.</li>
+        <li>Забыть про валютный контроль после выпуска.</li>
+        <li>Не сохранить документы — а потом не иметь, что предъявить при проверке.</li>
+        <li>Считать, что после выпуска таможня уже не вернётся к декларации.</li>
+      </ul>
+    </section>
+
+    <!-- 11 -->
+    <section class="card" id="risk">
+      <span class="section-kicker">Риски</span>
+      <h2>Чем это грозит</h2>
+
+      <div class="fine">
+        <span class="box-title">1 · Отказ в выпуске</span>
+        Товар остаётся на СВХ, расходы растут, поставка срывается.
+      </div>
+
+      <div class="fine">
+        <span class="box-title">2 · Условный выпуск</span>
+        Товар у вас, но распоряжаться им свободно нельзя до снятия ограничений.
+      </div>
+
+      <div class="fine">
+        <span class="box-title">3 · Проверка после выпуска</span>
+        Доначисление платежей, корректировка, административная ответственность.
+      </div>
+
+      <div class="warning">
+        <span class="box-title">4 · Валютный контроль</span>
+        Если УНК не указан или указан неверно, сведения в банк не уйдут — разбираться придётся отдельно.
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="card" id="check">
+      <span class="section-kicker">Практический инструмент</span>
+      <h2>Чек-лист</h2>
+      <ul class="checklist">
+        <li>Все условия выпуска проверены до подачи?</li>
+        <li>Платежи уплачены, остаток на ЕЛС достаточен?</li>
+        <li>Разрешительные документы действительны и заявлены?</li>
+        <li>Статус «Выпуск разрешён» получен и зафиксирован?</li>
+        <li>Списание с ЕЛС совпадает с расчётом?</li>
+        <li>Документы с отметками о выпуске получены?</li>
+        <li>Товар вывезен со СВХ?</li>
+        <li>Сведения о ДТ ушли в банк, квитанция видна?</li>
+        <li>Документы по декларации сохранены?</li>
+        <li>Если выпуск условный — понятно, какие ограничения и как их снять?</li>
+      </ul>
+    </section>
+
+    <!-- 13 -->
+    <section class="card" id="gloss">
+      <span class="section-kicker">Словарь</span>
+      <h2>Глоссарий</h2>
+      <dl class="glossary">
+        <div><dt>Выпуск товаров</dt><dd>действие таможни, после которого товар можно использовать по процедуре.</dd></div>
+        <div><dt>Товары Союза</dt><dd>товары, находящиеся в свободном обращении на территории ЕАЭС.</dd></div>
+        <div><dt>Условный выпуск</dt><dd>выпуск с ограничениями по пользованию и распоряжению.</dd></div>
+        <div><dt>Отказ в выпуске</dt><dd>решение таможни не выпускать товар.</dd></div>
+        <div><dt>Приостановление</dt><dd>временная остановка срока выпуска (например, по объектам интеллектуальной собственности).</dd></div>
+        <div><dt>ЕЛС</dt><dd>единый лицевой счёт для уплаты платежей.</dd></div>
+        <div><dt>СВХ</dt><dd>склад временного хранения.</dd></div>
+        <div><dt>УНК</dt><dd>уникальный номер контракта.</dd></div>
+        <div><dt>Квитанция банка</dt><dd>подтверждение получения сведений о ДТ.</dd></div>
+        <div><dt>Проверка после выпуска</dt><dd>таможенный контроль после завершения оформления.</dd></div>
+        <div><dt>ДТ</dt><dd>декларация на товары.</dd></div>
+        <div><dt>КТС</dt><dd>корректировка таможенной стоимости.</dd></div>
+      </dl>
+    </section>
+
+    <!-- 14 -->
+    <section class="card" id="summary">
+      <span class="section-kicker">Итог</span>
+      <h2>Резюме</h2>
+      <div class="summary">
+        <h3>Семь тезисов этапа 8</h3>
+        <ol>
+          <li>Выпуск — действие таможни при соблюдении всех условий, а не автоматическая процедура.</li>
+          <li>Базовый срок — 4 часа; при проверках он продлевается до 10 рабочих дней.</li>
+          <li>Выпуск оформляется электронным документом и статусом в системе.</li>
+          <li>После ИМ 40 товар получает статус товара Союза.</li>
+          <li>Отказ в выпуске — отдельное решение с причинами; его можно устранить и обжаловать.</li>
+          <li>Условный выпуск сохраняет ограничения по пользованию и распоряжению.</li>
+          <li>После выпуска остаются валютный контроль, хранение документов и проверка после выпуска.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 15 -->
+    <section class="card sources" id="sources">
+      <span class="section-kicker">Первоисточники</span>
+      <h2>Источники</h2>
+
+      <article class="source">
+        <h3>Таможенный кодекс ЕАЭС, статья 118</h3>
+        <p class="req">Общие положения о выпуске товаров.</p>
+        <p><strong>Что подтверждает:</strong> понятие выпуска, условия и порядок оформления решения. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_215315/f4d51f532e73b2af068010acf319baba27110ef0/">consultant.ru — ст. 118</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Таможенный кодекс ЕАЭС, статья 119</h3>
+        <p class="req">Сроки выпуска товаров.</p>
+        <p><strong>Что подтверждает:</strong> 4 часа с момента регистрации и продление до 10 рабочих дней; отдельные сроки по пунктам статьи. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_215315/74a9a8272b01d8d6c1a1f20d5f1df62ddd08d8fc/">consultant.ru — ст. 119</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Таможенный кодекс ЕАЭС, статья 120</h3>
+        <p class="req">Выпуск товаров до подачи декларации.</p>
+        <p><strong>Что подтверждает:</strong> условия и форма заявления о выпуске до подачи ДТ. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_215315/c4bb9590518b391573c78ccf6ed790c6435ecb8f/">consultant.ru — ст. 120</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Таможенный кодекс ЕАЭС, статья 124</h3>
+        <p class="req">Приостановление срока выпуска товаров, содержащих объекты интеллектуальной собственности.</p>
+        <p><strong>Что подтверждает:</strong> специальный механизм приостановления. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_215315/7c84bc89117f4fb40efb74b66a2bbda707169c30/">consultant.ru — ст. 124</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Таможенный кодекс ЕАЭС, статья 125</h3>
+        <p class="req">Отказ в выпуске товаров и порядок совершения операций.</p>
+        <p><strong>Что подтверждает:</strong> основания отказа и порядок действий. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_215315/e2bfedb81833af7ab024fde8844b6c1742f804a1/">consultant.ru — ст. 125</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Таможенный кодекс ЕАЭС, статья 126</h3>
+        <p class="req">Условный выпуск товаров.</p>
+        <p><strong>Что подтверждает:</strong> основания и ограничения условного выпуска, статус товаров. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_215315/">consultant.ru — ТК ЕАЭС</a></p>
+      </article>
+
+      <div class="actual">
+        <strong>Информация актуальна на 07.11.2026.</strong> Перед применением сверь действующие редакции статей 118–126 ТК ЕАЭС и сроки по ст. 124.
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Памятка подготовлена для личного использования участником ВЭД. Не является юридической консультацией. Решение о выпуске зависит от товара, документов и результатов контроля.
+  </footer>
+
+</div>
+
+<a class="up" href="#top" aria-label="Наверх">↑</a>
+
+<style>
+.nav-back { position: fixed; bottom: 24px; right: 24px; background: #0d3b66; color: #fff !important; padding: 10px 16px; border-radius: 8px; text-decoration: none; font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 9999; transition: background 0.2s; font-weight: 600; }
+.nav-back:hover { background: #1e5a99; }
+</style>
+<a href="index.html" class="nav-back">← Назад в меню</a>
+</body>
+</html>

@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сервисы и инструменты ФТС — памятка участника ВЭД</title>
+<style>
+:root{
+  --bg:#eef2f7; --ink:#16202e; --muted:#5b6779; --line:#d5dee9;
+  --accent:#1f4e79; --accent-2:#2f6b95; --accent-soft:#eaf2f9;
+  --green:#1f6b3f; --green-soft:#e9f6ee;
+  --red:#a8231b; --red-soft:#fdf0ee;
+  --amber:#8a5a06; --amber-soft:#fff7e3;
+  --radius:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+a{color:var(--accent-2);text-decoration:none;border-bottom:1px solid rgba(47,107,149,.32)}
+a:hover{border-bottom-color:var(--accent-2)}
+code{
+  background:#f3f6fa;border:1px solid var(--line);border-radius:6px;
+  padding:1px 5px;font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+strong{color:#0f2c44}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#0f2c44 0%,#1f4e79 52%,#3a769f 100%);
+  color:#fff;padding:52px 0 44px;margin-bottom:26px;
+}
+.hero::after{
+  content:"";position:absolute;right:-120px;top:-140px;width:420px;height:420px;
+  border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.20),rgba(255,255,255,0) 70%);
+}
+.hero .wrap{position:relative;z-index:2}
+.badge-top{
+  display:inline-block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.42);border-radius:999px;padding:6px 14px;margin-bottom:18px;
+  color:#dbeaf6;
+}
+.hero h1{margin:0 0 12px;font-size:34px;line-height:1.2;letter-spacing:-.01em}
+.hero .sub{margin:0;max-width:760px;font-size:17px;color:#d5e6f3}
+.hero-pills{margin-top:22px;display:flex;flex-wrap:wrap;gap:9px}
+.hero-pills span{
+  font-size:12.5px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);
+  border-radius:999px;padding:6px 12px;color:#eaf4fb;
+}
+
+/* ---------- TOC ---------- */
+.toc{position:sticky;top:0;z-index:50;background:rgba(238,242,247,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.toc-inner{
+  max-width:1080px;margin:0 auto;padding:10px 18px;display:flex;gap:8px;
+  overflow-x:auto;white-space:nowrap;scrollbar-width:thin;
+}
+.toc-inner a{
+  font-size:13px;color:#2b3a4d;background:#fff;border:1px solid var(--line);
+  border-radius:999px;padding:6px 12px;flex:0 0 auto;
+}
+.toc-inner a:hover{background:var(--accent-soft);border-color:#b9d2e6}
+
+/* ---------- CARDS ---------- */
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px 28px;margin-bottom:18px;scroll-margin-top:78px;
+  box-shadow:0 1px 2px rgba(22,32,46,.04);
+}
+.section-kicker{
+  font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent-2);font-weight:700;margin-bottom:6px;
+}
+.card h2{margin:0 0 10px;font-size:23px;line-height:1.28;letter-spacing:-.01em}
+.lead{margin:0 0 16px;color:var(--muted);font-size:15.5px}
+
+/* ---------- REPORT ---------- */
+.report{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:16px 0;background:#fcfdfe}
+.report-head{display:flex;gap:12px;align-items:flex-start}
+.num{
+  flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:var(--accent-soft);
+  color:var(--accent);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.num.green{background:var(--green-soft);color:var(--green)}
+.num.grey{background:#f1f4f8;color:var(--muted)}
+.num.amber{background:var(--amber-soft);color:var(--amber)}
+.report-head h3{margin:2px 0 0;font-size:17.5px;line-height:1.35}
+.report .sub{margin:4px 0 0;font-size:13.5px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tags span{font-size:11px;border-radius:999px;padding:3px 9px;border:1px solid transparent}
+.tag-norm{background:var(--accent-soft);color:var(--accent);border-color:#cfe0ee}
+.tag-fts{background:var(--green-soft);color:var(--green);border-color:#cfe9d9}
+.tag-prac{background:#f1f4f8;color:var(--muted);border-color:#dde5ee}
+.tag-warn{background:var(--amber-soft);color:var(--amber);border-color:#f0dfae}
+
+dl.meta{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0 6px}
+dl.meta dt{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}
+dl.meta dd{margin:3px 0 0;font-size:14px;line-height:1.5}
+
+.report ul{margin:10px 0 4px;padding-left:20px}
+.report li{margin:6px 0}
+.report p{margin:10px 0}
+
+/* ---------- BOXES ---------- */
+.note,.warning,.fine,.deadline,.ausn,.osno{
+  border-radius:12px;padding:14px 16px;margin:16px 0;font-size:14.5px;line-height:1.58;
+}
+.note{background:#f4f6fa;border:1px solid var(--line)}
+.warning{background:var(--amber-soft);border:1px solid #efdca7;border-left:4px solid var(--amber)}
+.fine{background:var(--red-soft);border:1px solid #f3cfc9;border-left:4px solid var(--red)}
+.deadline{background:var(--accent-soft);border:1px solid #cfe1ef;border-left:4px solid var(--accent)}
+.ausn{background:var(--green-soft);border:1px solid #cfe9d9;border-left:4px solid var(--green)}
+.osno{background:#fff;border:2px solid #c9dcec}
+.note b,.warning b,.fine b,.deadline b,.ausn b{color:inherit}
+.box-t{display:block;font-weight:700;margin-bottom:5px;font-size:13px;letter-spacing:.03em;text-transform:uppercase}
+
+.summary{
+  background:linear-gradient(135deg,#16202e 0%,#1f4e79 100%);color:#eef6fc;
+  border-radius:var(--radius);padding:24px 26px;margin:18px 0;
+}
+.summary h3{margin:0 0 10px;font-size:18px;color:#fff}
+.summary p{margin:8px 0;font-size:14.8px;color:#dbe9f4}
+.summary strong{color:#fff}
+
+/* ---------- FLOW ---------- */
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:16px 0}
+.node{
+  background:var(--accent-soft);border:1px solid #cfe0ee;border-radius:10px;
+  padding:9px 13px;font-size:13.5px;color:#1b3b58;
+}
+.arrow{color:var(--accent-2);font-weight:700}
+.arrow::before{content:"→"}
+
+/* ---------- STEPS ---------- */
+ol.steps{list-style:none;counter-reset:st;padding:0;margin:14px 0}
+ol.steps>li{
+  counter-increment:st;position:relative;padding:0 0 16px 44px;margin:0;
+}
+ol.steps>li::before{
+  content:counter(st);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;
+  background:var(--accent);color:#fff;font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+ol.steps>li:not(:last-child)::after{
+  content:"";position:absolute;left:13.5px;top:30px;bottom:2px;width:1px;background:var(--line);
+}
+.human{display:block;font-size:14.5px;margin-top:2px}
+.exact{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+.exact::before{content:"Точно: ";font-weight:700;color:#3d4c60}
+
+/* ---------- TABLE ---------- */
+.tblwrap{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:12px}
+table.tbl{border-collapse:collapse;width:100%;min-width:660px;font-size:14px;background:#fff}
+table.tbl th{
+  text-align:left;background:#f2f6fa;color:#22384f;font-size:11.5px;
+  text-transform:uppercase;letter-spacing:.07em;padding:11px 13px;border-bottom:1px solid var(--line);
+}
+table.tbl td{padding:11px 13px;border-bottom:1px solid #e8eef5;vertical-align:top}
+table.tbl tr:last-child td{border-bottom:none}
+table.tbl td:first-child{font-weight:700;color:var(--accent);white-space:nowrap}
+
+/* ---------- FLAG ---------- */
+.flag{
+  display:inline-block;background:var(--amber-soft);color:var(--amber);
+  border:1px dashed #d8b65f;border-radius:6px;padding:1px 7px;font-size:11.5px;
+  font-weight:700;letter-spacing:.02em;white-space:nowrap;
+}
+
+/* ---------- LISTS ---------- */
+.checklist{list-style:none;padding:0;margin:14px 0}
+.checklist li{position:relative;padding:7px 0 7px 30px;font-size:14.5px;border-bottom:1px dashed #e6ecf3}
+.checklist li:last-child{border-bottom:none}
+.checklist li::before{content:"☐";position:absolute;left:2px;top:5px;color:var(--accent-2);font-size:17px}
+
+dl.glossary{display:grid;grid-template-columns:1fr 1fr;gap:14px 26px;margin:16px 0}
+dl.glossary div{border-top:1px solid var(--line);padding-top:9px}
+dl.glossary dt{font-weight:700;font-size:14.5px;color:#1b3b58}
+dl.glossary dd{margin:3px 0 0;font-size:14px;color:#3d4c60}
+
+/* ---------- SOURCES ---------- */
+.sources{display:grid;gap:10px;margin:16px 0}
+.source{border-left:3px solid var(--accent-2);background:#f8fafc;padding:10px 14px;border-radius:0 10px 10px 0;font-size:14px}
+.source .req{font-weight:700;color:#1b3b58}
+.source .link{font-size:12.5px;color:var(--muted);margin-top:3px;word-break:break-all}
+
+.actual{
+  border:1px dashed #b9c9d8;border-radius:12px;padding:13px 16px;margin:20px 0 0;
+  font-size:13.5px;color:var(--muted);background:#f8fafc;
+}
+
+.up{
+  position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:50%;
+  background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:19px;border:none;box-shadow:0 6px 18px rgba(31,78,121,.32);z-index:60;
+}
+.up:hover{background:var(--accent-2)}
+
+@media (max-width:800px){
+  .hero h1{font-size:26px}
+  .card{padding:20px 18px}
+  .flow{flex-direction:column;align-items:stretch}
+  .arrow::before{content:"↓"}
+  .arrow{text-align:center}
+  dl.glossary{grid-template-columns:1fr}
+  dl.meta{grid-template-columns:1fr}
+  table.tbl{min-width:560px}
+}
+@media print{
+  body{background:#fff}
+  .hero{background:#fff;color:#000;border-bottom:2px solid #000;padding:20px 0}
+  .hero::after{display:none}
+  .badge-top{color:#000;border-color:#000}
+  .hero .sub{color:#000}
+  .hero-pills span{background:#fff;border-color:#999;color:#000}
+  .toc,.up{display:none}
+  .card,.report,.note,.warning,.fine,.deadline,.ausn,.osno,.summary{break-inside:avoid;box-shadow:none}
+  a{color:#000;border-bottom:none}
+  .summary{background:#fff;color:#000;border:1px solid #000}
+  .summary p,.summary strong{color:#000}
+}
+</style>
+</head>
+<body id="top">
+
+<div class="hero">
+  <div class="wrap">
+    <span class="badge-top">Памятка · серия ИМ 40 · инструменты</span>
+    <h1>Сервисы и инструменты ФТС:<br>что и когда использовать</h1>
+    <p class="sub">Карта «этап ИМ 40 → сервис», разбор Личного кабинета, публичные реестры, сервис информирования о выпуске и смежные ведомства. Только реально существующие инструменты; всё, что не подтверждено, — с флагом.</p>
+    <div class="hero-pills">
+      <span>12 разделов</span>
+      <span>карта по 10 этапам</span>
+      <span>статусы ссылок проставлены</span>
+      <span>актуально на 07.11.2026</span>
+    </div>
+  </div>
+</div>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#s1">1. Как читать</a>
+    <a href="#s2">2. Карта «этап → сервис»</a>
+    <a href="#s3">3. Личный кабинет</a>
+    <a href="#s4">4. Информирование о выпуске</a>
+    <a href="#s5">5. Классификация</a>
+    <a href="#s6">6. Реестры ФТС</a>
+    <a href="#s7">7. Платежи и ЕЛС</a>
+    <a href="#s8">8. Валютный контроль</a>
+    <a href="#s9">9. Правовая база</a>
+    <a href="#s10">10. Смежные ведомства</a>
+    <a href="#s11">11. Чего в сервисах нет</a>
+    <a href="#s12">12. Чек-лист</a>
+    <a href="#s13">13. Источники</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ================= 1 ================= -->
+<section class="card" id="s1">
+  <div class="section-kicker">Раздел 1</div>
+  <h2>Как читать эту памятку</h2>
+  <p class="lead">Главное правило: сервис существует отдельно от ссылки на него. Ниже у каждого инструмента указано, где он находится и что реально делает — и отдельно отмечено, если точный адрес раздела не подтверждён.</p>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num grey">i</div>
+      <div>
+        <h3>Легенда статусов ссылок</h3>
+        <p class="sub">Одна и та же логика, что и в предыдущих памятках серии</p>
+      </div>
+    </div>
+    <dl class="meta">
+      <div><dt>Подтверждено</dt><dd>Домен и наличие сервиса проверены. Ссылка ведёт на официальный ресурс.</dd></div>
+      <div><dt>Требует проверки</dt><dd>Сервис существует, но точный путь внутри сайта / номер акта не подтверждён. Стоит флаг.</dd></div>
+      <div><dt>Не ФТС</dt><dd>Смежное ведомство или иной госресурс — без него этап ИМ 40 не закрывается.</dd></div>
+    </dl>
+    <div class="tags">
+      <span class="tag-norm">Норма</span>
+      <span class="tag-fts">Позиция ФТС</span>
+      <span class="tag-prac">Практика</span>
+      <span class="tag-warn">Флаг = проверить</span>
+    </div>
+  </div>
+
+  <div class="warning">
+    <span class="box-t">Почему ссылки помечены по-разному</span>
+    На момент подготовки памятки автоматическая проверка адресов не дала результатов. Поэтому домены, в которых сомнений нет (<code>customs.gov.ru</code>, <code>lk.customs.gov.ru</code>, <code>eec.eaeunion.org</code>, <code>pravo.gov.ru</code>), указаны как есть, а глубокие пути вида <code>/elektronnye-servisy/...</code> помечены флагом. Ни один адрес не выдуман: если подтвердить не удалось — стоит флаг, а не «примерная» ссылка.
+  </div>
+
+  <div class="note">
+    <span class="box-t">Универсальный способ найти любой сервис ФТС</span>
+    Зайдите на <a href="https://customs.gov.ru" target="_blank" rel="noopener">customs.gov.ru</a> → раздел <strong>«Электронные сервисы»</strong> (верхнее меню / плитка на главной). Там же — вход в Личный кабинет. Этот путь стабильнее, чем прямые ссылки на подразделы: ФТС периодически меняет структуру сайта, и старые прямые ссылки ломаются.
+  </div>
+</section>
+
+<!-- ================= 2 ================= -->
+<section class="card" id="s2">
+  <div class="section-kicker">Раздел 2</div>
+  <h2>Карта: этап ИМ 40 → сервис</h2>
+  <p class="lead">Один экран, который закрывает вопрос «что мне сейчас открыть». Этапы — из сводного механизма ИМ 40.</p>
+
+  <div class="tblwrap">
+    <table class="tbl">
+      <thead>
+        <tr><th>Этап</th><th>Задача</th><th>Сервис / инструмент</th><th>Где</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0. Подготовка</td>
+          <td>УКЭП, доступ в ЛК, ЕЛС, проверка контрагента</td>
+          <td>Госуслуги (ЕСИА), ЛК участника ВЭД, ЕГРЮЛ</td>
+          <td><a href="https://gosuslugi.ru" target="_blank" rel="noopener">gosuslugi.ru</a> · <a href="https://lk.customs.gov.ru" target="_blank" rel="noopener">lk.customs.gov.ru</a> · <a href="https://egrul.nalog.ru" target="_blank" rel="noopener">egrul.nalog.ru</a></td>
+        </tr>
+        <tr>
+          <td>1. ПИ и прибытие</td>
+          <td>Подать предварительное информирование, проверить перевозчика</td>
+          <td>Сервис предварительного информирования; реестр таможенных перевозчиков</td>
+          <td><span class="flag">ТРЕБУЕТ ПРОВЕРКИ: адрес сервиса ПИ по виду транспорта</span></td>
+        </tr>
+        <tr>
+          <td>2. Транзит и СВХ</td>
+          <td>Выбрать СВХ, проверить статус владельца</td>
+          <td>Реестр владельцев СВХ; реестр таможенных перевозчиков</td>
+          <td><a href="https://customs.gov.ru" target="_blank" rel="noopener">customs.gov.ru</a> → «Реестры» <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: путь</span></td>
+        </tr>
+        <tr>
+          <td>3. Код и графа 44</td>
+          <td>Определить код, проверить разрешительные документы</td>
+          <td>ТН ВЭД ЕАЭС, реестр предварительных решений, ФГИС Росаккредитации, реестр СГР, реестр лицензий</td>
+          <td><a href="https://customs.gov.ru" target="_blank" rel="noopener">customs.gov.ru</a> · <a href="https://pub.fsa.gov.ru" target="_blank" rel="noopener">pub.fsa.gov.ru</a> · <a href="https://eec.eaeunion.org" target="_blank" rel="noopener">eec.eaeunion.org</a></td>
+        </tr>
+        <tr>
+          <td>4. Таможенная стоимость</td>
+          <td>Курс валюты, проверка цен по однородным товарам</td>
+          <td>Курсы ЦБ РФ; статистика внешней торговли ФТС</td>
+          <td><a href="https://www.cbr.ru" target="_blank" rel="noopener">cbr.ru</a> · <a href="https://customs.gov.ru" target="_blank" rel="noopener">customs.gov.ru</a> (раздел статистики)</td>
+        </tr>
+        <tr>
+          <td>5. Платежи</td>
+          <td>Рассчитать, проверить авансы и задолженность</td>
+          <td>ЕЛС в ЛК; ставки сборов</td>
+          <td><a href="https://lk.customs.gov.ru" target="_blank" rel="noopener">lk.customs.gov.ru</a> → «Платежи»</td>
+        </tr>
+        <tr>
+          <td>6. Подача ДТ</td>
+          <td>Сформировать и подать декларацию</td>
+          <td>АПС / ПО декларанта + шлюз ЕАИС; ЛК — только контроль статусов</td>
+          <td>Не веб-сервис ФТС — см. раздел 11</td>
+        </tr>
+        <tr>
+          <td>7. Контроль</td>
+          <td>Получать запросы, уведомления, требования</td>
+          <td>ЛК: раздел «Декларации» / уведомления</td>
+          <td><a href="https://lk.customs.gov.ru" target="_blank" rel="noopener">lk.customs.gov.ru</a></td>
+        </tr>
+        <tr>
+          <td>8. Выпуск</td>
+          <td>Убедиться в выпуске</td>
+          <td>Сервис «Предоставление информации о выпуске товаров»</td>
+          <td><a href="https://customs.gov.ru" target="_blank" rel="noopener">customs.gov.ru</a> → «Электронные сервисы» <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: путь</span></td>
+        </tr>
+        <tr>
+          <td>9. После выпуска</td>
+          <td>Возврат платежей, валютный контроль, хранение документов</td>
+          <td>ЛК: заявления на возврат/зачёт; раздел валютного контроля</td>
+          <td><a href="https://lk.customs.gov.ru" target="_blank" rel="noopener">lk.customs.gov.ru</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="box-t">Что важно понять из таблицы</span>
+    Из десяти этапов <strong>шесть</strong> закрываются одним инструментом — Личным кабинетом. Остальное — это либо публичные реестры (проверить контрагента и документ), либо смежные ведомства (сертификаты, СГР, лицензии). Отдельного «сервиса для каждого этапа» не существует, и это нормально.
+  </div>
+</section>
+
+<!-- ================= 3 ================= -->
+<section class="card" id="s3">
+  <div class="section-kicker">Раздел 3</div>
+  <h2>Личный кабинет участника ВЭД — ядро работы</h2>
+  <p class="lead">Единственная точка, где вы видите свои декларации, свои деньги и свои документы валютного контроля. Всё остальное — вспомогательное.</p>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num">1</div>
+      <div>
+        <h3>ЛК участника ВЭД</h3>
+        <p class="sub">Вход через ЕСИА или УКЭП, с привязкой организации</p>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag-fts">Позиция ФТС</span>
+      <span class="tag-prac">Практика</span>
+    </div>
+    <dl class="meta">
+      <div><dt>Где</dt><dd><a href="https://lk.customs.gov.ru" target="_blank" rel="noopener">lk.customs.gov.ru</a><br><span class="flag">ТРЕБУЕТ ПРОВЕРКИ: ранее использовался edata.customs.ru — сверьте, какой адрес сейчас указан на главной ФТС</span></dd></div>
+      <div><dt>Что даёт</dt><dd>Декларации и их статусы, платежи и задолженность, валютный контроль, заявления, уведомления таможни</dd></div>
+      <div><dt>Когда открывать</dt><dd>Этапы 0, 5, 6, 7, 8, 9 — фактически ежедневно</dd></div>
+    </dl>
+
+    <p><strong>Что внутри (по разделам):</strong></p>
+    <ul>
+      <li><strong>Декларации.</strong> Поданные ДТ, статусы обработки, электронные документы, КДТ и корректировки. Здесь же — уведомления и запросы таможенного органа в рамках контроля до выпуска.</li>
+      <li><strong>Платежи / ЕЛС.</strong> Авансовые платежи, единый лицевой счёт, начисления и списания, задолженность, выписка по операциям.</li>
+      <li><strong>Валютный контроль.</strong> Учётные номера контрактов (УНК), сведения о контрактах, документы валютного контроля, отчёты о подтверждающих документах.</li>
+      <li><strong>Заявления.</strong> Возврат и зачёт авансовых и излишне уплаченных платежей, сверка расчётов, обращения.</li>
+      <li><strong>Информирование о выпуске.</strong> Подписка/запрос статуса по номеру декларации (см. раздел 4).</li>
+    </ul>
+
+    <div class="fine">
+      <span class="box-t">Чего ЛК не делает — и это главная ошибка новичков</span>
+      В Личном кабинете <strong>нельзя сформировать и подать декларацию</strong>. ЛК — это витрина статусов и денег. ДТ формируется в АПС (ПО декларанта) и уходит в ЕАИС через шлюз. ЛК также не считает таможенную стоимость и не заполняет ДТС-1 за вас.
+    </div>
+
+    <div class="note">
+      <span class="box-t">Практика доступа</span>
+      Доступ выдаётся организации, а не физлицу: нужна УКЭП руководителя или доверенного лица и подтверждённая учётная запись. Если сотрудник увольняется — доступ отзывается отдельно, иначе получите «чужой» вход в ЛК с вашими ДТ. Порядок использования ЛК установлен приказом ФТС от 03.06.2019 № 901.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4 ================= -->
+<section class="card" id="s4">
+  <div class="section-kicker">Раздел 4</div>
+  <h2>Сервис «Предоставление информации о выпуске товаров»</h2>
+  <p class="lead">Самый недооценённый инструмент: он позволяет проверить выпуск, не заходя в ЛК и не звоня в таможню.</p>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num green">2</div>
+      <div>
+        <h3>Информирование о выпуске товаров</h3>
+        <p class="sub">Публичный сервис ФТС по номеру декларации</p>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag-norm">Норма</span>
+      <span class="tag-fts">Позиция ФТС</span>
+    </div>
+    <dl class="meta">
+      <div><dt>Где</dt><dd><a href="https://customs.gov.ru" target="_blank" rel="noopener">customs.gov.ru</a> → «Электронные сервисы»<br><span class="flag">ТРЕБУЕТ ПРОВЕРКИ: точный путь раздела</span></dd></div>
+      <div><dt>Что даёт</dt><dd>Сведения о выпуске товаров по номеру ДТ — без доступа к чужим данным</dd></div>
+      <div><dt>Когда открывать</dt><dd>Этап 8, а также этап 6 — для контроля после подачи</dd></div>
+    </dl>
+
+    <p><strong>Нормативная основа:</strong> государственная услуга по информированию о выпуске товаров — приказ Минфина России от 26.08.2020 № 176н. Бумажное обращение по этой услуге — <strong>10 рабочих дней</strong>; через ЕПГУ на текущий момент реализованы не все сценарии (заявлены планы), поэтому основной канал — сервис ФТС / ЛК.</p>
+
+    <div class="flow">
+      <div class="node">Номер ДТ</div>
+      <div class="arrow"></div>
+      <div class="node">Сервис информирования</div>
+      <div class="arrow"></div>
+      <div class="node">Статус: выпуск / отказ / приостановление</div>
+    </div>
+
+    <div class="warning">
+      <span class="box-t">Что сервис не заменяет</span>
+      Он показывает <em>факт</em> выпуска, но не является документом для контрагента и не заменяет отметку таможни в электронных документах. Для банка и для внутреннего учёта основание — электронная ДТ со статусом выпуска, полученная из ЛК/АПС, а не скриншот сервиса.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5 ================= -->
+<section class="card" id="s5">
+  <div class="section-kicker">Раздел 5</div>
+  <h2>Классификация: код, пояснения, предварительное решение</h2>
+  <p class="lead">Три разных инструмента, которые постоянно путают. Код ищут в одном месте, толкование читают во втором, а официальное подтверждение получают в третьем.</p>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num">3</div>
+      <div>
+        <h3>ТН ВЭД ЕАЭС и пояснения к ней</h3>
+        <p class="sub">Поиск кода и правил толкования</p>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag-norm">Норма</span>
+    </div>
+    <dl class="meta">
+      <div><dt>Где</dt><dd><a href="https://customs.gov.ru" target="_blank" rel="noopener">customs.gov.ru</a> (раздел ТН ВЭД) · <a href="https://eec.eaeunion.org" target="_blank" rel="noopener">eec.eaeunion.org</a> (официальный текст)</dd></div>
+      <div><dt>Что даёт</dt><dd>Товарная номенклатура, примечания к разделам и группам, пояснения</dd></div>
+      <div><dt>Когда открывать</dt><dd>Этап 3, до подачи ДТ</dd></div>
+    </dl>
+    <ul>
+      <li><strong>Номенклатура:</strong> Решение Совета ЕЭК от 14.09.2021 № 80, применяется с 01.01.2022 (действующая редакция — от 21.09.2026).</li>
+      <li><strong>Пояснения к ТН ВЭД:</strong> действующая редакция — от 24.12.2025. Это не закон, но именно на пояснения ссылаются при споре о коде.</li>
+      <li><strong>Порядок:</strong> сначала определяете код по тексту товарной позиции и примечаниям, потом проверяете себя по пояснениям, и только потом — по предварительным решениям (если товар типологически похож).</li>
+    </ul>
+    <div class="note">
+      <span class="box-t">Практика</span>
+      Не ищите код в коммерческих «базах ТН ВЭД»: они отстают от редакции на месяцы. Официальный текст — только на сайте ЕЭК; сайт ФТС удобнее для навигации, но сверять редакцию нужно по ЕЭК.
+    </div>
+  </div>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num">4</div>
+      <div>
+        <h3>Реестр предварительных решений по классификации</h3>
+        <p class="sub">Публичный реестр + подача заявления</p>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag-norm">Норма</span>
+      <span class="tag-fts">Позиция ФТС</span>
+    </div>
+    <dl class="meta">
+      <div><dt>Где</dt><dd><a href="https://customs.gov.ru" target="_blank" rel="noopener">customs.gov.ru</a> → раздел предварительных решений<br><span class="flag">ТРЕБУЕТ ПРОВЕРКИ: путь к реестру</span></dd></div>
+      <div><dt>Что даёт</dt><dd>Готовые решения по схожим товарам; возможность получить своё</dd></div>
+      <div><dt>Когда открывать</dt><dd>Этап 3, при спорном или новом товаре</dd></div>
+    </dl>
+    <ul>
+      <li><strong>Срок принятия:</strong> по ТК ЕАЭС — 90 дней; по ст. 18 ФЗ № 289-ФЗ — 60 дней. В России применяется национальное правило, срок — 60 дней.</li>
+      <li><strong>Срок действия:</strong> ТК ЕАЭС — 3 года; ФЗ № 289-ФЗ — 5 лет. В России действует 5 лет.</li>
+      <li><strong>Пошлина:</strong> 5 000 ₽ за каждое наименование товара.</li>
+      <li><strong>Кто принимает с 01.01.2026:</strong> ФТС и Центральное таможенное управление (приказ ФТС от 24.10.2025 № 973). Ранее — только ФТС; теперь часть решений ушла в ЦТУ.</li>
+    </ul>
+    <div class="warning">
+      <span class="box-t">Зачем это бизнесу</span>
+      Предварительное решение снимает риск корректировки кода после выпуска. Но оно привязано к описанию товара: если описание в ДТ шире или уже, чем в решении, защита не работает. Дословно переносите формулировку.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6 ================= -->
+<section class="card" id="s6">
+  <div class="section-kicker">Раздел 6</div>
+  <h2>Реестры ФТС: проверка контрагента и статуса</h2>
+  <p class="lead">Это не «сервис», а публичные списки на сайте ФТС. Но именно они закрывают половину рисков на этапах 1–2: пустой реестр = нет права оказывать услугу.</p>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num amber">5</div>
+      <div>
+        <h3>Реестры лиц, осуществляющих деятельность в сфере таможенного дела</h3>
+        <p class="sub">Таможенные представители, перевозчики, владельцы СВХ и таможенных складов, УЭО</p>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag-fts">Позиция ФТС</span>
+      <span class="tag-prac">Практика</span>
+    </div>
+    <dl class="meta">
+      <div><dt>Где</dt><dd><a href="https://customs.gov.ru" target="_blank" rel="noopener">customs.gov.ru</a> → «Реестры»<br><span class="flag">ТРЕБУЕТ ПРОВЕРКИ: путь к разделу реестров</span></dd></div>
+      <div><dt>Что даёт</dt><dd>Подтверждение, что у лица есть действующий статус и он не исключён</dd></div>
+      <div><dt>Когда открывать</dt><dd>Этап 0 (выбор представителя), этап 1–2 (перевозчик, СВХ)</dd></div>
+    </dl>
+
+    <dl class="glossary">
+      <div><dt>Таможенный представитель</dt><dd>Декларант по поручению. Проверяйте: действующая запись, регион деятельности, наличие обеспечения.</dd></div>
+      <div><dt>Таможенный перевозчик</dt><dd>Перевозка под таможенным контролем. Вне реестра — перевозчик не вправе везти товар по процедуре.</dd></div>
+      <div><dt>Владелец СВХ</dt><dd>Хранение до подачи ДТ. Проверяйте тип склада и его фактический адрес — он должен совпадать с заявленным в транзите.</dd></div>
+      <div><dt>Владелец таможенного склада</dt><dd>Хранение под процедурой таможенного склада. Для ИМ 40 — редко, но нужно при длительных схемах.</dd></div>
+      <div><dt>УЭО</dt><dd>Уполномоченный экономический оператор. Упрощения при выпуске; проверяется отдельным реестром.</dd></div>
+      <div><dt>Что смотреть</dt><dd>Не только «есть в реестре», но и дату включения, номер свидетельства и отсутствие записи об исключении.</dd></div>
+    </dl>
+
+    <div class="fine">
+      <span class="box-t">Типовая ошибка</span>
+      Договор с перевозчиком подписан, машина загружена, а перевозчика исключили из реестра месяц назад. Транзит не закроется, товар встанет. Проверка реестра — 2 минуты до погрузки, а не после.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7 ================= -->
+<section class="card" id="s7">
+  <div class="section-kicker">Раздел 7</div>
+  <h2>Платежи и единый лицевой счёт</h2>
+  <p class="lead">Все платежи видны в одном месте, но проверить их нужно до выпуска, а не после. Сервис показывает факт, а не правильность расчёта.</p>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num">6</div>
+      <div>
+        <h3>ЕЛС и раздел «Платежи» в ЛК</h3>
+        <p class="sub">Авансы, начисления, списания, задолженность</p>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag-fts">Позиция ФТС</span>
+      <span class="tag-prac">Практика</span>
+    </div>
+    <dl class="meta">
+      <div><dt>Где</dt><dd><a href="https://lk.customs.gov.ru" target="_blank" rel="noopener">lk.customs.gov.ru</a> → «Платежи»</dd></div>
+      <div><dt>Что даёт</dt><dd>Остаток авансов, детализацию начислений и списаний, задолженность, выписку</dd></div>
+      <div><dt>Когда открывать</dt><dd>Этап 5 (до подачи) и этап 9 (возврат/зачёт)</dd></div>
+    </dl>
+
+    <ol class="steps">
+      <li>
+        <span class="human">Проверяете, что авансов хватает на пошлину, НДС, акциз и сбор.</span>
+        <span class="exact">НДС = (ТС + пошлина + акциз) × ставка. Считать от одной ТС — ошибка.</span>
+      </li>
+      <li>
+        <span class="human">Подаёте ДТ и следите, чтобы платежи списались до выпуска.</span>
+        <span class="exact">Уплата — до выпуска (ст. 57 ТК ЕАЭС). Отсрочка/рассрочка — ст. 59–60; обеспечение — ст. 63.</span>
+      </li>
+      <li>
+        <span class="human">Сверяете списания и при расхождении подаёте заявление на сверку через ЛК.</span>
+        <span class="exact">Возврат/зачёт — ст. 66–67 ТК ЕАЭС, заявление в течение 3 лет.</span>
+      </li>
+    </ol>
+
+    <div class="note">
+      <span class="box-t">Ставки и индексация</span>
+      Таможенные сборы за операции — ПП РФ от 28.11.2024 № 1637 (ред. 27.11.2025). Индексация с 01.01.2026 — ПП РФ от 23.10.2025 № 1638, верхняя ставка сбора — <strong>73 860 ₽</strong>. Утилизационный сбор к таможенным платежам не относится — не ищите его в ЛК.
+    </div>
+
+    <div class="warning">
+      <span class="box-t">Калькулятор</span>
+      Публичный «таможенный калькулятор» на сайте ФТС/сторонних ресурсах годится только для прикидки. Он не учитывает вашу ДТС-1, льготы и структуру начислений. Итоговая сумма — только по ДТ и выписке ЕЛС. <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: наличие и адрес калькулятора на текущей версии сайта ФТС</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8 ================= -->
+<section class="card" id="s8">
+  <div class="section-kicker">Раздел 8</div>
+  <h2>Валютный контроль: что видно в ЛК</h2>
+  <p class="lead">После выпуска у вас есть два рабочих дня, и это единственный этап, где сервис ФТС работает в связке с банком.</p>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num">7</div>
+      <div>
+        <h3>Раздел «Валютный контроль» в ЛК</h3>
+        <p class="sub">УНК, контракты, документы, отчёты</p>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag-norm">Норма</span>
+      <span class="tag-fts">Позиция ФТС</span>
+    </div>
+    <dl class="meta">
+      <div><dt>Где</dt><dd><a href="https://lk.customs.gov.ru" target="_blank" rel="noopener">lk.customs.gov.ru</a> → «Валютный контроль»</dd></div>
+      <div><dt>Что даёт</dt><dd>Сведения об УНК, контрактах и представленных документах валютного контроля</dd></div>
+      <div><dt>Когда открывать</dt><dd>Этап 0 (постановка контракта на учёт) и этап 9 (после выпуска)</dd></div>
+    </dl>
+    <ul>
+      <li><strong>УНК</strong> присваивает банк при постановке контракта на учёт; в ДТ он идёт в графу 44 (код 03031). В ЛК вы видите, что контракт учтён и какие документы по нему представлены.</li>
+      <li><strong>Срок после выпуска:</strong> документы и информация по валютной операции — <strong>2 рабочих дня</strong> после выпуска товаров.</li>
+      <li><strong>Норма:</strong> ПП РФ от 28.12.2012 № 1459 (с изменениями: ПП № 499 от 29.03.2023 — в силе с 01.01.2024; ПП № 1247 от 11.09.2024).</li>
+    </ul>
+    <div class="note">
+      <span class="box-t">Разделение зон ответственности</span>
+      Контракт на учёт ставит <strong>банк</strong>, не таможня. Таможня — орган валютного контроля и видит данные через ЛК. Если в ЛК контракта нет, а банк говорит «всё отправлено» — запрашивайте у банка подтверждение отправки, а не звоните в таможню.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9 ================= -->
+<section class="card" id="s9">
+  <div class="section-kicker">Раздел 9</div>
+  <h2>Правовая база: где читать первоисточник</h2>
+  <p class="lead">Реквизиты актов в перепечатках устаревают. Три ресурса, которых достаточно, чтобы всегда иметь актуальную редакцию.</p>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num grey">8</div>
+      <div>
+        <h3>Официальные источники текстов</h3>
+        <p class="sub">Не сервисы ФТС, но обязательный инструмент</p>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag-norm">Норма</span>
+    </div>
+    <dl class="meta">
+      <div><dt>Российские акты</dt><dd><a href="https://pravo.gov.ru" target="_blank" rel="noopener">pravo.gov.ru</a> — официальное опубликование</dd></div>
+      <div><dt>Акты ЕАЭС</dt><dd><a href="https://eec.eaeunion.org" target="_blank" rel="noopener">eec.eaeunion.org</a> — ТК ЕАЭС, решения ЕЭК, ТН ВЭД, ЕТТ</dd></div>
+      <div><dt>Акты ФТС</dt><dd><a href="https://customs.gov.ru" target="_blank" rel="noopener">customs.gov.ru</a> → «Правовая информация» <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: путь к банку НПА</span></dd></div>
+    </dl>
+    <div class="ausn">
+      <span class="box-t">Правило проверки редакции</span>
+      Перед тем как ссылаться на акт в письме в таможню или банк, откройте его на pravo.gov.ru (для РФ) или eec.eaeunion.org (для ЕАЭС) и проверьте дату последней редакции. Разница в один абзац может стоить вам выпуска.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10 ================= -->
+<section class="card" id="s10">
+  <div class="section-kicker">Раздел 10</div>
+  <h2>Смежные ведомства: без них ИМ 40 не закрывается</h2>
+  <p class="lead">Разрешительные документы и проверка контрагента — не зона ФТС. Это отдельные реестры, и искать их на сайте таможни бессмысленно.</p>
+
+  <div class="tblwrap">
+    <table class="tbl">
+      <thead>
+        <tr><th>Что проверить</th><th>Ресурс</th><th>Когда</th><th>Статус</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Контрагент (продавец, перевозчик)</td>
+          <td><a href="https://egrul.nalog.ru" target="_blank" rel="noopener">egrul.nalog.ru</a> — ЕГРЮЛ/ЕГРИП</td>
+          <td>Этап 0</td>
+          <td>Не ФТС · подтверждено</td>
+        </tr>
+        <tr>
+          <td>Сертификаты и декларации о соответствии</td>
+          <td><a href="https://pub.fsa.gov.ru" target="_blank" rel="noopener">pub.fsa.gov.ru</a> — ФГИС Росаккредитации</td>
+          <td>Этап 3</td>
+          <td>Не ФТС · домен подтверждён, <span class="flag">путь к реестру проверить</span></td>
+        </tr>
+        <tr>
+          <td>Свидетельства о госрегистрации (СГР)</td>
+          <td>Реестр Роспотребнадзора — <code>fp.crc.ru</code></td>
+          <td>Этап 3</td>
+          <td>Не ФТС · <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: актуальный адрес реестра</span></td>
+        </tr>
+        <tr>
+          <td>Лицензии Минпромторга</td>
+          <td><a href="https://minpromtorg.gov.ru" target="_blank" rel="noopener">minpromtorg.gov.ru</a></td>
+          <td>Этап 3</td>
+          <td>Не ФТС · <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: путь к реестру лицензий</span></td>
+        </tr>
+        <tr>
+          <td>Ветеринарный контроль</td>
+          <td>Россельхознадзор — ФГИС «ВетИС» / «Аргус»</td>
+          <td>Этап 3</td>
+          <td>Не ФТС · <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: адрес конкретного модуля</span></td>
+        </tr>
+        <tr>
+          <td>Карантинный фитосанитарный контроль</td>
+          <td>Россельхознадзор — «Аргус-Фито»</td>
+          <td>Этап 3</td>
+          <td>Не ФТС · <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: адрес модуля</span></td>
+        </tr>
+        <tr>
+          <td>Курс валюты для ДТС-1</td>
+          <td><a href="https://www.cbr.ru" target="_blank" rel="noopener">cbr.ru</a> — курсы на дату</td>
+          <td>Этап 4</td>
+          <td>Не ФТС · подтверждено</td>
+        </tr>
+        <tr>
+          <td>Ставки ЕТТ, преференции</td>
+          <td><a href="https://eec.eaeunion.org" target="_blank" rel="noopener">eec.eaeunion.org</a></td>
+          <td>Этап 5</td>
+          <td>Не ФТС · подтверждено</td>
+        </tr>
+        <tr>
+          <td>УКЭП и ЕСИА</td>
+          <td><a href="https://gosuslugi.ru" target="_blank" rel="noopener">gosuslugi.ru</a></td>
+          <td>Этап 0</td>
+          <td>Не ФТС · подтверждено</td>
+        </tr>
+        <tr>
+          <td>Информация о мерах ВЭД</td>
+          <td><a href="https://ved.gov.ru" target="_blank" rel="noopener">ved.gov.ru</a> — портал ВЭД Минэкономразвития</td>
+          <td>Этапы 0, 3</td>
+          <td>Не ФТС · подтверждено</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warning">
+    <span class="box-t">Главная ловушка</span>
+    Разрешительный документ, которого нет в реестре, для таможни не существует — даже если бумага на руках. Проверять нужно не бланк, а <strong>запись в реестре</strong>: номер, дата, срок действия, статус «действует».
+  </div>
+</section>
+
+<!-- ================= 11 ================= -->
+<section class="card" id="s11">
+  <div class="section-kicker">Раздел 11</div>
+  <h2>Чего в сервисах ФТС нет — и чем это делается</h2>
+  <p class="lead">Самый полезный раздел: он экономит часы поиска «нужной кнопки», которой не существует.</p>
+
+  <div class="report">
+    <div class="report-head">
+      <div class="num amber">!</div>
+      <div>
+        <h3>Шесть мифов о сервисах</h3>
+        <p class="sub">Проверено практикой</p>
+      </div>
+    </div>
+    <div class="tags"><span class="tag-prac">Практика</span></div>
+    <ul>
+      <li><strong>«Подам ДТ через сайт ФТС».</strong> Нет. ДТ формируется в АПС / ПО декларанта и подаётся через шлюз ЕАИС. Сайт — это ЛК для статусов, реестры и информирование.</li>
+      <li><strong>«ЛК заполнит ДТС-1».</strong> Нет. ДТС-1 заполняется в АПС отдельным документом. ЛК её только отображает.</li>
+      <li><strong>«Есть сервис, который покажет чужие декларации».</strong> Нет. Публичного реестра ДТ не существует; данные видны только участнику ВЭД по своим декларациям.</li>
+      <li><strong>«Сервис посчитает платежи точно».</strong> Нет. Любой калькулятор — прикидка. Точный расчёт — по вашей ДТС-1 и ставкам на дату регистрации ДТ.</li>
+      <li><strong>«Есть единый сервис запретов и ограничений».</strong> Нет. Контуры суммируются: перечень № 30 → техрегламент → перечень СГР → спецконтуры (вет/фито, экспортный контроль). Проверять надо все четыре.</li>
+      <li><strong>«Сервис информирования о выпуске = документ».</strong> Нет. Это справка о статусе, а не подтверждение для банка. Основание — электронная ДТ со статусом выпуска.</li>
+    </ul>
+  </div>
+
+  <div class="summary">
+    <h3>Вывод</h3>
+    <p>Сервисы ФТС — это не «одна кнопка». Это <strong>ЛК</strong> (статусы, деньги, валюта), <strong>публичные реестры</strong> (контрагент, разрешительный документ) и <strong>смежные ФГИС</strong> (сертификаты, СГР, лицензии). Декларацию подаёт АПС, а не сайт.</p>
+    <p>Если ищете сервис и не находите — скорее всего, его нет. Тогда задача решается документом, а не кнопкой.</p>
+  </div>
+</section>
+
+<!-- ================= 12 ================= -->
+<section class="card" id="s12">
+  <div class="section-kicker">Раздел 12</div>
+  <h2>Чек-лист: какой сервис открыть</h2>
+  <p class="lead">Печатается на один лист. По этапам — по порядку.</p>
+
+  <ul class="checklist">
+    <li>Этап 0 — УКЭП получена, вход в ЛК проверен, организация привязана</li>
+    <li>Этап 0 — контрагент проверен по ЕГРЮЛ, полномочия подписанта подтверждены</li>
+    <li>Этап 1 — предварительное информирование подано (авто/ж-д/авиа — за 2 часа, вода — за 6 часов)</li>
+    <li>Этап 2 — перевозчик и владелец СВХ есть в действующих реестрах ФТС</li>
+    <li>Этап 3 — код определён по действующей редакции ТН ВЭД и сверен с пояснениями</li>
+    <li>Этап 3 — сертификат/декларация найдены в ФГИС Росаккредитации, СГР — в реестре Роспотребнадзора, лицензия — в реестре Минпромторга</li>
+    <li>Этап 4 — курс взят с cbr.ru на дату регистрации ДТ, графа 11 «а» — в валюте счёта</li>
+    <li>Этап 5 — авансов на ЕЛС достаточно, НДС посчитан от (ТС + пошлина + акциз)</li>
+    <li>Этап 6 — ДТ сформирована в АПС и подана через шлюз; статус отслеживается в ЛК</li>
+    <li>Этап 7 — уведомления и запросы таможни читаются в ЛК ежедневно</li>
+    <li>Этап 8 — выпуск подтверждён в ЛК и через сервис информирования</li>
+    <li>Этап 9 — документы по валютной операции поданы в течение 2 рабочих дней</li>
+    <li>Этап 9 — при переплате подано заявление на возврат/зачёт (в течение 3 лет)</li>
+    <li>Этап 9 — документы заложены на хранение: 5 лет после истечения года операций</li>
+  </ul>
+
+  <div class="deadline">
+    <span class="box-t">Три срока, которые чаще всего нарушают</span>
+    Предварительное информирование — <strong>2 часа</strong> (авто, ж/д, авиа) и <strong>6 часов</strong> (вода). Операции по прибытии — <strong>3 часа рабочего времени</strong>. Валютный контроль после выпуска — <strong>2 рабочих дня</strong>.
+  </div>
+</section>
+
+<!-- ================= 13 ================= -->
+<section class="card" id="s13">
+  <div class="section-kicker">Раздел 13</div>
+  <h2>Источники</h2>
+  <p class="lead">Только те акты и ресурсы, на которые опирается памятка.</p>
+
+  <div class="sources">
+    <div class="source">
+      <div class="req">Таможенный кодекс ЕАЭС</div>
+      <div>Ст. 57 (срок уплаты), 59–60 (отсрочка/рассрочка), 63 (обеспечение), 66–67 (возврат/зачёт), 88 (операции по прибытии), 111 (регистрация ДТ), 118–126 (выпуск).</div>
+      <div class="link">eec.eaeunion.org</div>
+    </div>
+    <div class="source">
+      <div class="req">ФЗ от 03.08.2018 № 289-ФЗ</div>
+      <div>Ст. 18 — предварительные решения: срок принятия 60 дней, срок действия 5 лет.</div>
+      <div class="link">pravo.gov.ru</div>
+    </div>
+    <div class="source">
+      <div class="req">Приказ Минфина России от 26.08.2020 № 176н</div>
+      <div>Государственная услуга по информированию о выпуске товаров; бумажное обращение — 10 рабочих дней.</div>
+      <div class="link">pravo.gov.ru</div>
+    </div>
+    <div class="source">
+      <div class="req">Приказ ФТС России от 03.06.2019 № 901</div>
+      <div>Порядок использования Личного кабинета участника ВЭД.</div>
+      <div class="link">customs.gov.ru</div>
+    </div>
+    <div class="source">
+      <div class="req">Приказ ФТС России от 24.10.2025 № 973</div>
+      <div>С 01.01.2026 предварительные решения по классификации принимают ФТС и Центральное таможенное управление.</div>
+      <div class="link">customs.gov.ru</div>
+    </div>
+    <div class="source">
+      <div class="req">Решение Совета ЕЭК от 14.09.2021 № 80</div>
+      <div>ТН ВЭД ЕАЭС, применяется с 01.01.2022; действующая редакция — от 21.09.2026. Пояснения — ред. 24.12.2025.</div>
+      <div class="link">eec.eaeunion.org</div>
+    </div>
+    <div class="source">
+      <div class="req">ПП РФ от 28.12.2012 № 1459</div>
+      <div>Правила валютного контроля; изменения — ПП № 499 от 29.03.2023 (с 01.01.2024) и ПП № 1247 от 11.09.2024.</div>
+      <div class="link">pravo.gov.ru</div>
+    </div>
+    <div class="source">
+      <div class="req">ПП РФ от 28.11.2024 № 1637 (ред. 27.11.2025) и ПП РФ от 23.10.2025 № 1638</div>
+      <div>Ставки таможенных сборов и их индексация с 01.01.2026; верхняя ставка — 73 860 ₽.</div>
+      <div class="link">pravo.gov.ru</div>
+    </div>
+    <div class="source">
+      <div class="req">Официальные ресурсы</div>
+      <div>customs.gov.ru · lk.customs.gov.ru · eec.eaeunion.org · pravo.gov.ru · pub.fsa.gov.ru · egrul.nalog.ru · cbr.ru · gosuslugi.ru</div>
+      <div class="link">Ссылки в тексте памятки кликабельны</div>
+    </div>
+  </div>
+
+  <div class="actual">
+    <strong>Информация актуальна на 07.11.2026.</strong><br>
+    Адреса и пути разделов на сайте ФТС периодически меняются. Перед использованием ссылки с флагом «ТРЕБУЕТ ПРОВЕРКИ» сверьте её через главную страницу customs.gov.ru (раздел «Электронные сервисы» / «Реестры»). Реквизиты актов приведены по подтверждённым данным; где подтверждения не было — стоит флаг, а не приблизительный номер.
+  </div>
+</section>
+
+</div>
+
+<a class="up" href="#top" aria-label="Наверх">↑</a>
+
+<style>
+.nav-back { position: fixed; bottom: 24px; right: 24px; background: #0d3b66; color: #fff !important; padding: 10px 16px; border-radius: 8px; text-decoration: none; font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 9999; transition: background 0.2s; font-weight: 600; }
+.nav-back:hover { background: #1e5a99; }
+</style>
+<a href="index.html" class="nav-back">← Назад в меню</a>
+</body>
+</html>

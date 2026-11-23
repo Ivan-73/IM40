@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Этап 5. Платежи, обеспечение и льготы — памятка</title>
+<style>
+  :root{
+    --bg:#eef2f7;
+    --ink:#16202e;
+    --muted:#5b6779;
+    --line:#d5dee9;
+    --accent:#1f4e79;
+    --accent-2:#2f6b95;
+    --accent-soft:#eaf2f9;
+    --green:#1f6b3f;
+    --green-soft:#e9f6ee;
+    --red:#a8231b;
+    --red-soft:#fdf0ee;
+    --amber:#8a5a06;
+    --amber-soft:#fff7e3;
+    --radius:16px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font:16px/1.58 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:960px;margin:0 auto;padding:0 18px 70px;}
+
+  .hero{
+    position:relative;
+    overflow:hidden;
+    margin:22px 0 0;
+    padding:38px 36px 34px;
+    border-radius:22px;
+    color:#fff;
+    background:linear-gradient(135deg,#0f2c44 0%,#1f4e79 52%,#3a769f 100%);
+    box-shadow:0 16px 38px rgba(18,45,70,.22);
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    right:-90px;top:-100px;
+    width:300px;height:300px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.14),rgba(255,255,255,0) 70%);
+  }
+  .hero .badge-top{
+    display:inline-block;
+    padding:5px 13px;
+    border-radius:100px;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.28);
+    font-size:12px;
+    font-weight:600;
+  }
+  .hero h1{
+    margin:14px 0 10px;
+    max-width:840px;
+    font-size:30px;
+    line-height:1.22;
+    letter-spacing:-.015em;
+  }
+  .hero .sub{
+    margin:0;
+    max-width:760px;
+    font-size:16.4px;
+    line-height:1.5;
+    color:#dce8f2;
+  }
+  .hero-pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px;}
+  .hero-pills span{
+    padding:7px 14px;
+    border-radius:100px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.25);
+    font-size:13.4px;
+    font-weight:600;
+  }
+
+  .toc{
+    position:sticky;
+    top:0;
+    z-index:30;
+    margin:16px 0 26px;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:0 6px 18px rgba(20,40,70,.07);
+  }
+  .toc-inner{display:flex;gap:4px;padding:9px 10px;overflow-x:auto;scrollbar-width:thin;}
+  .toc a{
+    flex:0 0 auto;
+    padding:6px 10px;
+    border-radius:8px;
+    color:#2b3b4f;
+    font-size:13.2px;
+    font-weight:600;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .toc a:hover{background:var(--accent-soft);color:var(--accent);}
+
+  .card{
+    margin:0 0 20px;
+    padding:24px 26px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 2px 4px rgba(20,40,70,.04),0 10px 24px rgba(20,40,70,.05);
+    scroll-margin-top:78px;
+  }
+  .section-kicker{
+    display:inline-block;
+    margin-bottom:8px;
+    padding:3px 9px;
+    border-radius:6px;
+    background:var(--accent-soft);
+    color:var(--accent);
+    font-size:11.2px;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+  }
+  .card h2{margin:0 0 8px;font-size:22px;line-height:1.28;letter-spacing:-.01em;}
+  .card .lead{margin:0 0 14px;color:#38465a;font-size:15.6px;}
+
+  h3{font-size:16px;margin:18px 0 7px;line-height:1.35;}
+  p{margin:8px 0;}
+  ul,ol{margin:8px 0;padding-left:22px;}
+  li{margin:5px 0;}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid #b9cfe2;word-break:break-word;}
+  a:hover{border-bottom-color:var(--accent);}
+
+  .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:0 0 16px;font-size:13px;color:var(--muted);}
+  .tag{
+    display:inline-block;
+    padding:3px 8px;
+    border-radius:5px;
+    border:1px solid transparent;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .tag-norm{background:#e8f0fb;color:#1f4e79;border-color:#c5d9ef;}
+  .tag-fts{background:#e3f2f1;color:#0e5a5a;border-color:#b6dbd8;}
+  .tag-prac{background:#fdf3e2;color:#7a4f06;border-color:#ecd3a6;}
+  .tag-red{background:var(--red-soft);color:var(--red);border-color:#e7bdb7;}
+  .tag-green{background:var(--green-soft);color:var(--green);border-color:#bfe0cc;}
+
+  .note,.warning,.fine,.deadline,.ausn,.osno,.summary{
+    margin:14px 0;
+    padding:14px 17px;
+    border-radius:12px;
+    font-size:14.6px;
+  }
+  .note{background:#f5f8fb;border:1px solid #dbe5ee;border-left:4px solid #8aa6c0;}
+  .warning{background:var(--amber-soft);border:1px solid #ecd9a8;border-left:5px solid #b8860b;}
+  .fine{background:var(--red-soft);border:1px solid #eccac5;border-left:5px solid var(--red);}
+  .deadline{background:var(--accent-soft);border:1px solid #c9dcef;border-left:5px solid var(--accent);}
+  .ausn{background:var(--green-soft);border:1px solid #c6e3d2;border-left:5px solid var(--green);}
+  .osno{background:#f2f6fc;border:1px solid #c8d9ee;border-left:5px solid #2c5f96;}
+  .summary{
+    padding:20px 22px;
+    border:0;
+    color:#eef5fb;
+    background:linear-gradient(135deg,#173752,#1f4e79);
+  }
+  .summary h3{margin-top:0;color:#fff;}
+  .summary ol{padding-left:20px;}
+  .summary li{margin:7px 0;}
+  .box-title{
+    display:block;
+    margin-bottom:4px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    opacity:.9;
+  }
+
+  .report{
+    margin:14px 0;
+    padding:16px 18px;
+    background:#fcfdfe;
+    border:1px solid var(--line);
+    border-radius:14px;
+    scroll-margin-top:78px;
+  }
+  .report-head{display:flex;gap:14px;align-items:flex-start;}
+  .num{
+    flex:0 0 44px;
+    width:44px;height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:var(--accent);
+    color:#fff;
+    font-size:14px;
+    font-weight:800;
+    text-align:center;
+    line-height:1.1;
+  }
+  .num.green{background:var(--green);}
+  .num.grey{background:#5d6c80;}
+  .num.amber{background:#a8741a;}
+  .report h3{margin:1px 0 2px;font-size:16.5px;}
+  .report .sub{margin:0;font-size:13.8px;color:var(--muted);}
+  .report .tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 8px;}
+  .meta{margin:0;padding:0;border:0;}
+  .meta > div{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:10px;
+    padding:7px 0;
+    border-top:1px dotted var(--line);
+    font-size:14.2px;
+  }
+  .meta dt{margin:0;font-weight:700;color:#2c3a4d;}
+  .meta dd{margin:0;color:#33415a;}
+
+  ol.steps{list-style:none;counter-reset:st;margin:14px 0;padding:0;}
+  ol.steps > li{
+    counter-increment:st;
+    position:relative;
+    margin:0 0 4px 15px;
+    padding:0 0 16px 46px;
+    border-left:2px solid #c9dcef;
+  }
+  ol.steps > li:last-child{border-left-color:transparent;padding-bottom:0;}
+  ol.steps > li::before{
+    content:counter(st);
+    position:absolute;left:-16px;top:0;
+    width:30px;height:30px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    font-size:14px;
+    font-weight:700;
+  }
+  ol.steps h3{margin:2px 0 4px;font-size:15.5px;}
+  .human{margin:2px 0 4px;font-size:14.6px;}
+  .human::before{content:"По-человечески: ";font-weight:700;color:var(--accent-2);}
+  .exact{
+    margin:2px 0 0;
+    padding:7px 10px;
+    background:#fafbfd;
+    border:1px dashed var(--line);
+    border-radius:6px;
+    color:#3c4a5c;
+    font-size:13.6px;
+  }
+  .exact::before{content:"Точно: ";font-weight:700;color:var(--muted);}
+
+  .flow{
+    display:flex;
+    align-items:stretch;
+    justify-content:center;
+    gap:4px;
+    margin:16px 0;
+    padding:18px 14px;
+    background:#fbfcfe;
+    border:1px solid var(--line);
+    border-radius:14px;
+    flex-wrap:wrap;
+  }
+  .flow .node{
+    flex:1 1 0;
+    min-width:0;
+    padding:11px 9px;
+    background:#fff;
+    border:1.5px solid #c9dcef;
+    border-top:4px solid var(--accent);
+    border-radius:9px;
+    text-align:center;
+    font-size:12.6px;
+    line-height:1.4;
+  }
+  .flow .node b{display:block;margin-bottom:3px;font-size:13.2px;}
+  .flow .node span{color:var(--muted);font-size:11.8px;}
+  .flow .node.hi{background:var(--accent-soft);border-top-color:var(--accent-2);}
+  .flow .arrow{
+    flex:0 0 20px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--accent);
+    font-size:18px;font-weight:700;
+  }
+  .flow .arrow::before{content:"→";}
+  .flow-caption{margin:-6px 0 14px;font-size:12.6px;color:var(--muted);text-align:center;line-height:1.45;}
+
+  .table-wrap{margin:14px 0;overflow-x:auto;border:1px solid var(--line);border-radius:12px;}
+  table{width:100%;min-width:680px;border-collapse:collapse;background:#fff;font-size:13.5px;}
+  caption{caption-side:top;padding:8px 10px 6px;background:#f7f9fc;color:var(--muted);font-size:12.8px;text-align:left;}
+  th,td{
+    padding:9px 11px;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    text-align:left;
+    vertical-align:top;
+  }
+  th:last-child,td:last-child{border-right:0;}
+  tbody tr:last-child td{border-bottom:0;}
+  th{background:#eef4fa;font-size:12.9px;font-weight:700;}
+  tbody tr:nth-child(even) td{background:#fafbfd;}
+  .yes{color:var(--green);font-weight:700;}
+  .no{color:var(--red);font-weight:700;}
+  .mid{color:#8a5a06;font-weight:700;}
+
+  .timeline{list-style:none;margin:16px 0 4px;padding:0 0 0 26px;border-left:2px solid #c4d4e4;}
+  .timeline li{position:relative;margin:0;padding:0 0 20px 18px;}
+  .timeline li:last-child{padding-bottom:0;}
+  .timeline li::before{
+    content:"";
+    position:absolute;left:-35px;top:4px;
+    width:14px;height:14px;
+    border:3px solid var(--accent);
+    border-radius:50%;
+    background:#fff;
+  }
+  .timeline b{display:block;margin-bottom:2px;font-size:15px;}
+  .timeline span{font-size:14.2px;color:#3c4a5e;}
+
+  .checklist{list-style:none;margin:10px 0;padding-left:0;}
+  .checklist li{position:relative;margin:9px 0;padding-left:32px;}
+  .checklist li::before{content:"☐";position:absolute;left:0;top:-1px;color:var(--accent);font-size:19px;}
+
+  dl.glossary{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;margin:12px 0;}
+  dl.glossary > div{padding:8px 0;border-bottom:1px dotted var(--line);}
+  dl.glossary dt{font-weight:700;font-size:14.4px;}
+  dl.glossary dd{margin:2px 0 0;font-size:14px;color:#3a465c;}
+
+  .sources .source{margin:16px 0;padding:4px 0 4px 14px;border-left:3px solid #c3d3e2;}
+  .sources .source h3{margin:0 0 3px;font-size:15px;}
+  .sources .req{margin:0 0 5px;font-size:12.8px;color:var(--muted);}
+  .sources .source p{margin:5px 0;font-size:14.2px;}
+  .sources .link{font-size:12.9px;}
+  .actual{
+    margin-top:18px;
+    padding:11px 14px;
+    background:#f2f6fa;
+    border:1px dashed #c3d3e2;
+    border-radius:10px;
+    font-size:13.4px;
+    color:#3d4b60;
+  }
+
+  .flag{
+    display:inline-block;
+    padding:0 5px;
+    border-radius:3px;
+    background:var(--amber-soft);
+    color:#6d4f00;
+    font-size:11.5px;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .small{font-size:13px;color:var(--muted);}
+
+  footer{
+    margin-top:26px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    font-size:12.7px;
+    line-height:1.5;
+    color:var(--muted);
+  }
+
+  .up{
+    position:fixed;
+    right:20px;bottom:20px;
+    z-index:40;
+    display:flex;align-items:center;justify-content:center;
+    width:46px;height:46px;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    font-size:19px;
+    text-decoration:none;
+    box-shadow:0 8px 20px rgba(20,50,80,.28);
+  }
+  .up:hover{background:#163b5c;}
+
+  @media (max-width:800px){
+    .hero{padding:28px 22px 26px;border-radius:18px;}
+    .hero h1{font-size:24px;}
+    .hero .sub{font-size:15.2px;}
+    .card{padding:20px 18px;}
+    .flow{flex-direction:column;gap:0;}
+    .flow .arrow{flex:0 0 28px;}
+    .flow .arrow::before{content:"↓";}
+    .flow .node{text-align:left;padding:11px 13px;}
+    dl.glossary{grid-template-columns:1fr;}
+    .meta > div{grid-template-columns:1fr;gap:2px;}
+    .toc{border-radius:10px;}
+  }
+
+  @media print{
+    @page{margin:13mm 12mm;}
+    body{background:#fff;color:#000;font-size:10.3pt;line-height:1.4;}
+    .wrap{max-width:none;padding:0;}
+    .hero{
+      padding:0 0 10pt;
+      border:1.5pt solid #000;
+      border-radius:0;
+      background:#fff !important;
+      color:#000;
+      box-shadow:none;
+    }
+    .hero::after{display:none;}
+    .hero .badge-top,.hero-pills span{border:1pt solid #000;background:#fff;color:#000;}
+    .hero .sub{color:#000;}
+    .toc,.up{display:none !important;}
+    .card,.report,.table-wrap,.summary,.flow{
+      box-shadow:none !important;
+      break-inside:avoid;
+      page-break-inside:avoid;
+    }
+    .card{margin-bottom:10pt;border:1pt solid #999;}
+    .summary{background:#fff !important;color:#000;border:1.5pt solid #000;}
+    .summary h3{color:#000;}
+    .note,.warning,.fine,.deadline,.ausn,.osno{
+      background:#fff !important;
+      border:1pt solid #000;
+      border-left:3pt solid #000;
+    }
+    .flow{border:1pt solid #000;background:#fff !important;}
+    .flow .node{background:#fff !important;border:1pt solid #000;}
+    table{min-width:0;font-size:8.6pt;}
+    thead{display:table-header-group;}
+    a{color:#000;border-bottom:0;text-decoration:none;}
+    h1,h2,h3{color:#000;}
+  }
+</style>
+</head>
+<body id="top">
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="badge-top">Актуально на 07.11.2026</span>
+    <h1>Этап 5. Платежи, обеспечение и льготы</h1>
+    <p class="sub">Из чего складываются платежи, когда их нужно внести, зачем нужно обеспечение и как работают льготы и преференции — без мифов о «нулевой пошлине для всех».</p>
+    <div class="hero-pills">
+      <span>Четыре платежа</span>
+      <span>До выпуска</span>
+      <span>Льготы — только по основанию</span>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Содержание">
+    <div class="toc-inner">
+      <a href="#princip">Главное</a>
+      <a href="#legal">Норма</a>
+      <a href="#types">Виды платежей</a>
+      <a href="#calc">Расчёт</a>
+      <a href="#terms">Сроки и ЕЛС</a>
+      <a href="#security">Обеспечение</a>
+      <a href="#benefits">Льготы</a>
+      <a href="#control">Контроль и возврат</a>
+      <a href="#errors">Ошибки</a>
+      <a href="#risk">Риски</a>
+      <a href="#check">Чек-лист</a>
+      <a href="#gloss">Глоссарий</a>
+      <a href="#sources">Источники</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- 1 -->
+    <section class="card" id="princip">
+      <span class="section-kicker">Сначала — главное</span>
+      <h2>Платежи — это не один налог</h2>
+      <p class="lead">При ввозе по ИМ 40 обычно возникает четыре платежа: ввозная пошлина, НДС, акциз (для подакцизных товаров) и таможенный сбор за таможенные операции. Утилизационный сбор — отдельная история, к таможенным платежам он не относится.</p>
+      <p>Все они считаются от таможенной стоимости и уплачиваются <strong>до выпуска</strong>. Если денег на счёте нет — выпуска не будет. Обеспечение и льготы — это инструменты, которые меняют сумму или срок, но не отменяют обязанность.</p>
+
+      <div class="legend">
+        <span><span class="tag tag-norm">Норма</span> ТК ЕАЭС, НК РФ, акты Правительства</span>
+        <span><span class="tag tag-fts">Позиция ФТС</span> разъяснения и сервисы</span>
+        <span><span class="tag tag-prac">Практика</span> что происходит на деле</span>
+      </div>
+
+      <div class="flow" role="img" aria-label="Схема: таможенная стоимость, пошлина, НДС, акциз, сбор, единый лицевой счёт, выпуск">
+        <div class="node"><b>ТС</b><span>база расчёта</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>Пошлина</b><span>ЕТТ ЕАЭС</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>Акциз</b><span>если применимо</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node hi"><b>НДС</b><span>20 % / 10 % / 0 %</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node"><b>Сбор</b><span>за операции</span></div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="node hi"><b>ЕЛС</b><span>списание</span></div>
+      </div>
+      <p class="flow-caption">Порядок расчёта важен: НДС считается не от ТС, а от ТС + пошлина + акциз. Ошибка здесь занижает платёж.</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="card" id="legal">
+      <span class="section-kicker">Нормативная база</span>
+      <h2>На чём всё держится</h2>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Основные акты этапа</caption>
+          <thead><tr><th>Акт</th><th>Что регулирует</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Глава 7 ТК ЕАЭС (ст. 51–56)</strong></td><td>Общие положения о таможенных платежах, возникновение и прекращение обязанности по уплате.</td></tr>
+            <tr><td><strong>Глава 8 ТК ЕАЭС (ст. 57–61)</strong></td><td>Сроки уплаты, отсрочка и рассрочка, проценты.</td></tr>
+            <tr><td><strong>Глава 9 ТК ЕАЭС (ст. 63–65)</strong></td><td>Обеспечение исполнения обязанности по уплате: способы, размер.</td></tr>
+            <tr><td><strong>Постановление Правительства РФ от 28.11.2024 № 1637</strong></td><td>Ставки и база для исчисления таможенных сборов за таможенные операции (ред. от 27.11.2025).</td></tr>
+            <tr><td><strong>Постановление Правительства РФ от 23.10.2025 № 1638</strong></td><td>Индексация ставок сборов с 01.01.2026.</td></tr>
+            <tr><td><strong>Глава 21 НК РФ</strong></td><td>НДС: база (ст. 160), ставки, льготы (ст. 150).</td></tr>
+            <tr><td><strong>Глава 22 НК РФ</strong></td><td>Акцизы: подакцизные товары и ставки.</td></tr>
+            <tr><td><strong>Договор о ЕАЭС, статьи 36–37</strong></td><td>Тарифные преференции и правила определения происхождения.</td></tr>
+            <tr><td><strong>Статья 16.2 (ч. 2) КоАП РФ</strong></td><td>Ответственность за занижение платежей.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="card" id="types">
+      <span class="section-kicker">Состав</span>
+      <h2>Четыре платежа и один «не таможенный»</h2>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Что, от чего и по какой ставке</caption>
+          <thead><tr><th>Платёж</th><th>База</th><th>Ставка</th><th>Особенности</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Ввозная пошлина</strong></td>
+              <td>Таможенная стоимость</td>
+              <td>ЕТТ ЕАЭС по коду товара</td>
+              <td>Может быть снижена преференцией или льготой</td>
+            </tr>
+            <tr>
+              <td><strong>НДС</strong></td>
+              <td>ТС + пошлина + акциз</td>
+              <td>20 %, 10 % или 0 %</td>
+              <td>Льготы — ст. 150 НК РФ; подтверждаются документами</td>
+            </tr>
+            <tr>
+              <td><strong>Акциз</strong></td>
+              <td>ТС или объём (зависит от товара)</td>
+              <td>Ставка по гл. 22 НК РФ</td>
+              <td>Только для подакцизных товаров</td>
+            </tr>
+            <tr>
+              <td><strong>Таможенный сбор за операции</strong></td>
+              <td>Таможенная стоимость партии</td>
+              <td>Шкала по ПП № 1637</td>
+              <td>С 01.01.2026 ставки проиндексированы (ПП № 1638); верхняя ставка — 73 860 ₽</td>
+            </tr>
+            <tr>
+              <td><strong>Утилизационный сбор</strong></td>
+              <td>Отдельная база</td>
+              <td>По законодательству об отходах</td>
+              <td>Не таможенный платёж; уплачивается отдельно</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="warning">
+        <strong>Не путайте.</strong> Утилизационный сбор не входит в графу 47 ДТ как таможенный платёж и не списывается с ЕЛС в общем порядке. Его отсутствие в расчёте таможенных платежей — не ошибка.
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="card" id="calc">
+      <span class="section-kicker">Расчёт</span>
+      <h2>Как считать</h2>
+
+      <div class="exact" style="font-family:ui-monospace,Consolas,monospace;">
+Пошлина = ТС × ставка пошлины
+
+Акциз = ТС (или объём) × ставка акциза
+
+НДС = (ТС + пошлина + акциз) × ставка НДС
+
+Сбор = по шкале ПП № 1637 (зависит от ТС партии)
+      </div>
+
+      <h3>Пример без акциза</h3>
+      <div class="exact" style="font-family:ui-monospace,Consolas,monospace;">
+ТС:                 990 000 ₽
+Пошлина 10 %:        99 000 ₽
+НДС 20 %:          217 800 ₽   ((990 000 + 99 000) × 20 %)
+Сбор:                по шкале ПП № 1637
+
+Итого без сбора:   316 800 ₽
+      </div>
+
+      <div class="note">
+        <strong>Почему НДС не от ТС.</strong> База НДС включает пошлину и акциз. Если считать НДС только от стоимости, платёж занижается примерно на 20 % от суммы пошлины — и это типичная ошибка.
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="card" id="terms">
+      <span class="section-kicker">Сроки</span>
+      <h2>Когда платить и где держать деньги</h2>
+
+      <ul>
+        <li><strong>Общее правило:</strong> платежи уплачиваются до выпуска товаров (ст. 57 ТК ЕАЭС).</li>
+        <li><strong>ЕЛС:</strong> деньги аккумулируются на едином лицевом счёте; таможня списывает суммы при подаче и выпуске.</li>
+        <li><strong>Авансовые платежи:</strong> пополнение ЕЛС заранее — самый простой способ не сорвать выпуск.</li>
+        <li><strong>Отсрочка или рассрочка:</strong> возможна по ст. 59–60 ТК ЕАЭС, с уплатой процентов.</li>
+        <li><strong>Пени:</strong> начисляются за просрочку; их наличие не заменяет обязанность уплатить основной долг.</li>
+      </ul>
+
+      <div class="deadline">
+        <span class="box-title">Практическое правило</span>
+        Держите на ЕЛС сумму с запасом: ТС может быть скорректирована, а ставка сбора — измениться. Недостаток средств — самая частая причина задержки выпуска.
+      </div>
+
+      <div class="fine">
+        <span class="box-title">Внимание</span>
+        Уплата «частями» без оформленной рассрочки не работает: таможня видит недоплату и не выпускает товар.
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="card" id="security">
+      <span class="section-kicker">Обеспечение</span>
+      <h2>Когда нужна гарантия</h2>
+
+      <p><span class="tag tag-norm">Норма</span> Обеспечение исполнения обязанности по уплате таможенных пошлин и налогов применяется в случаях, установленных ТК ЕАЭС (ст. 63 и отсылки к другим статьям).</p>
+
+      <h3>Способы обеспечения (ст. 63 ТК ЕАЭС)</h3>
+      <ul>
+        <li>денежные средства (деньги);</li>
+        <li>банковская гарантия;</li>
+        <li>поручительство;</li>
+        <li>залог имущества.</li>
+      </ul>
+
+      <h3>Типичные ситуации</h3>
+      <div class="table-wrap">
+        <table>
+          <caption>Где обеспечение встречается в процедуре ИМ 40</caption>
+          <thead><tr><th>Ситуация</th><th>Зачем нужно</th></tr></thead>
+          <tbody>
+            <tr><td>Таможенный транзит</td><td>Гарантия доставки товара и уплаты платежей</td></tr>
+            <tr><td>Выпуск до подачи декларации</td><td>Гарантия на период до подачи ДТ</td></tr>
+            <tr><td>Отсрочка или рассрочка</td><td>Обеспечение суммы, срок уплаты которой перенесён</td></tr>
+            <tr><td>Условный выпуск</td><td>Обеспечение при несоблюдении отдельных условий</td></tr>
+            <tr><td>Периодическое декларирование</td><td>Обеспечение на период между подачами</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <strong>Размер.</strong> Обеспечение рассчитывается исходя из сумм подлежащих уплате платежей. Для отдельных категорий лиц и товаров действуют особенности. <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: точный расчёт по вашей ситуации</span>
+      </div>
+
+      <div class="ausn">
+        <span class="box-title">Если обеспечение не нужно</span>
+        При обычном ИМ 40 с достаточным остатком на ЕЛС обеспечение, как правило, не требуется: платежи просто списываются.
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="card" id="benefits">
+      <span class="section-kicker">Льготы</span>
+      <h2>Льготы и преференции: три разных механизма</h2>
+      <p class="lead">Их постоянно смешивают. Между тем основания, документы и последствия у них разные.</p>
+
+      <article class="report">
+        <div class="report-head">
+          <span class="num green">1</span>
+          <div>
+            <h3>Тарифные преференции</h3>
+            <p class="sub">По стране происхождения</p>
+          </div>
+        </div>
+        <div class="tags"><span class="tag tag-norm">Договор о ЕАЭС, ст. 36–37</span></div>
+        <p><strong>Что это:</strong> снижение или обнуление ставки ввозной пошлины для товаров из развивающихся и наименее развитых стран.</p>
+        <div class="meta">
+          <div><dt>Основание</dt><dd>Происхождение товара и сертификат о происхождении установленной формы</dd></div>
+          <div><dt>Что проверить</dt><dd>Страна в перечне, правило происхождения, форма сертификата</dd></div>
+          <div><dt>Риск</dt><dd>Неверный сертификат — преференция не применена, доначисление</dd></div>
+        </div>
+      </article>
+
+      <article class="report">
+        <div class="report-head">
+          <span class="num">2</span>
+          <div>
+            <h3>Тарифные льготы</h3>
+            <p class="sub">По виду товара или операции</p>
+          </div>
+        </div>
+        <div class="tags"><span class="tag tag-norm">Право ЕАЭС и РФ</span></div>
+        <p><strong>Что это:</strong> освобождение от ввозной пошлины для отдельных категорий товаров (например, технологическое оборудование, вклад в уставный капитал, гуманитарная помощь).</p>
+        <div class="meta">
+          <div><dt>Основание</dt><dd>Конкретная норма и подтверждающие документы</dd></div>
+          <div><dt>Что проверить</dt><dd>Попадает ли товар в перечень и соблюдены ли условия</dd></div>
+          <div><dt>Риск</dt><dd>Льгота заявлена, но условие не выполнено — восстановление обязанности по уплате</dd></div>
+        </div>
+      </article>
+
+      <article class="report">
+        <div class="report-head">
+          <span class="num amber">3</span>
+          <div>
+            <h3>Налоговые льготы по НДС</h3>
+            <p class="sub">По статье 150 НК РФ</p>
+          </div>
+        </div>
+        <div class="tags"><span class="tag tag-norm">НК РФ, ст. 150</span></div>
+        <p><strong>Что это:</strong> освобождение от НДС при ввозе отдельных товаров (медицинские, детские, культурные ценности и др.).</p>
+        <div class="meta">
+          <div><dt>Основание</dt><dd>Норма НК РФ и документы, подтверждающие статус товара</dd></div>
+          <div><dt>Что проверить</dt><dd>Точное соответствие перечню, а не «похожесть»</dd></div>
+          <div><dt>Риск</dt><dd>Применение льготы «по аналогии» — доначисление НДС и пени</dd></div>
+        </div>
+      </article>
+
+      <div class="warning">
+        <strong>Льгота не применяется автоматически.</strong> Её нужно заявить в декларации и подтвердить документами. Если документов нет, платёж считается по общей ставке.
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="card" id="control">
+      <span class="section-kicker">Контроль</span>
+      <h2>Проверка, пени и возврат</h2>
+
+      <ol class="timeline">
+        <li><b>Проверка расчёта</b><span>Таможня сверяет ТС, ставки, льготы и сумму платежей в графе 47.</span></li>
+        <li><b>КТС и доначисление</b><span>Если стоимость скорректирована, платежи пересчитываются.</span></li>
+        <li><b>Пени</b><span>Начисляются за период просрочки.</span></li>
+        <li><b>Возврат или зачёт</b><span>Излишне уплаченные суммы возвращаются по заявлению; сроки и порядок — по ТК ЕАЭС. <span class="flag">ТРЕБУЕТ ПРОВЕРКИ: срок подачи заявления</span></span></li>
+      </ol>
+
+      <div class="note">
+        <strong>Практика.</strong> Возврат — это отдельная процедура, а не автоматический пересчёт. Если вы переплатили из-за ошибки в расчёте, нужно подать заявление и приложить подтверждения.
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="card" id="errors">
+      <span class="section-kicker">Типичные ошибки</span>
+      <h2>Частые ошибки</h2>
+      <ul>
+        <li>Считать НДС от таможенной стоимости, забывая пошлину и акциз.</li>
+        <li>Забыть таможенный сбор за операции.</li>
+        <li>Путать утилизационный сбор с таможенным платежом.</li>
+        <li>Планировать уплату «после выпуска» без отсрочки.</li>
+        <li>Пополнять ЕЛС ровно под расчёт, без запаса на корректировку.</li>
+        <li>Применять преференцию без сертификата о происхождении.</li>
+        <li>Применять льготу по НДС «по аналогии», без точного совпадения с перечнем.</li>
+        <li>Считать, что обеспечение — это штраф или дополнительный платёж.</li>
+      </ul>
+    </section>
+
+    <!-- 10 -->
+    <section class="card" id="risk">
+      <span class="section-kicker">Риски</span>
+      <h2>Чем это грозит</h2>
+
+      <div class="fine">
+        <span class="box-title">1 · Невыпуск</span>
+        Недостаток средств на ЕЛС — товар стоит, хранение дорожает.
+      </div>
+
+      <div class="fine">
+        <span class="box-title">2 · Доначисление и пени</span>
+        Неверная база или неприменённая льгота приводят к доплате и пеням.
+      </div>
+
+      <div class="fine">
+        <span class="box-title">3 · Часть 2 статьи 16.2 КоАП РФ</span>
+        Занижение платежей из-за недостоверных сведений — административная ответственность.
+      </div>
+
+      <div class="warning">
+        <span class="box-title">4 · Восстановление обязанности</span>
+        Если льгота применена при невыполнении условий, обязанность по уплате восстанавливается — иногда спустя месяцы.
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="card" id="check">
+      <span class="section-kicker">Практический инструмент</span>
+      <h2>Чек-лист</h2>
+      <ul class="checklist">
+        <li>Я определил все платежи: пошлина, НДС, акциз, сбор?</li>
+        <li>Я считаю НДС от ТС + пошлина + акциз?</li>
+        <li>Я учёл утилизационный сбор отдельно, если он применим?</li>
+        <li>Я проверил ставку пошлины по коду и действующей редакции ЕТТ?</li>
+        <li>Я проверил ставку сбора по ПП № 1637 с учётом изменений 2026 года?</li>
+        <li>На ЕЛС достаточно средств с запасом?</li>
+        <li>Нужно ли обеспечение и какой способ выгоднее?</li>
+        <li>Есть ли основание для преференции и правильный сертификат?</li>
+        <li>Есть ли основание для льготы по НДС и подтверждающие документы?</li>
+        <li>Я готов подтвердить расчёт документами при проверке?</li>
+      </ul>
+    </section>
+
+    <!-- 12 -->
+    <section class="card" id="gloss">
+      <span class="section-kicker">Словарь</span>
+      <h2>Глоссарий</h2>
+      <dl class="glossary">
+        <div><dt>ТС</dt><dd>таможенная стоимость товаров.</dd></div>
+        <div><dt>ЕТТ</dt><dd>Единый таможенный тариф ЕАЭС.</dd></div>
+        <div><dt>ЕЛС</dt><dd>единый лицевой счёт для уплаты таможенных платежей.</dd></div>
+        <div><dt>Авансовые платежи</dt><dd>деньги, внесённые на ЕЛС заранее.</dd></div>
+        <div><dt>Обеспечение</dt><dd>гарантия уплаты платежей (деньги, гарантия, поручительство, залог).</dd></div>
+        <div><dt>Отсрочка / рассрочка</dt><dd>перенос срока уплаты платежей.</dd></div>
+        <div><dt>Пени</dt><dd>начисление за просрочку уплаты.</dd></div>
+        <div><dt>Преференция</dt><dd>снижение ставки пошлины по происхождению товара.</dd></div>
+        <div><dt>Тарифная льгота</dt><dd>освобождение от пошлины по виду товара или операции.</dd></div>
+        <div><dt>Налоговая льгота</dt><dd>освобождение от НДС по ст. 150 НК РФ.</dd></div>
+        <div><dt>Утилизационный сбор</dt><dd>отдельный платёж, не таможенный.</dd></div>
+        <div><dt>Графа 47</dt><dd>графа ДТ с исчислением платежей.</dd></div>
+      </dl>
+    </section>
+
+    <!-- 13 -->
+    <section class="card" id="summary">
+      <span class="section-kicker">Итог</span>
+      <h2>Резюме</h2>
+      <div class="summary">
+        <h3>Семь тезисов этапа 5</h3>
+        <ol>
+          <li>Платежей обычно четыре: пошлина, НДС, акциз, сбор; утильсбор — отдельно.</li>
+          <li>НДС считается от ТС + пошлина + акциз, а не от стоимости.</li>
+          <li>Платежи уплачиваются до выпуска; ЕЛС должен быть пополнен заранее.</li>
+          <li>Обеспечение — гарантия, а не штраф; способы перечислены в ст. 63 ТК ЕАЭС.</li>
+          <li>Преференции, тарифные и налоговые льготы — три разных механизма.</li>
+          <li>Любая льгота требует основания и документов, а не «похожести» товара.</li>
+          <li>С 01.01.2026 ставки таможенных сборов проиндексированы.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 14 -->
+    <section class="card sources" id="sources">
+      <span class="section-kicker">Первоисточники</span>
+      <h2>Источники</h2>
+
+      <article class="source">
+        <h3>Таможенный кодекс ЕАЭС, главы 7–9</h3>
+        <p class="req">Таможенные платежи; сроки уплаты (ст. 57); отсрочка и рассрочка (ст. 59–60); обеспечение (ст. 63–65).</p>
+        <p><strong>Что подтверждает:</strong> состав платежей, сроки, способы обеспечения. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_215315/">consultant.ru — ТК ЕАЭС</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Постановление Правительства РФ от 28.11.2024 № 1637</h3>
+        <p class="req">О ставках и базе для исчисления таможенных сборов за таможенные операции (ред. от 27.11.2025).</p>
+        <p><strong>Что подтверждает:</strong> шкалу ставок сбора. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_491874/">consultant.ru</a> · <a href="https://www.alta.ru/tamdoc/24ps1637/">alta.ru</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Постановление Правительства РФ от 23.10.2025 № 1638</h3>
+        <p class="req">Изменения в ПП № 1637: индексация ставок с 01.01.2026.</p>
+        <p><strong>Что подтверждает:</strong> новые размеры ставок, включая верхнюю ставку 73 860 ₽. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/law/hotdocs/91230.html">consultant.ru</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Налоговый кодекс РФ, глава 21</h3>
+        <p class="req">НДС: база — ст. 160, льготы — ст. 150.</p>
+        <p><strong>Что подтверждает:</strong> порядок расчёта НДС при ввозе и основания освобождения. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_28165/">consultant.ru — НК РФ</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Налоговый кодекс РФ, глава 22</h3>
+        <p class="req">Акцизы: подакцизные товары и ставки.</p>
+        <p><strong>Что подтверждает:</strong> необходимость и размер акциза. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_28165/">consultant.ru — НК РФ</a></p>
+      </article>
+
+      <article class="source">
+        <h3>Договор о ЕАЭС, статьи 36–37</h3>
+        <p class="req">Тарифные преференции и правила определения происхождения.</p>
+        <p><strong>Что подтверждает:</strong> основания и условия преференций. <span class="tag tag-norm">Норма</span></p>
+        <p class="link"><a href="https://www.consultant.ru/document/cons_doc_LAW_163855/">consultant.ru</a> · <a href="https://eec.eaeunion.org/comission/department/dotp/tariff_preferences.php">eec.eaeunion.org</a></p>
+      </article>
+
+      <div class="actual">
+        <strong>Информация актуальна на 07.11.2026.</strong> Перед применением сверь действующие редакции ТК ЕАЭС, НК РФ и постановлений № 1637 и № 1638, а также ставку пошлины по коду товара.
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Памятка подготовлена для личного использования участником ВЭД. Не является юридической консультацией. Суммы зависят от товара, кода, страны происхождения и условий сделки.
+  </footer>
+
+</div>
+
+<a class="up" href="#top" aria-label="Наверх">↑</a>
+
+<style>
+.nav-back { position: fixed; bottom: 24px; right: 24px; background: #0d3b66; color: #fff !important; padding: 10px 16px; border-radius: 8px; text-decoration: none; font-family: "Segoe UI", Arial, sans-serif; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 9999; transition: background 0.2s; font-weight: 600; }
+.nav-back:hover { background: #1e5a99; }
+</style>
+<a href="index.html" class="nav-back">← Назад в меню</a>
+</body>
+</html>
